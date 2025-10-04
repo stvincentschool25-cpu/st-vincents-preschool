@@ -147,14 +147,10 @@
         .testimonial-text {
             font-size: 1.1rem;
             line-height: 1.6;
-            text-align: justify;
-            hyphens: auto;
-            word-spacing: -0.05em;
         }
         @media (max-width: 768px) {
             .testimonial-text {
                 font-size: 1rem;
-                text-align: left;
             }
         }
         
@@ -173,36 +169,10 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* Enhanced Canvas Styles */
-        .canvas-container {
-            position: relative;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="white"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="lightgray" stroke-width="0.5"/></svg>');
-            background-size: 20px 20px;
-        }
-        .brush-size-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .brush-size-preview {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            border: 2px solid #2d3748;
-        }
-        .tool-btn {
-            transition: all 0.2s ease;
-        }
-        .tool-btn.active {
-            transform: scale(1.1);
-            background-color: #e5e7eb;
-        }
-        .tool-btn:hover {
-            transform: scale(1.05);
+        /* Blog modal styles */
+        .blog-modal-content {
+            max-height: 90vh;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -229,7 +199,6 @@
             <nav class="hidden md:flex items-center space-x-6 text-2xl">
                  <a href="#programs" class="text-gray-600 hover:text-red-500">Programs</a>
                  <a href="#gallery" class="text-gray-600 hover:text-red-500">Gallery</a>
-                 <a href="#creativity-canvas" class="text-gray-600 hover:text-red-500">Creativity</a>
                  <a href="#faq" class="text-gray-600 hover:text-red-500">FAQ</a>
                  <a href="#parent-resources" class="text-gray-600 hover:text-red-500">Parent Resources</a>
                  <button id="open-contact-modal" class="crayon-button bg-red-400 text-white font-semibold px-6 py-2 text-2xl">Book a Tour</button>
@@ -239,7 +208,6 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 text-2xl">
             <a href="#programs" class="block text-center py-2 text-gray-600 hover:text-red-500">Programs</a>
             <a href="#gallery" class="block text-center py-2 text-gray-600 hover:text-red-500">Gallery</a>
-            <a href="#creativity-canvas" class="block text-center py-2 text-gray-600 hover:text-red-500">Creativity</a>
             <a href="#faq" class="block text-center py-2 text-gray-600 hover:text-red-500">FAQ</a>
             <a href="#parent-resources" class="block text-center py-2 text-gray-600 hover:text-red-500">Parent Resources</a>
             <button id="open-contact-modal-mobile" class="block text-center w-full py-2 text-gray-600 hover:text-red-500">Book a Tour</button>
@@ -396,118 +364,6 @@
             </div>
         </section>
         
-        <!-- Enhanced Creativity Canvas Section -->
-        <section id="creativity-canvas" class="section-padding bg-red-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">A Splash of Creativity</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Experience the joy of creation, just like our little learners. Grab a color and draw something wonderful!</p>
-                </div>
-                
-                <div class="bg-white p-6 crayon-border max-w-4xl mx-auto">
-                    <!-- Drawing Area -->
-                    <div class="canvas-container crayon-border mb-4 overflow-hidden">
-                        <canvas id="drawing-canvas" class="w-full h-96"></canvas>
-                    </div>
-                    
-                    <!-- Enhanced Controls -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <!-- Color Palette -->
-                        <div class="bg-yellow-50 p-4 crayon-border">
-                            <h3 class="font-bold text-xl mb-3 text-center">Colors</h3>
-                            <div class="flex flex-wrap justify-center gap-2">
-                                <button class="color-btn w-10 h-10 rounded-full bg-black active crayon-border" data-color="black" title="Black"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-red-500 crayon-border" data-color="#ef4444" title="Red"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-blue-500 crayon-border" data-color="#3b82f6" title="Blue"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-green-500 crayon-border" data-color="#22c55e" title="Green"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-yellow-400 crayon-border" data-color="#facc15" title="Yellow"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-purple-500 crayon-border" data-color="#a855f7" title="Purple"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-pink-500 crayon-border" data-color="#ec4899" title="Pink"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-orange-500 crayon-border" data-color="#f97316" title="Orange"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-teal-500 crayon-border" data-color="#14b8a6" title="Teal"></button>
-                                <button class="color-btn w-10 h-10 rounded-full bg-gray-400 crayon-border" data-color="#9ca3af" title="Gray"></button>
-                            </div>
-                        </div>
-                        
-                        <!-- Tools & Settings -->
-                        <div class="bg-blue-50 p-4 crayon-border">
-                            <h3 class="font-bold text-xl mb-3 text-center">Tools</h3>
-                            <div class="flex flex-wrap justify-center gap-2 mb-3">
-                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg active" data-tool="brush" title="Brush">
-                                    <i data-lucide="paintbrush" class="w-5 h-5"></i>
-                                </button>
-                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg" data-tool="eraser" title="Eraser">
-                                    <i data-lucide="eraser" class="w-5 h-5"></i>
-                                </button>
-                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg" data-tool="fill" title="Fill">
-                                    <i data-lucide="bucket" class="w-5 h-5"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="brush-size-control mt-2">
-                                <label class="font-medium text-gray-700">Brush Size:</label>
-                                <input type="range" id="brush-size" min="1" max="30" value="5" class="w-full">
-                                <div class="brush-size-preview">
-                                    <div id="brush-preview" class="rounded-full bg-black"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Actions -->
-                        <div class="bg-green-50 p-4 crayon-border">
-                            <h3 class="font-bold text-xl mb-3 text-center">Actions</h3>
-                            <div class="flex flex-col gap-2">
-                                <button id="clear-canvas-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
-                                    <i data-lucide="trash-2" class="w-5 h-5"></i> Clear Canvas
-                                </button>
-                                <button id="save-canvas-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
-                                    <i data-lucide="download" class="w-5 h-5"></i> Save Drawing
-                                </button>
-                                <button id="random-color-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
-                                    <i data-lucide="shuffle" class="w-5 h-5"></i> Random Color
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Drawing Tips -->
-                    <div class="mt-6 bg-yellow-100 p-4 crayon-border">
-                        <h3 class="font-bold text-xl mb-2 text-center">Drawing Tips</h3>
-                        <ul class="font-body text-gray-700 text-base list-disc pl-5 space-y-1">
-                            <li>Use different brush sizes for varied effects</li>
-                            <li>Try the fill tool to quickly color large areas</li>
-                            <li>Use the eraser to correct mistakes</li>
-                            <li>Save your masterpiece when you're done!</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Improved Testimonials Section -->
-        <section class="section-padding bg-paper">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Hear from families who have experienced the St. Vincent's difference</p>
-                </div>
-                <div class="relative overflow-hidden max-w-4xl mx-auto">
-                    <div class="testimonial-slider" id="testimonial-slider"></div>
-                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
-                        <i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i>
-                    </button>
-                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
-                        <i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i>
-                    </button>
-                </div>
-                <div class="text-center mt-12">
-                    <a href="https://g.page/r/CbNp6tq5qJ7-EB0/review" target="_blank" class="crayon-button bg-green-500 text-white font-bold px-8 py-4 text-xl inline-flex items-center gap-2">
-                        <i data-lucide="star" class="w-6 h-6"></i> Leave a Google Review
-                    </a>
-                </div>
-            </div>
-        </section>
-
         <!-- Parent Resources Section -->
         <section id="parent-resources" class="section-padding bg-yellow-100">
             <div class="container-narrow px-6">
@@ -554,6 +410,56 @@
                     <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Give Your Child the Best Start?</h3>
                     <p class="font-body text-gray-600 mb-6 max-w-2xl mx-auto text-lg">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
                     <button class="open-contact-modal-premium crayon-button bg-red-500 text-white font-bold px-8 py-4 text-xl">Schedule a Tour Today</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Creativity Canvas Section -->
+        <section id="creativity-canvas" class="section-padding bg-red-100">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">A Splash of Creativity</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Experience the joy of creation, just like our little learners. Grab a color and draw something wonderful!</p>
+                </div>
+                <div class="bg-white p-4 crayon-border max-w-4xl mx-auto">
+                    <div class="w-full bg-gray-100 crayon-border overflow-hidden">
+                        <canvas id="drawing-canvas"></canvas>
+                    </div>
+                    <div id="canvas-controls" class="flex flex-wrap items-center justify-center gap-4 mt-4 p-2">
+                        <button class="color-btn w-10 h-10 rounded-full bg-black active crayon-border" data-color="black"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-red-500 crayon-border" data-color="#ef4444"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-blue-500 crayon-border" data-color="#3b82f6"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-green-500 crayon-border" data-color="#22c55e"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-yellow-400 crayon-border" data-color="#facc15"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-purple-500 crayon-border" data-color="#a855f7"></button>
+                        <div class="w-px h-10 bg-gray-300 mx-2"></div>
+                        <button id="clear-canvas-btn" class="crayon-button flex items-center gap-2 bg-gray-200 text-gray-700 font-semibold px-4 py-2 text-xl">
+                            <i data-lucide="trash-2" class="w-5 h-5"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section-padding bg-paper">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2>
+                </div>
+                <div class="relative overflow-hidden max-w-3xl mx-auto">
+                    <div class="testimonial-slider" id="testimonial-slider"></div>
+                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
+                        <i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i>
+                    </button>
+                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
+                        <i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i>
+                    </button>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="https://g.page/r/CbNp6tq5qJ7-EB0/review" target="_blank" class="crayon-button bg-green-500 text-white font-bold px-8 py-4 text-xl inline-flex items-center gap-2">
+                        <i data-lucide="star" class="w-6 h-6"></i> Leave a Google Review
+                    </a>
                 </div>
             </div>
         </section>
@@ -689,7 +595,7 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Testimonial Slider with Improved Text Formatting
+        // Testimonial Slider
         const testimonials = [
             { 
                 name: "Shravani K.", 
@@ -719,9 +625,9 @@
             if (!slider) return;
             slider.innerHTML = testimonials.map(t => `
                 <div class="testimonial-slide p-4 flex-shrink-0">
-                    <div class="bg-yellow-100 p-8 rounded-xl crayon-border">
-                        <p class="font-body text-gray-600 testimonial-text">"${t.text}"</p>
-                        <p class="font-bold text-gray-800 mt-6 text-2xl text-right">- ${t.name}</p>
+                    <div class="bg-yellow-100 p-8 rounded-xl crayon-border text-center">
+                        <p class="font-body text-gray-600 testimonial-text italic">"${t.text}"</p>
+                        <p class="font-bold text-gray-800 mt-4 text-2xl">- ${t.name}</p>
                     </div>
                 </div>
             `).join('');
@@ -760,257 +666,178 @@
             });
         });
 
-        // Enhanced Canvas Logic
-        const canvas = document.getElementById('drawing-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let isDrawing = false;
-            let currentTool = 'brush';
-            let currentColor = 'black';
-            let brushSize = 5;
-            
-            // Set up canvas
-            function resizeCanvas() {
-                const dpr = window.devicePixelRatio || 1;
-                const rect = canvas.parentElement.getBoundingClientRect();
-                canvas.width = rect.width * dpr;
-                canvas.height = rect.height * dpr;
-                canvas.style.width = `${rect.width}px`;
-                canvas.style.height = `${rect.height}px`;
-                ctx.scale(dpr, dpr);
-                ctx.lineCap = 'round'; 
-                ctx.lineJoin = 'round'; 
-                ctx.lineWidth = brushSize;
-                ctx.strokeStyle = currentColor;
-                ctx.fillStyle = currentColor;
-                
-                // Draw a subtle grid background
-                ctx.fillStyle = 'white';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Draw grid lines
-                ctx.strokeStyle = 'rgba(0,0,0,0.05)';
-                ctx.lineWidth = 1;
-                const gridSize = 20;
-                
-                for (let x = 0; x <= canvas.width; x += gridSize) {
-                    ctx.beginPath();
-                    ctx.moveTo(x, 0);
-                    ctx.lineTo(x, canvas.height);
-                    ctx.stroke();
-                }
-                
-                for (let y = 0; y <= canvas.height; y += gridSize) {
-                    ctx.beginPath();
-                    ctx.moveTo(0, y);
-                    ctx.lineTo(canvas.width, y);
-                    ctx.stroke();
-                }
-                
-                // Reset drawing settings
-                ctx.lineWidth = brushSize;
-                ctx.strokeStyle = currentColor;
-                ctx.fillStyle = currentColor;
-            }
-            
-            function getPos(e) {
-                const rect = canvas.getBoundingClientRect();
-                const evt = e.touches ? e.touches[0] : e;
-                return { 
-                    x: evt.clientX - rect.left, 
-                    y: evt.clientY - rect.top 
-                };
-            }
-            
-            function startDrawing(e) { 
-                isDrawing = true; 
-                const {x,y} = getPos(e); 
-                
-                if (currentTool === 'brush') {
-                    ctx.beginPath(); 
-                    ctx.moveTo(x,y); 
-                } else if (currentTool === 'fill') {
-                    // Simple flood fill implementation
-                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                    const targetColor = getPixelColor(imageData, x, y);
-                    floodFill(imageData, x, y, targetColor, hexToRgb(currentColor));
-                    ctx.putImageData(imageData, 0, 0);
-                }
-            }
-            
-            function draw(e) { 
-                if (!isDrawing || currentTool !== 'brush') return; 
-                e.preventDefault(); 
-                const {x,y} = getPos(e); 
-                ctx.lineTo(x,y); 
-                ctx.stroke(); 
-            }
-            
-            function stopDrawing() { 
-                isDrawing = false; 
-                if (currentTool === 'brush') {
-                    ctx.closePath(); 
-                }
-            }
-            
-            // Flood fill algorithm
-            function getPixelColor(imageData, x, y) {
-                const index = (y * imageData.width + x) * 4;
-                return {
-                    r: imageData.data[index],
-                    g: imageData.data[index + 1],
-                    b: imageData.data[index + 2],
-                    a: imageData.data[index + 3]
-                };
-            }
-            
-            function setPixelColor(imageData, x, y, color) {
-                const index = (y * imageData.width + x) * 4;
-                imageData.data[index] = color.r;
-                imageData.data[index + 1] = color.g;
-                imageData.data[index + 2] = color.b;
-                imageData.data[index + 3] = color.a || 255;
-            }
-            
-            function colorsMatch(a, b, tolerance = 1) {
-                return Math.abs(a.r - b.r) <= tolerance &&
-                       Math.abs(a.g - b.g) <= tolerance &&
-                       Math.abs(a.b - b.b) <= tolerance &&
-                       Math.abs(a.a - (b.a || 255)) <= tolerance;
-            }
-            
-            function hexToRgb(hex) {
-                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                return result ? {
-                    r: parseInt(result[1], 16),
-                    g: parseInt(result[2], 16),
-                    b: parseInt(result[3], 16)
-                } : {r: 0, g: 0, b: 0};
-            }
-            
-            function floodFill(imageData, x, y, targetColor, replacementColor) {
-                const stack = [[x, y]];
-                const width = imageData.width;
-                const height = imageData.height;
-                
-                while (stack.length > 0) {
-                    const [currentX, currentY] = stack.pop();
+        // Blog Content
+        const blogData = {
+            science: {
+                title: "The Science of Early Learning",
+                subtitle: "How Preschool Shapes Brain Development",
+                image: "https://images.unsplash.com/photo-1519452575416-64e83f8b89cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                content: `
+                    <p class="mb-4">The early years of a child's life are a period of rapid brain development. During this time, the brain forms neural connections at an astonishing rate - up to one million new connections per second. These connections build the foundation for all future learning, behavior, and health.</p>
                     
-                    if (currentX < 0 || currentX >= width || currentY < 0 || currentY >= height) {
-                        continue;
-                    }
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Critical Periods of Development</h4>
+                    <p class="mb-4">Research shows that certain abilities are best developed during specific "sensitive periods" in early childhood. For example:</p>
                     
-                    const currentColor = getPixelColor(imageData, currentX, currentY);
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><strong>Language development:</strong> The prime period for language acquisition is between birth and age 5</li>
+                        <li><strong>Social-emotional skills:</strong> Foundation for relationships forms in the first 3 years</li>
+                        <li><strong>Cognitive development:</strong> Critical thinking skills develop rapidly between ages 3-5</li>
+                    </ul>
                     
-                    if (!colorsMatch(currentColor, targetColor)) {
-                        continue;
-                    }
+                    <div class="bg-blue-50 p-6 crayon-border my-6">
+                        <p class="text-blue-800 font-semibold text-lg">"The architecture of the brain is built over time, and early experiences shape the foundation." - Center on the Developing Child, Harvard University</p>
+                    </div>
                     
-                    setPixelColor(imageData, currentX, currentY, replacementColor);
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">The Role of Quality Early Education</h4>
+                    <p class="mb-4">High-quality preschool programs provide the stimulating environment necessary for optimal brain development. Studies have shown that children who attend quality preschool programs:</p>
                     
-                    stack.push([currentX + 1, currentY]);
-                    stack.push([currentX - 1, currentY]);
-                    stack.push([currentX, currentY + 1]);
-                    stack.push([currentX, currentY - 1]);
-                }
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li>Develop stronger neural connections in language and cognitive areas</li>
+                        <li>Show better executive function skills (planning, focus, self-control)</li>
+                        <li>Have higher graduation rates and better lifelong outcomes</li>
+                    </ul>
+                    
+                    <div class="flex flex-col md:flex-row gap-6 my-8">
+                        <div class="md:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Children engaged in learning activities" class="w-full h-48 object-cover crayon-border">
+                        </div>
+                        <div class="md:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Teacher guiding children" class="w-full h-48 object-cover crayon-border">
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">References & Further Reading</h4>
+                    <ul class="text-sm space-y-1 mb-4">
+                        <li>Center on the Developing Child, Harvard University. (2016). From Best Practices to Breakthrough Impacts.</li>
+                        <li>National Scientific Council on the Developing Child. (2007). The Timing and Quality of Early Experiences Combine to Shape Brain Architecture.</li>
+                        <li>Yoshikawa, H., et al. (2013). Investing in Our Future: The Evidence Base on Preschool Education.</li>
+                    </ul>
+                    
+                    <p class="mt-6">By understanding the science behind early learning, we can better appreciate the vital role that quality preschool education plays in setting children up for lifelong success.</p>
+                `
+            },
+            social: {
+                title: "Social Skills Development",
+                subtitle: "Building Foundations for Healthy Relationships",
+                image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                content: `
+                    <p class="mb-4">The preschool years are a critical period for social development. During this time, children learn fundamental skills that will influence their relationships throughout life. At St. Vincent's, we create environments where children naturally develop these essential social competencies.</p>
+                    
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Key Social Skills Developed in Preschool</h4>
+                    <p class="mb-4">Through carefully designed activities and guided interactions, children develop:</p>
+                    
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><strong>Cooperation:</strong> Learning to work together toward common goals</li>
+                        <li><strong>Empathy:</strong> Understanding and responding to others' feelings</li>
+                        <li><strong>Communication:</strong> Expressing needs and listening to others</li>
+                        <li><strong>Conflict resolution:</strong> Solving disagreements peacefully</li>
+                        <li><strong>Sharing and turn-taking:</strong> Fundamental skills for social interaction</li>
+                    </ul>
+                    
+                    <div class="bg-green-50 p-6 crayon-border my-6">
+                        <p class="text-green-800 font-semibold text-lg">"The single best childhood predictor of adult adaptation is not school grades, but adequacy with which the child gets along with other children." - Willard Hartup, Child Development Researcher</p>
+                    </div>
+                    
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">How We Foster Social Development</h4>
+                    <p class="mb-4">Our approach to social development includes:</p>
+                    
+                    <ol class="list-decimal pl-6 mb-4 space-y-2">
+                        <li><strong>Structured group activities:</strong> Collaborative projects that require teamwork</li>
+                        <li><strong>Role-playing scenarios:</strong> Practicing social situations in a safe environment</li>
+                        <li><strong>Teacher modeling:</strong> Demonstrating positive social interactions</li>
+                        <li><strong>Emotional literacy:</strong> Teaching children to identify and express emotions</li>
+                        <li><strong>Problem-solving guidance:</strong> Helping children navigate social challenges</li>
+                    </ol>
+                    
+                    <div class="flex flex-col md:flex-row gap-6 my-8">
+                        <div class="md:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Children playing together" class="w-full h-48 object-cover crayon-border">
+                        </div>
+                        <div class="md:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Children engaged in group activity" class="w-full h-48 object-cover crayon-border">
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Long-Term Benefits</h4>
+                    <p class="mb-4">Research shows that strong social skills in early childhood predict:</p>
+                    
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li>Better academic performance in later school years</li>
+                        <li>Higher rates of college attendance and completion</li>
+                        <li>More stable employment in adulthood</li>
+                        <li>Better mental health outcomes</li>
+                        <li>Stronger, more satisfying relationships throughout life</li>
+                    </ul>
+                    
+                    <p class="mt-6">By prioritizing social development alongside academic readiness, we help children build the foundation for success in all areas of life.</p>
+                `
+            },
+            primary: {
+                title: "Preparing for Primary School",
+                subtitle: "Ensuring a Smooth Transition to Formal Education",
+                image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                content: `
+                    <p class="mb-4">The transition from preschool to primary school is a significant milestone in a child's educational journey. At St. Vincent's, we carefully prepare children for this important step, ensuring they enter formal schooling with confidence, curiosity, and the foundational skills needed for success.</p>
+                    
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Academic Readiness</h4>
+                    <p class="mb-4">Our curriculum builds essential academic foundations through developmentally appropriate activities:</p>
+                    
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><strong>Literacy skills:</strong> Phonemic awareness, letter recognition, and early reading readiness</li>
+                        <li><strong>Numeracy development:</strong> Number sense, basic operations, and mathematical thinking</li>
+                        <li><strong>Fine motor skills:</strong> Pencil grip, cutting, and writing preparation</li>
+                        <li><strong>Executive function:</strong> Attention, memory, and self-regulation abilities</li>
+                    </ul>
+                    
+                    <div class="bg-purple-50 p-6 crayon-border my-6">
+                        <p class="text-purple-800 font-semibold text-lg">"Children who experience a smooth transition to primary school are more likely to develop positive attitudes toward learning and achieve academic success." - Ramey & Ramey, Early Childhood Researchers</p>
+                    </div>
+                    
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Social-Emotional Preparation</h4>
+                    <p class="mb-4">Beyond academic skills, we focus on developing the social and emotional competencies needed for primary school:</p>
+                    
+                    <ol class="list-decimal pl-6 mb-4 space-y-2">
+                        <li><strong>Independence:</strong> Following routines, managing belongings, and self-care skills</li>
+                        <li><strong>Resilience:</strong> Coping with challenges and bouncing back from setbacks</li>
+                        <li><strong>Collaboration:</strong> Working effectively with peers and teachers</li>
+                        <li><strong>Self-advocacy:</strong> Expressing needs and asking for help appropriately</li>
+                    </ol>
+                    
+                    <div class="flex flex-col md:flex-row gap-6 my-8">
+                        <div class="md:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1519452575416-64e83f8b89cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Child engaged in learning activity" class="w-full h-48 object-cover crayon-border">
+                        </div>
+                        <div class="md:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Teacher working with small group" class="w-full h-48 object-cover crayon-border">
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Our Transition Program</h4>
+                    <p class="mb-4">We implement a comprehensive transition program that includes:</p>
+                    
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li>Gradual introduction to more structured learning environments</li>
+                        <li>Collaboration with local primary schools to align expectations</li>
+                        <li>Parent workshops on supporting the transition to primary school</li>
+                        <li>Portfolio development to showcase children's readiness</li>
+                        <li>Visits from primary school teachers and students when possible</li>
+                    </ul>
+                    
+                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Measurable Outcomes</h4>
+                    <p class="mb-4">Our graduates consistently demonstrate:</p>
+                    
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li>Strong foundational literacy and numeracy skills</li>
+                        <li>Positive attitudes toward learning and school</li>
+                        <li>Well-developed social skills and emotional regulation</li>
+                        <li>Confidence in navigating new environments and routines</li>
+                        <li>Smooth adjustment to the demands of primary school</li>
+                    </ul>
+                    
+                    <p class="mt-6">By focusing on holistic development and school readiness, we ensure that children leave St. Vincent's not just prepared for primary school, but excited about the learning journey ahead.</p>
+                `
             }
-            
-            // Event listeners for drawing
-            ['mousedown', 'touchstart'].forEach(e => canvas.addEventListener(e, startDrawing));
-            ['mousemove', 'touchmove'].forEach(e => canvas.addEventListener(e, draw));
-            ['mouseup', 'mouseleave', 'touchend'].forEach(e => canvas.addEventListener(e, stopDrawing));
-            
-            // Color selection
-            document.querySelectorAll('.color-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    currentColor = e.target.dataset.color;
-                    document.querySelector('.color-btn.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    ctx.strokeStyle = currentColor;
-                    ctx.fillStyle = currentColor;
-                    
-                    // Update brush preview
-                    document.getElementById('brush-preview').style.backgroundColor = currentColor;
-                });
-            });
-            
-            // Tool selection
-            document.querySelectorAll('.tool-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    currentTool = e.currentTarget.dataset.tool;
-                    document.querySelector('.tool-btn.active').classList.remove('active');
-                    e.currentTarget.classList.add('active');
-                    
-                    if (currentTool === 'eraser') {
-                        ctx.strokeStyle = 'white';
-                        ctx.fillStyle = 'white';
-                    } else {
-                        ctx.strokeStyle = currentColor;
-                        ctx.fillStyle = currentColor;
-                    }
-                });
-            });
-            
-            // Brush size control
-            const brushSizeControl = document.getElementById('brush-size');
-            const brushPreview = document.getElementById('brush-preview');
-            
-            brushSizeControl.addEventListener('input', (e) => {
-                brushSize = parseInt(e.target.value);
-                ctx.lineWidth = brushSize;
-                
-                // Update brush preview size
-                const size = Math.max(5, brushSize / 2);
-                brushPreview.style.width = `${size}px`;
-                brushPreview.style.height = `${size}px`;
-            });
-            
-            // Clear canvas
-            document.getElementById('clear-canvas-btn').addEventListener('click', () => {
-                if (confirm('Are you sure you want to clear the canvas?')) {
-                    ctx.fillStyle = 'white';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    resizeCanvas(); // Redraw grid
-                }
-            });
-            
-            // Save canvas
-            document.getElementById('save-canvas-btn').addEventListener('click', () => {
-                const dataURL = canvas.toDataURL('image/png');
-                const link = document.createElement('a');
-                link.download = 'st-vincents-drawing.png';
-                link.href = dataURL;
-                link.click();
-            });
-            
-            // Random color
-            document.getElementById('random-color-btn').addEventListener('click', () => {
-                const colors = ['#ef4444', '#3b82f6', '#22c55e', '#facc15', '#a855f7', '#ec4899', '#f97316', '#14b8a6'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                currentColor = randomColor;
-                
-                // Update active color button
-                document.querySelector('.color-btn.active').classList.remove('active');
-                const colorBtn = document.querySelector(`.color-btn[data-color="${randomColor}"]`);
-                if (colorBtn) {
-                    colorBtn.classList.add('active');
-                }
-                
-                ctx.strokeStyle = currentColor;
-                ctx.fillStyle = currentColor;
-                
-                // Update brush preview
-                document.getElementById('brush-preview').style.backgroundColor = currentColor;
-            });
-            
-            // Initialize
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-            
-            // Set initial brush preview
-            document.getElementById('brush-preview').style.width = `${brushSize/2}px`;
-            document.getElementById('brush-preview').style.height = `${brushSize/2}px`;
-        }
+        };
 
         // Image Slider
         const imageSlider = document.getElementById('image-slider');
@@ -1384,12 +1211,81 @@
         document.getElementById('open-contact-modal-mobile').addEventListener('click', createContactModal);
         document.getElementById('open-contact-modal-hero').addEventListener('click', createContactModal);
         document.getElementById('open-contact-modal-bottom').addEventListener('click', createContactModal);
+        document.querySelectorAll('.open-contact-modal-faq').forEach(btn => {
+            btn.addEventListener('click', createContactModal);
+        });
         document.querySelector('.open-contact-modal-premium').addEventListener('click', createContactModal);
         
         // Auto-open contact modal after 5 seconds
         setTimeout(() => {
             createContactModal();
         }, 5000);
+
+        // Canvas Logic
+        const canvas = document.getElementById('drawing-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            
+            function resizeCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = canvas.parentElement.clientWidth * dpr;
+                canvas.height = (canvas.parentElement.clientWidth * 0.6) * dpr;
+                canvas.style.width = `${canvas.parentElement.clientWidth}px`;
+                canvas.style.height = `${canvas.parentElement.clientWidth * 0.6}px`;
+                ctx.scale(dpr, dpr);
+                ctx.lineCap = 'round'; 
+                ctx.lineJoin = 'round'; 
+                ctx.lineWidth = 5;
+            }
+            
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const evt = e.touches ? e.touches[0] : e;
+                return { 
+                    x: evt.clientX - rect.left, 
+                    y: evt.clientY - rect.top 
+                };
+            }
+            
+            function start(e) { 
+                isDrawing = true; 
+                const {x,y} = getPos(e); 
+                ctx.beginPath(); 
+                ctx.moveTo(x,y); 
+            }
+            
+            function draw(e) { 
+                if (!isDrawing) return; 
+                e.preventDefault(); 
+                const {x,y} = getPos(e); 
+                ctx.lineTo(x,y); 
+                ctx.stroke(); 
+            }
+            
+            function stop() { 
+                isDrawing = false; 
+                ctx.closePath(); 
+            }
+            
+            ['mousedown', 'touchstart'].forEach(e => canvas.addEventListener(e, start));
+            ['mousemove', 'touchmove'].forEach(e => canvas.addEventListener(e, draw));
+            ['mouseup', 'mouseleave', 'touchend'].forEach(e => canvas.addEventListener(e, stop));
+            
+            document.getElementById('canvas-controls').addEventListener('click', (e) => {
+                if (e.target.dataset.color) {
+                    ctx.strokeStyle = e.target.dataset.color;
+                    document.querySelector('.color-btn.active').classList.remove('active');
+                    e.target.classList.add('active');
+                }
+                if (e.target.closest('#clear-canvas-btn')) { 
+                    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                }
+            });
+            
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+        }
     </script>
 </body>
 </html>
