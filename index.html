@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Vincent's Preschool' | Preschool & Daycare in Chanda Nagar, Hyderabad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Patrick Hand', cursive;
+            letter-spacing: 0.5px;
+        }
+        h1, h2, h3, h4, h5, h6, .font-display {
+             font-family: 'Patrick Hand', cursive;
+        }
+        .font-body {
+            font-family: 'Lora', serif;
+        }
+        .crayon-border {
+            border: 3px solid #2d3748;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+        }
+        .crayon-button {
+            border: 3px solid #2d3748;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 2px 4px 0px #2d3748;
+        }
+        .crayon-button:hover {
+            transform: translateY(2px) translateX(1px);
+            box-shadow: 1px 2px 0px #2d3748;
+        }
+        .crayon-button:active {
+            transform: translateY(4px) translateX(2px);
+            box-shadow: 0px 0px 0px #2d3748;
+        }
+        .bg-paper {
+             background-color: #fff;
+             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fde68a' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .faq-item .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px; /* Adjust as needed */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .testimonial-slider { display: flex; transition: transform 0.5s ease-in-out; }
+        .testimonial-slide { min-width: 100%; box-sizing: border-box; }
+        .modal-overlay { transition: opacity 0.3s ease; }
+        .modal-content { transition: transform 0.3s ease; }
+        #drawing-canvas { touch-action: none; cursor: crosshair; }
+        .color-btn.active { transform: scale(1.2); box-shadow: 0 0 0 3px white, 0 0 0 5px currentColor; }
+    </style>
+</head>
+<body class="bg-yellow-50 text-gray-800 text-xl">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50 crayon-border border-t-0 border-l-0 border-r-0">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <div class="w-12 h-12 flex items-center justify-center">
+                    <svg class="w-10 h-10 text-red-500" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 70 C 30 20, 70 20, 90 70" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round"/><defs><linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" /><stop offset="50%" style="stop-color:#EF4444;stop-opacity:1" /><stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" /></linearGradient></defs></svg>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">St. Vincents Preschool</h1>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6 text-2xl">
+                 <a href="#programs" class="text-gray-600 hover:text-red-500">Programs</a>
+                 <a href="#virtual-tour" class="text-gray-600 hover:text-red-500">Virtual Tour</a>
+                 <a href="#faq" class="text-gray-600 hover:text-red-500">FAQ</a>
+                 <a href="#book-tour" class="crayon-button bg-red-400 text-white font-semibold px-6 py-2 text-2xl">Book a Tour</a>
+            </nav>
+            <button id="menu-btn" class="md:hidden crayon-button p-2 bg-yellow-300"><i data-lucide="menu" class="w-6 h-6"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 text-2xl"><a href="#programs" class="block text-center py-2 text-gray-600 hover:text-red-500">Programs</a><a href="#virtual-tour" class="block text-center py-2 text-gray-600 hover:text-red-500">Virtual Tour</a><a href="#faq" class="block text-center py-2 text-gray-600 hover:text-red-500">FAQ</a><a href="#book-tour" class="block text-center py-2 text-gray-600 hover:text-red-500">Book a Tour</a></div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="relative bg-paper py-16 md:py-24">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:text-left">
+                    <span class="text-red-500 font-semibold text-2xl">Admissions Open 2025-2026</span>
+                    <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">Nurturing Tomorrow's Leaders, Today.</h2>
+                    <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chanda Nagar. We offer a fun, safe, and stimulating environment for children aged 1.5 to 5 years.</p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="#book-tour" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">Schedule a Visit</a>
+                        <a href="tel:9100999312" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2"><i data-lucide="phone"></i>Call Us Now</a>
+                    </div>
+                </div>
+                <div class="hidden md:block"><img src="https://lh3.googleusercontent.com/p/AF1QipM5x2p1Y_T1W6yP-k2cZ2e6a_O7aC8-P1eG8sA=s1360-w1360-h1020" alt="Happy children" class="crayon-border object-cover w-full h-full"></div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="py-16 md:py-24 bg-blue-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12"><h2 class="text-5xl md:text-6xl font-bold text-gray-800">Why Parents Trust Us</h2><p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">A foundation for lifelong learning through a perfect blend of care, creativity, and curriculum.</p></div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-8 text-center crayon-border transform hover:-rotate-2 transition-transform"><div class="bg-red-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border"><i data-lucide="shield-check" class="w-12 h-12 text-red-600"></i></div><h3 class="font-bold text-3xl mt-6 text-gray-800">Safe & Secure</h3><p class="font-body text-gray-600 mt-2 text-base">CCTV, child-proofed campus, and strict hygiene protocols ensure a safe environment.</p></div>
+                    <div class="bg-white p-8 text-center crayon-border transform hover:rotate-2 transition-transform"><div class="bg-blue-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border"><i data-lucide="lightbulb" class="w-12 h-12 text-blue-600"></i></div><h3 class="font-bold text-3xl mt-6 text-gray-800">Play-Based Fun</h3><p class="font-body text-gray-600 mt-2 text-base">Our curriculum fosters creativity and critical thinking through engaging, hands-on activities.</p></div>
+                    <div class="bg-white p-8 text-center crayon-border transform hover:-rotate-2 transition-transform"><div class="bg-yellow-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border"><i data-lucide="users" class="w-12 h-12 text-yellow-600"></i></div><h3 class="font-bold text-3xl mt-6 text-gray-800">Caring Teachers</h3><p class="font-body text-gray-600 mt-2 text-base">Our passionate educators are dedicated to your child's individual growth and happiness.</p></div>
+                    <div class="bg-white p-8 text-center crayon-border transform hover:rotate-2 transition-transform"><div class="bg-green-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border"><i data-lucide="heart-handshake" class="w-12 h-12 text-green-600"></i></div><h3 class="font-bold text-3xl mt-6 text-gray-800">Personalized Care</h3><p class="font-body text-gray-600 mt-2 text-base">A low student-teacher ratio ensures every child gets the attention they deserve.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Section -->
+        <section id="programs" class="py-16 md:py-24 bg-paper">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12"><h2 class="text-5xl md:text-6xl font-bold text-gray-800">Our Awesome Programs</h2><p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Structured for holistic development at every age.</p></div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="program-card bg-red-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="playgroup"><div class="p-8 text-center"><h3 class="font-bold text-4xl text-red-500">Playgroup</h3><p class="font-medium text-gray-700 text-2xl">Ages 1.5 - 2.5</p><p class="font-body text-gray-600 mt-3 text-base">A gentle introduction to school, focusing on sensory exploration and social interaction.</p><span class="mt-4 inline-block font-semibold text-red-600 text-xl">View Details &rarr;</span></div></div>
+                    <div class="program-card bg-blue-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="nursery"><div class="p-8 text-center"><h3 class="font-bold text-4xl text-blue-500">Nursery</h3><p class="font-medium text-gray-700 text-2xl">Ages 2.5 - 3.5</p><p class="font-body text-gray-600 mt-3 text-base">Building foundational literacy and numeracy skills through fun, thematic activities.</p><span class="mt-4 inline-block font-semibold text-blue-600 text-xl">View Details &rarr;</span></div></div>
+                    <div class="program-card bg-yellow-200 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="lkg_ukg"><div class="p-8 text-center"><h3 class="font-bold text-4xl text-yellow-600">LKG & UKG</h3><p class="font-medium text-gray-700 text-2xl">Ages 3.5 - 5.5</p><p class="font-body text-gray-600 mt-3 text-base">Preparing for formal schooling with a focus on writing, reading, and problem-solving.</p><span class="mt-4 inline-block font-semibold text-yellow-700 text-xl">View Details &rarr;</span></div></div>
+                     <div class="program-card bg-green-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="daycare"><div class="p-8 text-center"><h3 class="font-bold text-4xl text-green-600">Full Day Care</h3><p class="font-medium text-gray-700 text-2xl">Ages 1.5 - 8</p><p class="font-body text-gray-600 mt-3 text-base">A safe, engaging, and structured environment for children of working parents.</p><span class="mt-4 inline-block font-semibold text-green-700 text-xl">View Details &rarr;</span></div></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Creativity Canvas Section -->
+        <section id="creativity-canvas" class="py-16 md:py-24 bg-red-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12"><h2 class="text-5xl md:text-6xl font-bold text-gray-800">A Splash of Creativity</h2><p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Experience the joy of creation, just like our little learners. Grab a color and draw something wonderful!</p></div>
+                <div class="bg-white p-4 crayon-border max-w-4xl mx-auto">
+                    <div class="w-full bg-gray-100 crayon-border overflow-hidden"><canvas id="drawing-canvas"></canvas></div>
+                    <div id="canvas-controls" class="flex flex-wrap items-center justify-center gap-4 mt-4 p-2">
+                        <button class="color-btn w-10 h-10 rounded-full bg-black active crayon-border" data-color="black"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-red-500 crayon-border" data-color="#ef4444"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-blue-500 crayon-border" data-color="#3b82f6"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-green-500 crayon-border" data-color="#22c55e"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-yellow-400 crayon-border" data-color="#facc15"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-purple-500 crayon-border" data-color="#a855f7"></button>
+                        <div class="w-px h-10 bg-gray-300 mx-2"></div>
+                        <button id="clear-canvas-btn" class="crayon-button flex items-center gap-2 bg-gray-200 text-gray-700 font-semibold px-4 py-2 text-xl"><i data-lucide="trash-2" class="w-5 h-5"></i> Clear</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-16 md:py-24 bg-paper">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12"><h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2></div>
+                <div class="relative overflow-hidden max-w-3xl mx-auto">
+                    <div class="testimonial-slider" id="testimonial-slider"></div>
+                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10"><i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i></button>
+                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10"><i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Virtual Tour Section -->
+        <section id="virtual-tour" class="py-16 md:py-24 bg-yellow-100">
+            <div class="container mx-auto px-6">
+                 <div class="relative bg-cover bg-center crayon-border py-24 px-8 text-center" style="background-image: url('https://lh3.googleusercontent.com/p/AF1QipONm2mSj24J-V9d-w_D3-s8-uY6gV3kI1H-A-A=s1360-w1360-h1020');">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 crayon-border"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-5xl md:text-6xl font-bold text-white">Explore Our Campus From Home</h2>
+                        <p class="text-white/90 mt-4 max-w-2xl mx-auto text-2xl">Step inside our vibrant classrooms and play areas with our interactive 360° virtual tour.</p>
+                        <button id="start-tour-btn" class="mt-8 crayon-button bg-red-500 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2 mx-auto"><i data-lucide="play-circle"></i>Start Virtual Tour</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-16 md:py-24 bg-paper">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Have Questions? We Have Answers!</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Everything you need to know about joining St. Vincent's Preschool family.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item bg-white crayon-border">
+                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
+                            <h3 class="text-2xl font-bold">What is the admission process?</h3>
+                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-red-500 flex-shrink-0"></i>
+                        </div>
+                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
+                            <p>Our admission process is simple! First, we recommend scheduling a campus tour to see our facility. You can then fill out the admission form, submit the required documents (like birth certificate and photos), and pay the admission fee to secure your child's spot. It’s that easy!</p>
+                            <a href="#book-tour" class="crayon-button inline-block bg-red-400 text-white font-bold px-6 py-2 text-lg mt-4">Book a Tour Now</a>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item bg-white crayon-border">
+                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
+                            <h3 class="text-2xl font-bold">What is your student-teacher ratio?</h3>
+                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-blue-500 flex-shrink-0"></i>
+                        </div>
+                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
+                            <p>We pride ourselves on providing personalized attention. Our student-teacher ratio is kept low, typically around 10:1 for our Playgroup and Nursery classes. This ensures that every child receives the individual care and guidance they need to thrive.</p>
+                            <a href="#programs" class="crayon-button inline-block bg-blue-400 text-white font-bold px-6 py-2 text-lg mt-4">See Our Programs</a>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item bg-white crayon-border">
+                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
+                            <h3 class="text-2xl font-bold">How do you ensure campus safety?</h3>
+                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-green-500 flex-shrink-0"></i>
+                        </div>
+                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
+                            <p>Your child's safety is our top priority. Our entire campus is under CCTV surveillance, and all our staff are trained in safety protocols. We have secure entry/exit points, child-proofed classrooms, and maintain a high standard of hygiene to create a safe and healthy learning environment.</p>
+                            <a href="#book-tour" class="crayon-button inline-block bg-green-500 text-white font-bold px-6 py-2 text-lg mt-4">Visit Our Safe Campus</a>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item bg-white crayon-border">
+                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
+                            <h3 class="text-2xl font-bold">What are the school timings?</h3>
+                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-yellow-500 flex-shrink-0"></i>
+                        </div>
+                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
+                            <p>Our school is open from 8:30 AM to 6:30 PM, Monday to Saturday. Our preschool programs (Playgroup, Nursery, LKG/UKG) typically run in the morning, while our full daycare services are available throughout the day to support working parents.</p>
+                             <a href="tel:9100999312" class="crayon-button inline-block bg-yellow-400 text-white font-bold px-6 py-2 text-lg mt-4">Call for Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking & Contact Section -->
+        <section id="book-tour" class="py-16 md:py-24 bg-green-100">
+            <div class="container mx-auto px-6">
+                 <div class="bg-white p-8 md:p-12 crayon-border grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Ready to Visit Us?</h2>
+                        <p class="font-body text-gray-600 mt-4 text-lg">Visit our campus to experience The Learning Curve difference. Fill out the form to schedule a personalized tour. We can't wait to meet you and your little one!</p>
+                        <div class="mt-8 space-y-4 text-2xl">
+                            <div class="flex items-start gap-4"><i data-lucide="map-pin" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i><div><h4>Our Address</h4><p class="font-body text-gray-600 text-base">XH5F+G94, Papamma Guda, Chanda Nagar, Hyderabad, Telangana 500050</p></div></div>
+                             <div class="flex items-start gap-4"><i data-lucide="phone-call" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i><div><h4>Call for Inquiries</h4><a href="tel:9100999312" class="font-body text-gray-600 hover:text-red-500 text-base">091009 99312</a></div></div>
+                        </div>
+                    </div>
+                    <div>
+                         <form id="tour-form" class="space-y-4 bg-yellow-50 p-8 crayon-border">
+                            <div class="text-2xl"><label for="parentName" class="font-medium text-gray-700">Parent's Name</label><input type="text" id="parentName" name="parentName" class="w-full mt-1 p-3 crayon-border text-xl" required></div>
+                            <div class="text-2xl"><label for="phone" class="font-medium text-gray-700">Phone Number</label><input type="tel" id="phone" name="phone" class="w-full mt-1 p-3 crayon-border text-xl" required></div>
+                             <div class="text-2xl"><label for="childAge" class="font-medium text-gray-700">Child's Age</label><input type="number" id="childAge" name="childAge" min="1" max="8" class="w-full mt-1 p-3 crayon-border text-xl" required></div>
+                            <button type="submit" class="w-full crayon-button bg-red-400 text-white font-bold text-2xl p-4">Submit Inquiry</button>
+                            <p id="form-success-message" class="text-green-600 text-center font-semibold hidden text-xl">Thank you! We'll call you soon!</p>
+                         </form>
+                    </div>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-8 text-xl">
+        <p>&copy; 2024 St. Vincent's' Preschool & Daycare.</p>
+        <p class="text-base text-gray-400 mt-2">Designed to help your child grow, learn, and shine.</p>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-container"></div>
+    <div id="tour-modal-container"></div>
+
+    <script>
+        lucide.createIcons();
+        
+        // Mobile Menu
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Testimonial Slider
+        const testimonials = [{ name: "Shravani K.", text: "The best preschool in our area. The teachers are very caring and the curriculum is excellent. My son enjoys going to school every day." }, { name: "Praveen G.", text: "A perfect school for early learning. They have a good play area and the management is very responsive. Highly recommend it." }, { name: "Divya S.", text: "Amazing school. The staff is professional and the environment is very clean and hygienic which was very important for me." }];
+        const slider = document.getElementById('testimonial-slider');
+        let currentIndex = 0;
+        function renderTestimonials() {
+            if (!slider) return;
+            slider.innerHTML = testimonials.map(t => <div class="testimonial-slide p-4 flex-shrink-0"><div class="bg-yellow-100 p-8 rounded-xl crayon-border text-center"><p class="font-body text-gray-600 text-lg italic">"${t.text}"</p><p class="font-bold text-gray-800 mt-4 text-2xl">- ${t.name}</p></div></div>).join('');
+        }
+        function updateSlider() { slider.style.transform = translateX(-${currentIndex * 100}%); }
+        function showNext() { currentIndex = (currentIndex + 1) % testimonials.length; updateSlider(); }
+        if (slider) {
+            document.getElementById('nextBtn').addEventListener('click', showNext);
+            document.getElementById('prevBtn').addEventListener('click', () => { currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length; updateSlider(); });
+            setInterval(showNext, 5000);
+            renderTestimonials();
+        }
+
+        // Form Submission
+        const tourForm = document.getElementById('tour-form');
+        const successMessage = document.getElementById('form-success-message');
+        tourForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            successMessage.classList.remove('hidden');
+            tourForm.reset();
+            setTimeout(() => { successMessage.classList.add('hidden'); }, 5000);
+        });
+        
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                const wasOpen = parent.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(openItem => openItem.classList.remove('open'));
+                if (!wasOpen) {
+                    parent.classList.add('open');
+                }
+            });
+        });
+
+        // Modal Logic
+        const programData = {
+            playgroup: { title: "Playgroup", hook: "Where Curiosity Takes Flight!", value: "Our Playgroup is a wonderland of sensory experiences designed to nurture your toddler's budding curiosity.", curriculum: ["Sensory Play", "Gross Motor Skills", "Music & Movement", "Early Language", "Group Play"], pricing: "₹6,500 / month", color: "red" },
+            nursery: { title: "Nursery", hook: "Building Blocks for a Bright Future!", value: "In Nursery, we build upon natural curiosity by introducing foundational concepts in literacy and numeracy.", curriculum: ["Phonological Awareness", "Pre-writing Skills", "Number Recognition", "Colors & Shapes", "Storytelling"], pricing: "₹7,000 / month", color: "blue" },
+            lkg_ukg: { title: "LKG & UKG", hook: "Getting Ready for Big School!", value: "Our Kindergarten program is structured to ensure a smooth transition to formal schooling.", curriculum: ["Reading & Writing", "Advanced Numeracy", "EVS Concepts", "Logical Reasoning", "Public Speaking"], pricing: "₹7,500 / month", color: "yellow" },
+            daycare: { title: "Full Day Care", hook: "Your Child's Safe Second Home!", value: "We provide a secure, nurturing, and structured environment for children of working parents.", curriculum: ["Homework Assistance", "Hobby Classes", "Structured Play", "Nutritious Meals", "Nap Time"], pricing: "Starting from ₹9,000 / month", color: "green" }
+        };
+
+        function createModal(data, container) {
+            let modalHTML = '';
+            if (container === document.getElementById('modal-container')) {
+                 modalHTML = <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;"><div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95"><div class="p-8"><div class="flex justify-between items-start mb-4"><div><h2 class="text-5xl font-bold text-gray-800">${data.title}</h2><p class="text-2xl text-${data.color}-600 font-semibold mt-1">${data.hook}</p></div><button class="close-modal-btn p-1"><i data-lucide="x" class="w-8 h-8 text-gray-500"></i></button></div><p class="font-body text-gray-600 mb-6 text-lg">${data.value}</p><h3 class="font-bold text-3xl mb-3 text-gray-700">Curriculum Fun</h3><ul class="space-y-2 mb-8">${data.curriculum.map(item => `<li class="flex items-center text-xl"><i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-2"></i>${item}</li>).join('')}</ul><div class="bg-${data.color}-100 crayon-border p-6 flex justify-between items-center"><div><p class="text-gray-600 font-medium text-xl">Program Fee</p><p class="text-4xl font-bold text-gray-800">${data.pricing}</p></div><a href="#book-tour" class="close-modal-btn crayon-button bg-${data.color}-500 text-white font-bold px-6 py-3 text-xl">Book a Tour</a></div></div></div></div>`;
+            } else if (container === document.getElementById('tour-modal-container')) {
+                 modalHTML = <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-2 z-50 opacity-0" style="display: none;"><div class="modal-content bg-gray-900 crayon-border w-full max-w-5xl h-[90vh] flex flex-col transform scale-95"><div class="flex justify-between items-center p-4 bg-gray-800"><h2 class="text-3xl font-bold text-white">360° Virtual Tour</h2><button class="close-modal-btn p-1"><i data-lucide="x" class="w-8 h-8 text-gray-300 hover:text-white"></i></button></div><div class="flex-grow bg-black"><iframe class="w-full h-full" src="${data.embedUrl}" frameborder="0" style="border:0;" allowfullscreen></iframe></div></div></div>;
+            }
+
+            container.innerHTML = modalHTML;
+            const overlay = container.querySelector('.modal-overlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => { overlay.classList.remove('opacity-0'); overlay.querySelector('.modal-content').classList.remove('scale-95'); }, 10);
+            lucide.createIcons();
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay || e.target.closest('.close-modal-btn')) {
+                    overlay.classList.add('opacity-0');
+                    overlay.querySelector('.modal-content').classList.add('scale-95');
+                    setTimeout(() => { overlay.remove(); }, 300);
+                }
+            });
+        }
+        document.querySelectorAll('.program-card').forEach(c => { c.addEventListener('click', () => createModal(programData[c.dataset.program], document.getElementById('modal-container'))); });
+        document.getElementById('start-tour-btn').addEventListener('click', () => {
+            const tourData = { embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15222.355609315053!2d78.31889445437893!3d17.4788531122557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb938095555555%3A0xe5427a1955b23d90!2sThe%20Learning%20Curve%2C%20Preschool%20%26%20Daycare!5e0!3m2!1sen!2sin!4v1724300095817!5m2!1sen!2sin&layer=c" };
+            createModal(tourData, document.getElementById('tour-modal-container'));
+        });
+
+        // Canvas Logic
+        const canvas = document.getElementById('drawing-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            function resizeCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = canvas.parentElement.clientWidth * dpr;
+                canvas.height = (canvas.parentElement.clientWidth * 0.6) * dpr;
+                canvas.style.width = ${canvas.parentElement.clientWidth}px;
+                canvas.style.height = ${canvas.parentElement.clientWidth * 0.6}px;
+                ctx.scale(dpr, dpr);
+                ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.lineWidth = 5;
+            }
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const evt = e.touches ? e.touches[0] : e;
+                return { x: evt.clientX - rect.left, y: evt.clientY - rect.top };
+            }
+            function start(e) { isDrawing = true; const {x,y} = getPos(e); ctx.beginPath(); ctx.moveTo(x,y); }
+            function draw(e) { if (!isDrawing) return; e.preventDefault(); const {x,y} = getPos(e); ctx.lineTo(x,y); ctx.stroke(); }
+            function stop() { isDrawing = false; ctx.closePath(); }
+            ['mousedown', 'touchstart'].forEach(e => canvas.addEventListener(e, start));
+            ['mousemove', 'touchmove'].forEach(e => canvas.addEventListener(e, draw));
+            ['mouseup', 'mouseleave', 'touchend'].forEach(e => canvas.addEventListener(e, stop));
+            document.getElementById('canvas-controls').addEventListener('click', (e) => {
+                if (e.target.dataset.color) {
+                    ctx.strokeStyle = e.target.dataset.color;
+                    document.querySelector('.color-btn.active').classList.remove('active');
+                    e.target.classList.add('active');
+                }
+                if (e.target.closest('#clear-canvas-btn')) { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+            });
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+        }
+    </script>
+</body>
+</html>
