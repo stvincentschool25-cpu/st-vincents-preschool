@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Vincent's Preschool' | Preschool & Daycare in Chanda Nagar, Hyderabad</title>
+    <title>St. Vincent's Preschool | Preschool & Daycare in Chanda Nagar, Hyderabad</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +51,7 @@
             padding-bottom: 0;
         }
         .faq-item.open .faq-answer {
-            max-height: 500px; /* Adjust as needed */
+            max-height: 500px;
             padding-top: 1rem;
             padding-bottom: 1rem;
         }
@@ -67,196 +67,586 @@
         .modal-content { transition: transform 0.3s ease; }
         #drawing-canvas { touch-action: none; cursor: crosshair; }
         .color-btn.active { transform: scale(1.2); box-shadow: 0 0 0 3px white, 0 0 0 5px currentColor; }
+        .section-padding { padding: 5rem 0; }
+        .container-narrow { max-width: 1200px; margin: 0 auto; }
+        
+        /* Image Slider Styles */
+        .image-slider-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .image-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .image-slide {
+            min-width: 100%;
+            transition: opacity 0.3s ease;
+        }
+        .image-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .slider-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .slider-arrow:hover {
+            background-color: white;
+        }
+        .slider-arrow.prev {
+            left: 20px;
+        }
+        .slider-arrow.next {
+            right: 20px;
+        }
+        
+        /* Premium Content Cards */
+        .premium-card {
+            transition: all 0.3s ease;
+        }
+        .premium-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Testimonial improvements */
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: justify;
+            hyphens: auto;
+            word-spacing: -0.05em;
+        }
+        @media (max-width: 768px) {
+            .testimonial-text {
+                font-size: 1rem;
+                text-align: left;
+            }
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Enhanced Canvas Styles */
+        .canvas-container {
+            position: relative;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="white"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="lightgray" stroke-width="0.5"/></svg>');
+            background-size: 20px 20px;
+        }
+        .brush-size-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .brush-size-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 2px solid #2d3748;
+        }
+        .tool-btn {
+            transition: all 0.2s ease;
+        }
+        .tool-btn.active {
+            transform: scale(1.1);
+            background-color: #e5e7eb;
+        }
+        .tool-btn:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="bg-yellow-50 text-gray-800 text-xl">
 
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50 crayon-border border-t-0 border-l-0 border-r-0">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <div class="container-narrow px-6 py-3 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2">
                 <div class="w-12 h-12 flex items-center justify-center">
-                    <svg class="w-10 h-10 text-red-500" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 70 C 30 20, 70 20, 90 70" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round"/><defs><linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" /><stop offset="50%" style="stop-color:#EF4444;stop-opacity:1" /><stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" /></linearGradient></defs></svg>
+                    <svg class="w-10 h-10 text-red-500" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 70 C 30 20, 70 20, 90 70" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#EF4444;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">St. Vincents Preschool</h1>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">St. Vincent's Preschool</h1>
             </a>
             <nav class="hidden md:flex items-center space-x-6 text-2xl">
                  <a href="#programs" class="text-gray-600 hover:text-red-500">Programs</a>
-                 <a href="#virtual-tour" class="text-gray-600 hover:text-red-500">Virtual Tour</a>
+                 <a href="#gallery" class="text-gray-600 hover:text-red-500">Gallery</a>
+                 <a href="#creativity-canvas" class="text-gray-600 hover:text-red-500">Creativity</a>
                  <a href="#faq" class="text-gray-600 hover:text-red-500">FAQ</a>
-                 <a href="#book-tour" class="crayon-button bg-red-400 text-white font-semibold px-6 py-2 text-2xl">Book a Tour</a>
+                 <a href="#parent-resources" class="text-gray-600 hover:text-red-500">Parent Resources</a>
+                 <button id="open-contact-modal" class="crayon-button bg-red-400 text-white font-semibold px-6 py-2 text-2xl">Book a Tour</button>
             </nav>
             <button id="menu-btn" class="md:hidden crayon-button p-2 bg-yellow-300"><i data-lucide="menu" class="w-6 h-6"></i></button>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 text-2xl"><a href="#programs" class="block text-center py-2 text-gray-600 hover:text-red-500">Programs</a><a href="#virtual-tour" class="block text-center py-2 text-gray-600 hover:text-red-500">Virtual Tour</a><a href="#faq" class="block text-center py-2 text-gray-600 hover:text-red-500">FAQ</a><a href="#book-tour" class="block text-center py-2 text-gray-600 hover:text-red-500">Book a Tour</a></div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 text-2xl">
+            <a href="#programs" class="block text-center py-2 text-gray-600 hover:text-red-500">Programs</a>
+            <a href="#gallery" class="block text-center py-2 text-gray-600 hover:text-red-500">Gallery</a>
+            <a href="#creativity-canvas" class="block text-center py-2 text-gray-600 hover:text-red-500">Creativity</a>
+            <a href="#faq" class="block text-center py-2 text-gray-600 hover:text-red-500">FAQ</a>
+            <a href="#parent-resources" class="block text-center py-2 text-gray-600 hover:text-red-500">Parent Resources</a>
+            <button id="open-contact-modal-mobile" class="block text-center w-full py-2 text-gray-600 hover:text-red-500">Book a Tour</button>
+        </div>
     </header>
 
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="relative bg-paper py-16 md:py-24">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
+        <section class="relative bg-paper section-padding">
+            <div class="container-narrow px-6 grid md:grid-cols-2 gap-8 items-center">
                 <div class="text-center md:text-left">
-                    <span class="text-red-500 font-semibold text-2xl">Admissions Open 2025-2026</span>
-                    <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">Nurturing Tomorrow's Leaders, Today.</h2>
-                    <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chanda Nagar. We offer a fun, safe, and stimulating environment for children aged 1.5 to 5 years.</p>
+                    <span class="text-red-500 font-semibold text-2xl">Admissions Open</span>
+                    <h2 class="text-5xl md:text-7xl font-bold text-gray-800 mt-2 leading-tight">Your child's development is our Promise</h2>
+                    <p class="font-body text-gray-600 mt-4 text-lg">Your child's happy place in Chanda Nagar. We offer a fun, safe, and stimulating environment for children aged 1.5 to 6 years.</p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#book-tour" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">Schedule a Visit</a>
-                        <a href="tel:9100999312" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2"><i data-lucide="phone"></i>Call Us Now</a>
+                        <button id="open-contact-modal-hero" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl shadow-lg">Schedule a Visit</button>
+                        <a href="tel:9100999312" class="crayon-button bg-blue-400 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2">
+                            <i data-lucide="phone"></i>Call Us Now
+                        </a>
                     </div>
                 </div>
-                <div class="hidden md:block"><img src="https://lh3.googleusercontent.com/p/AF1QipM5x2p1Y_T1W6yP-k2cZ2e6a_O7aC8-P1eG8sA=s1360-w1360-h1020" alt="Happy children" class="crayon-border object-cover w-full h-full"></div>
+                <div class="hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1519452575416-64e83f8b89cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Happy children" class="crayon-border object-cover w-full h-full">
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Slider Section -->
+        <section id="gallery" class="section-padding bg-blue-100">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Our Happy Learning Environment</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Take a peek inside our vibrant classrooms and play areas.</p>
+                </div>
+                
+                <div class="image-slider-container crayon-border">
+                    <div class="image-slider" id="image-slider">
+                        <div class="image-slide">
+                            <img src="https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Preschool classroom">
+                        </div>
+                        <div class="image-slide">
+                            <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Children playing">
+                        </div>
+                        <div class="image-slide">
+                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Art activities">
+                        </div>
+                        <div class="image-slide">
+                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Outdoor play area">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow prev" id="slider-prev">
+                        <i data-lucide="chevron-left" class="w-6 h-6 text-gray-700"></i>
+                    </div>
+                    <div class="slider-arrow next" id="slider-next">
+                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
+                    </div>
+                    
+                    <div class="slider-nav" id="slider-nav">
+                        <div class="slider-dot active" data-index="0"></div>
+                        <div class="slider-dot" data-index="1"></div>
+                        <div class="slider-dot" data-index="2"></div>
+                        <div class="slider-dot" data-index="3"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Why Choose Us Section -->
-        <section class="py-16 md:py-24 bg-blue-100">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12"><h2 class="text-5xl md:text-6xl font-bold text-gray-800">Why Parents Trust Us</h2><p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">A foundation for lifelong learning through a perfect blend of care, creativity, and curriculum.</p></div>
+        <section class="section-padding bg-blue-100">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Why Parents Trust Us</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">A foundation for lifelong learning through a perfect blend of care, creativity, and curriculum.</p>
+                </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white p-8 text-center crayon-border transform hover:-rotate-2 transition-transform"><div class="bg-red-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border"><i data-lucide="shield-check" class="w-12 h-12 text-red-600"></i></div><h3 class="font-bold text-3xl mt-6 text-gray-800">Safe & Secure</h3><p class="font-body text-gray-600 mt-2 text-base">CCTV, child-proofed campus, and strict hygiene protocols ensure a safe environment.</p></div>
-                    <div class="bg-white p-8 text-center crayon-border transform hover:rotate-2 transition-transform"><div class="bg-blue-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border"><i data-lucide="lightbulb" class="w-12 h-12 text-blue-600"></i></div><h3 class="font-bold text-3xl mt-6 text-gray-800">Play-Based Fun</h3><p class="font-body text-gray-600 mt-2 text-base">Our curriculum fosters creativity and critical thinking through engaging, hands-on activities.</p></div>
-                    <div class="bg-white p-8 text-center crayon-border transform hover:-rotate-2 transition-transform"><div class="bg-yellow-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border"><i data-lucide="users" class="w-12 h-12 text-yellow-600"></i></div><h3 class="font-bold text-3xl mt-6 text-gray-800">Caring Teachers</h3><p class="font-body text-gray-600 mt-2 text-base">Our passionate educators are dedicated to your child's individual growth and happiness.</p></div>
-                    <div class="bg-white p-8 text-center crayon-border transform hover:rotate-2 transition-transform"><div class="bg-green-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border"><i data-lucide="heart-handshake" class="w-12 h-12 text-green-600"></i></div><h3 class="font-bold text-3xl mt-6 text-gray-800">Personalized Care</h3><p class="font-body text-gray-600 mt-2 text-base">A low student-teacher ratio ensures every child gets the attention they deserve.</p></div>
+                    <div class="bg-white p-8 text-center crayon-border transform hover:-rotate-2 transition-transform">
+                        <div class="bg-red-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border">
+                            <i data-lucide="shield-check" class="w-12 h-12 text-red-600"></i>
+                        </div>
+                        <h3 class="font-bold text-3xl mt-6 text-gray-800">Safe & Secure</h3>
+                        <p class="font-body text-gray-600 mt-2 text-base">CCTV, child-proofed campus, and strict hygiene protocols ensure a safe environment.</p>
+                    </div>
+                    <div class="bg-white p-8 text-center crayon-border transform hover:rotate-2 transition-transform">
+                        <div class="bg-blue-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border">
+                            <i data-lucide="lightbulb" class="w-12 h-12 text-blue-600"></i>
+                        </div>
+                        <h3 class="font-bold text-3xl mt-6 text-gray-800">Play-Based Learning</h3>
+                        <p class="font-body text-gray-600 mt-2 text-base">Our curriculum fosters creativity and critical thinking through engaging, hands-on activities.</p>
+                    </div>
+                    <div class="bg-white p-8 text-center crayon-border transform hover:-rotate-2 transition-transform">
+                        <div class="bg-yellow-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border">
+                            <i data-lucide="users" class="w-12 h-12 text-yellow-600"></i>
+                        </div>
+                        <h3 class="font-bold text-3xl mt-6 text-gray-800">Caring Teachers</h3>
+                        <p class="font-body text-gray-600 mt-2 text-base">Our passionate educators are dedicated to your child's individual growth and happiness.</p>
+                    </div>
+                    <div class="bg-white p-8 text-center crayon-border transform hover:rotate-2 transition-transform">
+                        <div class="bg-green-200 rounded-full w-24 h-24 flex items-center justify-center mx-auto crayon-border">
+                            <i data-lucide="heart-handshake" class="w-12 h-12 text-green-600"></i>
+                        </div>
+                        <h3 class="font-bold text-3xl mt-6 text-gray-800">Personalized Care</h3>
+                        <p class="font-body text-gray-600 mt-2 text-base">A low student-teacher ratio ensures every child gets the attention they deserve.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Programs Section -->
-        <section id="programs" class="py-16 md:py-24 bg-paper">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12"><h2 class="text-5xl md:text-6xl font-bold text-gray-800">Our Awesome Programs</h2><p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Structured for holistic development at every age.</p></div>
+        <section id="programs" class="section-padding bg-paper">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Our Awesome Programs</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Structured for holistic development at every age.</p>
+                </div>
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="program-card bg-red-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="playgroup"><div class="p-8 text-center"><h3 class="font-bold text-4xl text-red-500">Playgroup</h3><p class="font-medium text-gray-700 text-2xl">Ages 1.5 - 2.5</p><p class="font-body text-gray-600 mt-3 text-base">A gentle introduction to school, focusing on sensory exploration and social interaction.</p><span class="mt-4 inline-block font-semibold text-red-600 text-xl">View Details &rarr;</span></div></div>
-                    <div class="program-card bg-blue-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="nursery"><div class="p-8 text-center"><h3 class="font-bold text-4xl text-blue-500">Nursery</h3><p class="font-medium text-gray-700 text-2xl">Ages 2.5 - 3.5</p><p class="font-body text-gray-600 mt-3 text-base">Building foundational literacy and numeracy skills through fun, thematic activities.</p><span class="mt-4 inline-block font-semibold text-blue-600 text-xl">View Details &rarr;</span></div></div>
-                    <div class="program-card bg-yellow-200 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="lkg_ukg"><div class="p-8 text-center"><h3 class="font-bold text-4xl text-yellow-600">LKG & UKG</h3><p class="font-medium text-gray-700 text-2xl">Ages 3.5 - 5.5</p><p class="font-body text-gray-600 mt-3 text-base">Preparing for formal schooling with a focus on writing, reading, and problem-solving.</p><span class="mt-4 inline-block font-semibold text-yellow-700 text-xl">View Details &rarr;</span></div></div>
-                     <div class="program-card bg-green-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="daycare"><div class="p-8 text-center"><h3 class="font-bold text-4xl text-green-600">Full Day Care</h3><p class="font-medium text-gray-700 text-2xl">Ages 1.5 - 8</p><p class="font-body text-gray-600 mt-3 text-base">A safe, engaging, and structured environment for children of working parents.</p><span class="mt-4 inline-block font-semibold text-green-700 text-xl">View Details &rarr;</span></div></div>
+                    <div class="program-card bg-red-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="playgroup">
+                        <div class="p-8 text-center">
+                            <h3 class="font-bold text-4xl text-red-500">Playgroup</h3>
+                            <p class="font-body text-gray-600 mt-3 text-base">A gentle introduction to school, focusing on sensory exploration and social interaction.</p>
+                            <span class="mt-4 inline-block font-semibold text-red-600 text-xl">View Details &rarr;</span>
+                        </div>
+                    </div>
+                    <div class="program-card bg-blue-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="nursery">
+                        <div class="p-8 text-center">
+                            <h3 class="font-bold text-4xl text-blue-500">Nursery</h3>
+                            <p class="font-body text-gray-600 mt-3 text-base">Building foundational literacy and numeracy skills through fun, thematic activities.</p>
+                            <span class="mt-4 inline-block font-semibold text-blue-600 text-xl">View Details &rarr;</span>
+                        </div>
+                    </div>
+                    <div class="program-card bg-yellow-200 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="lkg">
+                        <div class="p-8 text-center">
+                            <h3 class="font-bold text-4xl text-yellow-600">LKG</h3>
+                            <p class="font-body text-gray-600 mt-3 text-base">Developing foundational academic skills and preparing children for formal schooling.</p>
+                            <span class="mt-4 inline-block font-semibold text-yellow-700 text-xl">View Details &rarr;</span>
+                        </div>
+                    </div>
+                    <div class="program-card bg-green-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="ukg">
+                        <div class="p-8 text-center">
+                            <h3 class="font-bold text-4xl text-green-600">UKG</h3>
+                            <p class="font-body text-gray-600 mt-3 text-base">Advanced preparation for primary school with focus on comprehensive skill development.</p>
+                            <span class="mt-4 inline-block font-semibold text-green-700 text-xl">View Details &rarr;</span>
+                        </div>
+                    </div>
+                    <div class="program-card bg-purple-100 crayon-border transform hover:scale-105 transition-transform cursor-pointer" data-program="daycare">
+                        <div class="p-8 text-center">
+                            <h3 class="font-bold text-4xl text-purple-600">Day Care</h3>
+                            <p class="font-body text-gray-600 mt-3 text-base">A safe, engaging, and structured environment for children of working parents.</p>
+                            <span class="mt-4 inline-block font-semibold text-purple-700 text-xl">View Details &rarr;</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         
-        <!-- Creativity Canvas Section -->
-        <section id="creativity-canvas" class="py-16 md:py-24 bg-red-100">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12"><h2 class="text-5xl md:text-6xl font-bold text-gray-800">A Splash of Creativity</h2><p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Experience the joy of creation, just like our little learners. Grab a color and draw something wonderful!</p></div>
-                <div class="bg-white p-4 crayon-border max-w-4xl mx-auto">
-                    <div class="w-full bg-gray-100 crayon-border overflow-hidden"><canvas id="drawing-canvas"></canvas></div>
-                    <div id="canvas-controls" class="flex flex-wrap items-center justify-center gap-4 mt-4 p-2">
-                        <button class="color-btn w-10 h-10 rounded-full bg-black active crayon-border" data-color="black"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-red-500 crayon-border" data-color="#ef4444"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-blue-500 crayon-border" data-color="#3b82f6"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-green-500 crayon-border" data-color="#22c55e"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-yellow-400 crayon-border" data-color="#facc15"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-purple-500 crayon-border" data-color="#a855f7"></button>
-                        <div class="w-px h-10 bg-gray-300 mx-2"></div>
-                        <button id="clear-canvas-btn" class="crayon-button flex items-center gap-2 bg-gray-200 text-gray-700 font-semibold px-4 py-2 text-xl"><i data-lucide="trash-2" class="w-5 h-5"></i> Clear</button>
+        <!-- Enhanced Creativity Canvas Section -->
+        <section id="creativity-canvas" class="section-padding bg-red-100">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">A Splash of Creativity</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Experience the joy of creation, just like our little learners. Grab a color and draw something wonderful!</p>
+                </div>
+                
+                <div class="bg-white p-6 crayon-border max-w-4xl mx-auto">
+                    <!-- Drawing Area -->
+                    <div class="canvas-container crayon-border mb-4 overflow-hidden">
+                        <canvas id="drawing-canvas" class="w-full h-96"></canvas>
+                    </div>
+                    
+                    <!-- Enhanced Controls -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Color Palette -->
+                        <div class="bg-yellow-50 p-4 crayon-border">
+                            <h3 class="font-bold text-xl mb-3 text-center">Colors</h3>
+                            <div class="flex flex-wrap justify-center gap-2">
+                                <button class="color-btn w-10 h-10 rounded-full bg-black active crayon-border" data-color="black" title="Black"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-red-500 crayon-border" data-color="#ef4444" title="Red"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-blue-500 crayon-border" data-color="#3b82f6" title="Blue"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-green-500 crayon-border" data-color="#22c55e" title="Green"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-yellow-400 crayon-border" data-color="#facc15" title="Yellow"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-purple-500 crayon-border" data-color="#a855f7" title="Purple"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-pink-500 crayon-border" data-color="#ec4899" title="Pink"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-orange-500 crayon-border" data-color="#f97316" title="Orange"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-teal-500 crayon-border" data-color="#14b8a6" title="Teal"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-gray-400 crayon-border" data-color="#9ca3af" title="Gray"></button>
+                            </div>
+                        </div>
+                        
+                        <!-- Tools & Settings -->
+                        <div class="bg-blue-50 p-4 crayon-border">
+                            <h3 class="font-bold text-xl mb-3 text-center">Tools</h3>
+                            <div class="flex flex-wrap justify-center gap-2 mb-3">
+                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg active" data-tool="brush" title="Brush">
+                                    <i data-lucide="paintbrush" class="w-5 h-5"></i>
+                                </button>
+                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg" data-tool="eraser" title="Eraser">
+                                    <i data-lucide="eraser" class="w-5 h-5"></i>
+                                </button>
+                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg" data-tool="fill" title="Fill">
+                                    <i data-lucide="bucket" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="brush-size-control mt-2">
+                                <label class="font-medium text-gray-700">Brush Size:</label>
+                                <input type="range" id="brush-size" min="1" max="30" value="5" class="w-full">
+                                <div class="brush-size-preview">
+                                    <div id="brush-preview" class="rounded-full bg-black"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="bg-green-50 p-4 crayon-border">
+                            <h3 class="font-bold text-xl mb-3 text-center">Actions</h3>
+                            <div class="flex flex-col gap-2">
+                                <button id="clear-canvas-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
+                                    <i data-lucide="trash-2" class="w-5 h-5"></i> Clear Canvas
+                                </button>
+                                <button id="save-canvas-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
+                                    <i data-lucide="download" class="w-5 h-5"></i> Save Drawing
+                                </button>
+                                <button id="random-color-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
+                                    <i data-lucide="shuffle" class="w-5 h-5"></i> Random Color
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Drawing Tips -->
+                    <div class="mt-6 bg-yellow-100 p-4 crayon-border">
+                        <h3 class="font-bold text-xl mb-2 text-center">Drawing Tips</h3>
+                        <ul class="font-body text-gray-700 text-base list-disc pl-5 space-y-1">
+                            <li>Use different brush sizes for varied effects</li>
+                            <li>Try the fill tool to quickly color large areas</li>
+                            <li>Use the eraser to correct mistakes</li>
+                            <li>Save your masterpiece when you're done!</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section class="py-16 md:py-24 bg-paper">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12"><h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2></div>
-                <div class="relative overflow-hidden max-w-3xl mx-auto">
+        <!-- Improved Testimonials Section -->
+        <section class="section-padding bg-paper">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Hear from families who have experienced the St. Vincent's difference</p>
+                </div>
+                <div class="relative overflow-hidden max-w-4xl mx-auto">
                     <div class="testimonial-slider" id="testimonial-slider"></div>
-                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10"><i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i></button>
-                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10"><i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i></button>
+                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
+                        <i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i>
+                    </button>
+                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
+                        <i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i>
+                    </button>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="https://g.page/r/CbNp6tq5qJ7-EB0/review" target="_blank" class="crayon-button bg-green-500 text-white font-bold px-8 py-4 text-xl inline-flex items-center gap-2">
+                        <i data-lucide="star" class="w-6 h-6"></i> Leave a Google Review
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Virtual Tour Section -->
-        <section id="virtual-tour" class="py-16 md:py-24 bg-yellow-100">
-            <div class="container mx-auto px-6">
-                 <div class="relative bg-cover bg-center crayon-border py-24 px-8 text-center" style="background-image: url('https://lh3.googleusercontent.com/p/AF1QipONm2mSj24J-V9d-w_D3-s8-uY6gV3kI1H-A-A=s1360-w1360-h1020');">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 crayon-border"></div>
-                    <div class="relative z-10">
-                        <h2 class="text-5xl md:text-6xl font-bold text-white">Explore Our Campus From Home</h2>
-                        <p class="text-white/90 mt-4 max-w-2xl mx-auto text-2xl">Step inside our vibrant classrooms and play areas with our interactive 360° virtual tour.</p>
-                        <button id="start-tour-btn" class="mt-8 crayon-button bg-red-500 text-white font-bold px-8 py-4 text-2xl shadow-lg flex items-center justify-center gap-2 mx-auto"><i data-lucide="play-circle"></i>Start Virtual Tour</button>
+        <!-- Parent Resources Section -->
+        <section id="parent-resources" class="section-padding bg-yellow-100">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Resources for Parents</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Expert insights to help your child thrive in their early years.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="premium-card bg-white p-6 crayon-border">
+                        <div class="bg-blue-100 rounded-lg p-4 mb-4 crayon-border">
+                            <i data-lucide="brain" class="w-12 h-12 text-blue-600 mx-auto"></i>
+                        </div>
+                        <h3 class="font-bold text-2xl mb-3 text-gray-800">The Science of Early Learning</h3>
+                        <p class="font-body text-gray-600 mb-4 text-base">Discover how preschool shapes your child's brain development and sets the foundation for lifelong learning.</p>
+                        <button class="open-blog-modal text-blue-600 font-semibold text-lg flex items-center" data-blog="science">
+                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </button>
                     </div>
+                    
+                    <div class="premium-card bg-white p-6 crayon-border">
+                        <div class="bg-green-100 rounded-lg p-4 mb-4 crayon-border">
+                            <i data-lucide="users" class="w-12 h-12 text-green-600 mx-auto"></i>
+                        </div>
+                        <h3 class="font-bold text-2xl mb-3 text-gray-800">Social Skills Development</h3>
+                        <p class="font-body text-gray-600 mb-4 text-base">Learn how preschool helps children develop crucial social skills like sharing, empathy, and cooperation.</p>
+                        <button class="open-blog-modal text-green-600 font-semibold text-lg flex items-center" data-blog="social">
+                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="premium-card bg-white p-6 crayon-border">
+                        <div class="bg-purple-100 rounded-lg p-4 mb-4 crayon-border">
+                            <i data-lucide="graduation-cap" class="w-12 h-12 text-purple-600 mx-auto"></i>
+                        </div>
+                        <h3 class="font-bold text-2xl mb-3 text-gray-800">Preparing for Primary School</h3>
+                        <p class="font-body text-gray-600 mb-4 text-base">How our curriculum ensures a smooth transition to formal schooling with confidence and enthusiasm.</p>
+                        <button class="open-blog-modal text-purple-600 font-semibold text-lg flex items-center" data-blog="primary">
+                            Read More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-red-100 p-8 crayon-border text-center">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Give Your Child the Best Start?</h3>
+                    <p class="font-body text-gray-600 mb-6 max-w-2xl mx-auto text-lg">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
+                    <button class="open-contact-modal-premium crayon-button bg-red-500 text-white font-bold px-8 py-4 text-xl">Schedule a Tour Today</button>
                 </div>
             </div>
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="py-16 md:py-24 bg-paper">
-            <div class="container mx-auto px-6">
+        <section id="faq" class="section-padding bg-paper">
+            <div class="container-narrow px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Have Questions? We Have Answers!</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Everything you need to know about joining St. Vincent's Preschool family.</p>
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Frequently Asked Questions</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Answers to common questions about preschool and early childhood development.</p>
                 </div>
                 <div class="max-w-3xl mx-auto space-y-4">
                     <!-- FAQ Item 1 -->
                     <div class="faq-item bg-white crayon-border">
                         <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">What is the admission process?</h3>
+                            <h3 class="text-2xl font-bold">What is the ideal age to start preschool?</h3>
                             <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-red-500 flex-shrink-0"></i>
                         </div>
                         <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>Our admission process is simple! First, we recommend scheduling a campus tour to see our facility. You can then fill out the admission form, submit the required documents (like birth certificate and photos), and pay the admission fee to secure your child's spot. It’s that easy!</p>
-                            <a href="#book-tour" class="crayon-button inline-block bg-red-400 text-white font-bold px-6 py-2 text-lg mt-4">Book a Tour Now</a>
+                            <p>Most children are ready for preschool between ages 2 and 3. At this stage, they've typically developed basic communication skills, can follow simple instructions, and are beginning to show interest in playing with peers. Our playgroup program starts at 1.5 years for children who show readiness for structured social interaction.</p>
                         </div>
                     </div>
                     <!-- FAQ Item 2 -->
                     <div class="faq-item bg-white crayon-border">
                         <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">What is your student-teacher ratio?</h3>
+                            <h3 class="text-2xl font-bold">How can I prepare my toddler for preschool?</h3>
                             <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-blue-500 flex-shrink-0"></i>
                         </div>
                         <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>We pride ourselves on providing personalized attention. Our student-teacher ratio is kept low, typically around 10:1 for our Playgroup and Nursery classes. This ensures that every child receives the individual care and guidance they need to thrive.</p>
-                            <a href="#programs" class="crayon-button inline-block bg-blue-400 text-white font-bold px-6 py-2 text-lg mt-4">See Our Programs</a>
+                            <p>To make the transition smooth, regularly remind your child of the fun and happy things about school — it builds confidence and excitement. You can also prepare your child by establishing routines, reading books about preschool, practicing separation for short periods, and encouraging independence with simple tasks like putting on shoes or using the bathroom. We also offer orientation sessions where you and your child can visit the classroom together before the first day.</p>
                         </div>
                     </div>
                     <!-- FAQ Item 3 -->
                     <div class="faq-item bg-white crayon-border">
                         <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">How do you ensure campus safety?</h3>
+                            <h3 class="text-2xl font-bold">What should I look for in a quality preschool?</h3>
                             <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-green-500 flex-shrink-0"></i>
                         </div>
                         <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>Your child's safety is our top priority. Our entire campus is under CCTV surveillance, and all our staff are trained in safety protocols. We have secure entry/exit points, child-proofed classrooms, and maintain a high standard of hygiene to create a safe and healthy learning environment.</p>
-                            <a href="#book-tour" class="crayon-button inline-block bg-green-500 text-white font-bold px-6 py-2 text-lg mt-4">Visit Our Safe Campus</a>
+                            <p>Key indicators of quality preschools include: low student-teacher ratios, qualified and caring staff, a safe and stimulating environment, a balanced curriculum that includes play, clear communication with parents, and happy, engaged children. We're proud to meet all these criteria at St. Vincent's.</p>
                         </div>
                     </div>
                     <!-- FAQ Item 4 -->
                     <div class="faq-item bg-white crayon-border">
                         <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
-                            <h3 class="text-2xl font-bold">What are the school timings?</h3>
+                            <h3 class="text-2xl font-bold">How does preschool help with separation anxiety?</h3>
                             <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-yellow-500 flex-shrink-0"></i>
                         </div>
                         <div class="faq-answer px-5 font-body text-gray-600 text-base">
-                            <p>Our school is open from 8:30 AM to 6:30 PM, Monday to Saturday. Our preschool programs (Playgroup, Nursery, LKG/UKG) typically run in the morning, while our full daycare services are available throughout the day to support working parents.</p>
-                             <a href="tel:9100999312" class="crayon-button inline-block bg-yellow-400 text-white font-bold px-6 py-2 text-lg mt-4">Call for Details</a>
+                            <p>Our teachers are trained to help children through separation anxiety with comforting routines, engaging activities, and gradual transitions. We recommend starting with shorter days and building up, establishing a consistent goodbye ritual, and reassuring your child that you'll return. Most children adjust within a few weeks as they form bonds with teachers and classmates.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 5 -->
+                    <div class="faq-item bg-white crayon-border">
+                        <div class="faq-question flex justify-between items-center p-5 cursor-pointer">
+                            <h3 class="text-2xl font-bold">What is the role of play in preschool learning?</h3>
+                            <i data-lucide="plus-circle" class="faq-icon w-8 h-8 text-purple-500 flex-shrink-0"></i>
+                        </div>
+                        <div class="faq-answer px-5 font-body text-gray-600 text-base">
+                            <p>Play is the primary way young children learn. Through play, children develop cognitive, physical, social, and emotional skills. Structured and unstructured play activities in our curriculum help children practice problem-solving, build vocabulary, develop fine and gross motor skills, learn to cooperate with peers, and express creativity.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Booking & Contact Section -->
-        <section id="book-tour" class="py-16 md:py-24 bg-green-100">
-            <div class="container mx-auto px-6">
+        <!-- Contact Section -->
+        <section id="contact" class="section-padding bg-green-100">
+            <div class="container-narrow px-6">
                  <div class="bg-white p-8 md:p-12 crayon-border grid md:grid-cols-2 gap-12 items-center">
                     <div>
                         <h2 class="text-5xl md:text-6xl font-bold text-gray-800">Ready to Visit Us?</h2>
-                        <p class="font-body text-gray-600 mt-4 text-lg">Visit our campus to experience The Learning Curve difference. Fill out the form to schedule a personalized tour. We can't wait to meet you and your little one!</p>
+                        <p class="font-body text-gray-600 mt-4 text-lg">Visit our campus to experience St. Vincent's difference. Click the button below to schedule a personalized tour. We can't wait to meet you and your little one!</p>
                         <div class="mt-8 space-y-4 text-2xl">
-                            <div class="flex items-start gap-4"><i data-lucide="map-pin" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i><div><h4>Our Address</h4><p class="font-body text-gray-600 text-base">XH5F+G94, Papamma Guda, Chanda Nagar, Hyderabad, Telangana 500050</p></div></div>
-                             <div class="flex items-start gap-4"><i data-lucide="phone-call" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i><div><h4>Call for Inquiries</h4><a href="tel:9100999312" class="font-body text-gray-600 hover:text-red-500 text-base">091009 99312</a></div></div>
+                            <div class="flex items-start gap-4">
+                                <i data-lucide="map-pin" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4>Our Address</h4>
+                                    <p class="font-body text-gray-600 text-base">XH5F+G94, Papamma Guda, Chanda Nagar, Hyderabad, Telangana 500050</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i data-lucide="phone-call" class="w-8 h-8 text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4>Call for Inquiries</h4>
+                                    <a href="tel:9100999312" class="font-body text-gray-600 hover:text-red-500 text-base">091009 99312</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                         <form id="tour-form" class="space-y-4 bg-yellow-50 p-8 crayon-border">
-                            <div class="text-2xl"><label for="parentName" class="font-medium text-gray-700">Parent's Name</label><input type="text" id="parentName" name="parentName" class="w-full mt-1 p-3 crayon-border text-xl" required></div>
-                            <div class="text-2xl"><label for="phone" class="font-medium text-gray-700">Phone Number</label><input type="tel" id="phone" name="phone" class="w-full mt-1 p-3 crayon-border text-xl" required></div>
-                             <div class="text-2xl"><label for="childAge" class="font-medium text-gray-700">Child's Age</label><input type="number" id="childAge" name="childAge" min="1" max="8" class="w-full mt-1 p-3 crayon-border text-xl" required></div>
-                            <button type="submit" class="w-full crayon-button bg-red-400 text-white font-bold text-2xl p-4">Submit Inquiry</button>
-                            <p id="form-success-message" class="text-green-600 text-center font-semibold hidden text-xl">Thank you! We'll call you soon!</p>
-                         </form>
+                    <div class="text-center">
+                         <button id="open-contact-modal-bottom" class="crayon-button bg-red-400 text-white font-bold px-8 py-4 text-2xl">Schedule a Visit</button>
+                         <p class="font-body text-gray-600 mt-4 text-base">Or give us a call to book your tour directly.</p>
                     </div>
                  </div>
             </div>
@@ -265,15 +655,33 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white text-center py-8 text-xl">
-        <p>&copy; 2024 St. Vincent's' Preschool & Daycare.</p>
+        <p>&copy; 2025 St. Vincent's Preschool & Daycare.</p>
         <p class="text-base text-gray-400 mt-2">Designed to help your child grow, learn, and shine.</p>
     </footer>
 
     <!-- Modals -->
     <div id="modal-container"></div>
-    <div id="tour-modal-container"></div>
+    <div id="contact-modal-container"></div>
+    <div id="review-modal-container"></div>
+    <div id="blog-modal-container"></div>
+
+    <!-- Tawk.to Chat Widget -->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/66c7f2f09f5ed798a77a6d5f/1i68b8k9t';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
 
     <script>
+        // Google Sheets API endpoint - Replace with your actual Google Apps Script URL
+        const GOOGLE_SHEETS_API_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+        
         lucide.createIcons();
         
         // Mobile Menu
@@ -281,33 +689,65 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Testimonial Slider
-        const testimonials = [{ name: "Shravani K.", text: "The best preschool in our area. The teachers are very caring and the curriculum is excellent. My son enjoys going to school every day." }, { name: "Praveen G.", text: "A perfect school for early learning. They have a good play area and the management is very responsive. Highly recommend it." }, { name: "Divya S.", text: "Amazing school. The staff is professional and the environment is very clean and hygienic which was very important for me." }];
+        // Testimonial Slider with Improved Text Formatting
+        const testimonials = [
+            { 
+                name: "Shravani K.", 
+                text: "The best preschool in our area. The teachers are very caring and the curriculum is excellent. My son enjoys going to school every day and has developed so much confidence since joining." 
+            }, 
+            { 
+                name: "Praveen G.", 
+                text: "A perfect school for early learning. They have a good play area and the management is very responsive. My daughter's language skills have improved dramatically in just a few months." 
+            }, 
+            { 
+                name: "Divya S.", 
+                text: "Amazing school. The staff is professional and the environment is very clean and hygienic which was very important for me. The communication with parents is excellent." 
+            },
+            { 
+                name: "Rajesh M.", 
+                text: "My daughter has been attending St. Vincent's for the past year and we've seen remarkable improvement in her social skills and confidence. The teachers are wonderful!" 
+            },
+            { 
+                name: "Priya N.", 
+                text: "The facilities are excellent and the staff is very caring. My son looks forward to going to school every day. Highly recommended!" 
+            }
+        ];
         const slider = document.getElementById('testimonial-slider');
         let currentIndex = 0;
+        
         function renderTestimonials() {
             if (!slider) return;
-            slider.innerHTML = testimonials.map(t => <div class="testimonial-slide p-4 flex-shrink-0"><div class="bg-yellow-100 p-8 rounded-xl crayon-border text-center"><p class="font-body text-gray-600 text-lg italic">"${t.text}"</p><p class="font-bold text-gray-800 mt-4 text-2xl">- ${t.name}</p></div></div>).join('');
+            slider.innerHTML = testimonials.map(t => `
+                <div class="testimonial-slide p-4 flex-shrink-0">
+                    <div class="bg-yellow-100 p-8 rounded-xl crayon-border">
+                        <p class="font-body text-gray-600 testimonial-text">"${t.text}"</p>
+                        <p class="font-bold text-gray-800 mt-6 text-2xl text-right">- ${t.name}</p>
+                    </div>
+                </div>
+            `).join('');
         }
-        function updateSlider() { slider.style.transform = translateX(-${currentIndex * 100}%); }
-        function showNext() { currentIndex = (currentIndex + 1) % testimonials.length; updateSlider(); }
+        
+        function updateSlider() { 
+            if (slider) {
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`; 
+            }
+        }
+        
+        function showNext() { 
+            currentIndex = (currentIndex + 1) % testimonials.length; 
+            updateSlider(); 
+        }
+        
         if (slider) {
             document.getElementById('nextBtn').addEventListener('click', showNext);
-            document.getElementById('prevBtn').addEventListener('click', () => { currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length; updateSlider(); });
+            document.getElementById('prevBtn').addEventListener('click', () => { 
+                currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length; 
+                updateSlider(); 
+            });
             setInterval(showNext, 5000);
             renderTestimonials();
         }
 
-        // Form Submission
-        const tourForm = document.getElementById('tour-form');
-        const successMessage = document.getElementById('form-success-message');
-        tourForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            successMessage.classList.remove('hidden');
-            tourForm.reset();
-            setTimeout(() => { successMessage.classList.add('hidden'); }, 5000);
-        });
-        
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
@@ -320,77 +760,636 @@
             });
         });
 
+        // Enhanced Canvas Logic
+        const canvas = document.getElementById('drawing-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            let currentTool = 'brush';
+            let currentColor = 'black';
+            let brushSize = 5;
+            
+            // Set up canvas
+            function resizeCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+                ctx.scale(dpr, dpr);
+                ctx.lineCap = 'round'; 
+                ctx.lineJoin = 'round'; 
+                ctx.lineWidth = brushSize;
+                ctx.strokeStyle = currentColor;
+                ctx.fillStyle = currentColor;
+                
+                // Draw a subtle grid background
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw grid lines
+                ctx.strokeStyle = 'rgba(0,0,0,0.05)';
+                ctx.lineWidth = 1;
+                const gridSize = 20;
+                
+                for (let x = 0; x <= canvas.width; x += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height);
+                    ctx.stroke();
+                }
+                
+                for (let y = 0; y <= canvas.height; y += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(canvas.width, y);
+                    ctx.stroke();
+                }
+                
+                // Reset drawing settings
+                ctx.lineWidth = brushSize;
+                ctx.strokeStyle = currentColor;
+                ctx.fillStyle = currentColor;
+            }
+            
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const evt = e.touches ? e.touches[0] : e;
+                return { 
+                    x: evt.clientX - rect.left, 
+                    y: evt.clientY - rect.top 
+                };
+            }
+            
+            function startDrawing(e) { 
+                isDrawing = true; 
+                const {x,y} = getPos(e); 
+                
+                if (currentTool === 'brush') {
+                    ctx.beginPath(); 
+                    ctx.moveTo(x,y); 
+                } else if (currentTool === 'fill') {
+                    // Simple flood fill implementation
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const targetColor = getPixelColor(imageData, x, y);
+                    floodFill(imageData, x, y, targetColor, hexToRgb(currentColor));
+                    ctx.putImageData(imageData, 0, 0);
+                }
+            }
+            
+            function draw(e) { 
+                if (!isDrawing || currentTool !== 'brush') return; 
+                e.preventDefault(); 
+                const {x,y} = getPos(e); 
+                ctx.lineTo(x,y); 
+                ctx.stroke(); 
+            }
+            
+            function stopDrawing() { 
+                isDrawing = false; 
+                if (currentTool === 'brush') {
+                    ctx.closePath(); 
+                }
+            }
+            
+            // Flood fill algorithm
+            function getPixelColor(imageData, x, y) {
+                const index = (y * imageData.width + x) * 4;
+                return {
+                    r: imageData.data[index],
+                    g: imageData.data[index + 1],
+                    b: imageData.data[index + 2],
+                    a: imageData.data[index + 3]
+                };
+            }
+            
+            function setPixelColor(imageData, x, y, color) {
+                const index = (y * imageData.width + x) * 4;
+                imageData.data[index] = color.r;
+                imageData.data[index + 1] = color.g;
+                imageData.data[index + 2] = color.b;
+                imageData.data[index + 3] = color.a || 255;
+            }
+            
+            function colorsMatch(a, b, tolerance = 1) {
+                return Math.abs(a.r - b.r) <= tolerance &&
+                       Math.abs(a.g - b.g) <= tolerance &&
+                       Math.abs(a.b - b.b) <= tolerance &&
+                       Math.abs(a.a - (b.a || 255)) <= tolerance;
+            }
+            
+            function hexToRgb(hex) {
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : {r: 0, g: 0, b: 0};
+            }
+            
+            function floodFill(imageData, x, y, targetColor, replacementColor) {
+                const stack = [[x, y]];
+                const width = imageData.width;
+                const height = imageData.height;
+                
+                while (stack.length > 0) {
+                    const [currentX, currentY] = stack.pop();
+                    
+                    if (currentX < 0 || currentX >= width || currentY < 0 || currentY >= height) {
+                        continue;
+                    }
+                    
+                    const currentColor = getPixelColor(imageData, currentX, currentY);
+                    
+                    if (!colorsMatch(currentColor, targetColor)) {
+                        continue;
+                    }
+                    
+                    setPixelColor(imageData, currentX, currentY, replacementColor);
+                    
+                    stack.push([currentX + 1, currentY]);
+                    stack.push([currentX - 1, currentY]);
+                    stack.push([currentX, currentY + 1]);
+                    stack.push([currentX, currentY - 1]);
+                }
+            }
+            
+            // Event listeners for drawing
+            ['mousedown', 'touchstart'].forEach(e => canvas.addEventListener(e, startDrawing));
+            ['mousemove', 'touchmove'].forEach(e => canvas.addEventListener(e, draw));
+            ['mouseup', 'mouseleave', 'touchend'].forEach(e => canvas.addEventListener(e, stopDrawing));
+            
+            // Color selection
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    currentColor = e.target.dataset.color;
+                    document.querySelector('.color-btn.active').classList.remove('active');
+                    e.target.classList.add('active');
+                    ctx.strokeStyle = currentColor;
+                    ctx.fillStyle = currentColor;
+                    
+                    // Update brush preview
+                    document.getElementById('brush-preview').style.backgroundColor = currentColor;
+                });
+            });
+            
+            // Tool selection
+            document.querySelectorAll('.tool-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    currentTool = e.currentTarget.dataset.tool;
+                    document.querySelector('.tool-btn.active').classList.remove('active');
+                    e.currentTarget.classList.add('active');
+                    
+                    if (currentTool === 'eraser') {
+                        ctx.strokeStyle = 'white';
+                        ctx.fillStyle = 'white';
+                    } else {
+                        ctx.strokeStyle = currentColor;
+                        ctx.fillStyle = currentColor;
+                    }
+                });
+            });
+            
+            // Brush size control
+            const brushSizeControl = document.getElementById('brush-size');
+            const brushPreview = document.getElementById('brush-preview');
+            
+            brushSizeControl.addEventListener('input', (e) => {
+                brushSize = parseInt(e.target.value);
+                ctx.lineWidth = brushSize;
+                
+                // Update brush preview size
+                const size = Math.max(5, brushSize / 2);
+                brushPreview.style.width = `${size}px`;
+                brushPreview.style.height = `${size}px`;
+            });
+            
+            // Clear canvas
+            document.getElementById('clear-canvas-btn').addEventListener('click', () => {
+                if (confirm('Are you sure you want to clear the canvas?')) {
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    resizeCanvas(); // Redraw grid
+                }
+            });
+            
+            // Save canvas
+            document.getElementById('save-canvas-btn').addEventListener('click', () => {
+                const dataURL = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.download = 'st-vincents-drawing.png';
+                link.href = dataURL;
+                link.click();
+            });
+            
+            // Random color
+            document.getElementById('random-color-btn').addEventListener('click', () => {
+                const colors = ['#ef4444', '#3b82f6', '#22c55e', '#facc15', '#a855f7', '#ec4899', '#f97316', '#14b8a6'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                currentColor = randomColor;
+                
+                // Update active color button
+                document.querySelector('.color-btn.active').classList.remove('active');
+                const colorBtn = document.querySelector(`.color-btn[data-color="${randomColor}"]`);
+                if (colorBtn) {
+                    colorBtn.classList.add('active');
+                }
+                
+                ctx.strokeStyle = currentColor;
+                ctx.fillStyle = currentColor;
+                
+                // Update brush preview
+                document.getElementById('brush-preview').style.backgroundColor = currentColor;
+            });
+            
+            // Initialize
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            
+            // Set initial brush preview
+            document.getElementById('brush-preview').style.width = `${brushSize/2}px`;
+            document.getElementById('brush-preview').style.height = `${brushSize/2}px`;
+        }
+
+        // Image Slider
+        const imageSlider = document.getElementById('image-slider');
+        const sliderDots = document.querySelectorAll('.slider-dot');
+        let slideIndex = 0;
+        
+        function updateImageSlider() {
+            if (imageSlider) {
+                imageSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                
+                // Update active dot
+                sliderDots.forEach((dot, index) => {
+                    if (index === slideIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % sliderDots.length;
+            updateImageSlider();
+        }
+        
+        function prevSlide() {
+            slideIndex = (slideIndex - 1 + sliderDots.length) % sliderDots.length;
+            updateImageSlider();
+        }
+        
+        // Initialize image slider
+        if (imageSlider) {
+            document.getElementById('slider-next').addEventListener('click', nextSlide);
+            document.getElementById('slider-prev').addEventListener('click', prevSlide);
+            
+            // Add click events to dots
+            sliderDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    slideIndex = index;
+                    updateImageSlider();
+                });
+            });
+            
+            // Auto-advance slides
+            setInterval(nextSlide, 4000);
+        }
+
         // Modal Logic
         const programData = {
-            playgroup: { title: "Playgroup", hook: "Where Curiosity Takes Flight!", value: "Our Playgroup is a wonderland of sensory experiences designed to nurture your toddler's budding curiosity.", curriculum: ["Sensory Play", "Gross Motor Skills", "Music & Movement", "Early Language", "Group Play"], pricing: "₹6,500 / month", color: "red" },
-            nursery: { title: "Nursery", hook: "Building Blocks for a Bright Future!", value: "In Nursery, we build upon natural curiosity by introducing foundational concepts in literacy and numeracy.", curriculum: ["Phonological Awareness", "Pre-writing Skills", "Number Recognition", "Colors & Shapes", "Storytelling"], pricing: "₹7,000 / month", color: "blue" },
-            lkg_ukg: { title: "LKG & UKG", hook: "Getting Ready for Big School!", value: "Our Kindergarten program is structured to ensure a smooth transition to formal schooling.", curriculum: ["Reading & Writing", "Advanced Numeracy", "EVS Concepts", "Logical Reasoning", "Public Speaking"], pricing: "₹7,500 / month", color: "yellow" },
-            daycare: { title: "Full Day Care", hook: "Your Child's Safe Second Home!", value: "We provide a secure, nurturing, and structured environment for children of working parents.", curriculum: ["Homework Assistance", "Hobby Classes", "Structured Play", "Nutritious Meals", "Nap Time"], pricing: "Starting from ₹9,000 / month", color: "green" }
+            playgroup: { 
+                title: "Playgroup", 
+                hook: "Where Curiosity Takes Flight!", 
+                value: "Our Playgroup is a wonderland of sensory experiences designed to nurture your toddler's budding curiosity.", 
+                curriculum: ["Sensory Play", "Gross Motor Skills", "Fine Motor Development", "Music & Movement", "Early Language", "Group Play"], 
+                color: "red" 
+            },
+            nursery: { 
+                title: "Nursery", 
+                hook: "Building Blocks for a Bright Future!", 
+                value: "In Nursery, we build upon natural curiosity by introducing foundational concepts in literacy and numeracy.", 
+                curriculum: ["Phonics", "Pre-writing Skills", "Number Recognition", "Physical Development Activities", "Colors & Shapes", "Storytelling"], 
+                color: "blue" 
+            },
+            lkg: { 
+                title: "LKG", 
+                hook: "Getting Ready for Big School!", 
+                value: "Our LKG program focuses on developing foundational academic skills and preparing children for formal schooling.", 
+                curriculum: ["Reading & Writing", "Basic Numeracy", "Physical Coordination", "EVS Concepts", "Logical Reasoning", "Creative Expression"], 
+                color: "yellow" 
+            },
+            ukg: { 
+                title: "UKG", 
+                hook: "Advanced Preparation for Primary School!", 
+                value: "Our UKG program ensures children are fully prepared for primary school with comprehensive skill development.", 
+                curriculum: ["Advanced Reading & Writing", "Mathematical Concepts", "Physical Development", "Science Exploration", "Problem Solving", "Public Speaking"], 
+                color: "green" 
+            },
+            daycare: { 
+                title: "Day Care", 
+                hook: "Your Child's Safe Second Home!", 
+                value: "We provide a secure, nurturing, and structured environment for children of working parents.", 
+                curriculum: ["Homework Assistance", "Hobby Classes", "Structured Play", "Nap Time", "Indoor Activities"], 
+                color: "purple" 
+            }
         };
 
         function createModal(data, container) {
             let modalHTML = '';
             if (container === document.getElementById('modal-container')) {
-                 modalHTML = <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;"><div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95"><div class="p-8"><div class="flex justify-between items-start mb-4"><div><h2 class="text-5xl font-bold text-gray-800">${data.title}</h2><p class="text-2xl text-${data.color}-600 font-semibold mt-1">${data.hook}</p></div><button class="close-modal-btn p-1"><i data-lucide="x" class="w-8 h-8 text-gray-500"></i></button></div><p class="font-body text-gray-600 mb-6 text-lg">${data.value}</p><h3 class="font-bold text-3xl mb-3 text-gray-700">Curriculum Fun</h3><ul class="space-y-2 mb-8">${data.curriculum.map(item => `<li class="flex items-center text-xl"><i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-2"></i>${item}</li>).join('')}</ul><div class="bg-${data.color}-100 crayon-border p-6 flex justify-between items-center"><div><p class="text-gray-600 font-medium text-xl">Program Fee</p><p class="text-4xl font-bold text-gray-800">${data.pricing}</p></div><a href="#book-tour" class="close-modal-btn crayon-button bg-${data.color}-500 text-white font-bold px-6 py-3 text-xl">Book a Tour</a></div></div></div></div>`;
-            } else if (container === document.getElementById('tour-modal-container')) {
-                 modalHTML = <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-2 z-50 opacity-0" style="display: none;"><div class="modal-content bg-gray-900 crayon-border w-full max-w-5xl h-[90vh] flex flex-col transform scale-95"><div class="flex justify-between items-center p-4 bg-gray-800"><h2 class="text-3xl font-bold text-white">360° Virtual Tour</h2><button class="close-modal-btn p-1"><i data-lucide="x" class="w-8 h-8 text-gray-300 hover:text-white"></i></button></div><div class="flex-grow bg-black"><iframe class="w-full h-full" src="${data.embedUrl}" frameborder="0" style="border:0;" allowfullscreen></iframe></div></div></div>;
+                 modalHTML = `
+                 <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
+                    <div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
+                        <div class="p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h2 class="text-5xl font-bold text-gray-800">${data.title}</h2>
+                                    <p class="text-2xl text-${data.color}-600 font-semibold mt-1">${data.hook}</p>
+                                </div>
+                                <button class="close-modal-btn p-1">
+                                    <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
+                                </button>
+                            </div>
+                            <p class="font-body text-gray-600 mb-6 text-lg">${data.value}</p>
+                            <h3 class="font-bold text-3xl mb-3 text-gray-700">Curriculum Highlights</h3>
+                            <ul class="space-y-2 mb-8">
+                                ${data.curriculum.map(item => `
+                                    <li class="flex items-center text-xl">
+                                        <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-2"></i>${item}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                            <div class="bg-${data.color}-100 crayon-border p-6 flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-600 font-medium text-xl">To know more</p>
+                                    <p class="text-4xl font-bold text-gray-800">Contact Us</p>
+                                </div>
+                                <button class="open-contact-modal-from-program crayon-button bg-${data.color}-500 text-white font-bold px-6 py-3 text-xl">Book a Tour</button>
+                            </div>
+                        </div>
+                    </div>
+                 </div>`;
+            } else if (container === document.getElementById('contact-modal-container')) {
+                 modalHTML = `
+                 <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
+                    <div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
+                        <div class="p-8">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h2 class="text-5xl font-bold text-gray-800">Schedule a Visit</h2>
+                                    <p class="text-xl text-gray-600 mt-2">We'd love to show you around our campus!</p>
+                                </div>
+                                <button class="close-modal-btn p-1">
+                                    <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
+                                </button>
+                            </div>
+                            <form id="contact-form" class="space-y-4">
+                                <div class="text-2xl">
+                                    <label for="parentName" class="font-medium text-gray-700">Parent's Name</label>
+                                    <input type="text" id="parentName" name="parentName" class="w-full mt-1 p-3 crayon-border text-xl" required>
+                                </div>
+                                <div class="text-2xl">
+                                    <label for="phone" class="font-medium text-gray-700">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" class="w-full mt-1 p-3 crayon-border text-xl" required>
+                                </div>
+                                <div class="text-2xl">
+                                    <label for="childAge" class="font-medium text-gray-700">Child's Age</label>
+                                    <input type="number" id="childAge" name="childAge" min="1" max="8" class="w-full mt-1 p-3 crayon-border text-xl" required>
+                                </div>
+                                <div class="text-2xl">
+                                    <label for="program" class="font-medium text-gray-700">Program Interested In</label>
+                                    <select id="program" name="program" class="w-full mt-1 p-3 crayon-border text-xl" required>
+                                        <option value="">Select a program</option>
+                                        <option value="playgroup">Playgroup</option>
+                                        <option value="nursery">Nursery</option>
+                                        <option value="lkg">LKG</option>
+                                        <option value="ukg">UKG</option>
+                                        <option value="daycare">Day Care</option>
+                                    </select>
+                                </div>
+                                <div class="text-2xl">
+                                    <label for="message" class="font-medium text-gray-700">Additional Message (Optional)</label>
+                                    <textarea id="message" name="message" class="w-full mt-1 p-3 crayon-border text-xl" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="w-full crayon-button bg-red-400 text-white font-bold text-2xl p-4 flex items-center justify-center gap-2">
+                                    <span id="submit-text">Submit Inquiry</span>
+                                    <div id="submit-spinner" class="spinner hidden" style="width: 20px; height: 20px;"></div>
+                                </button>
+                                <p id="contact-form-success-message" class="text-green-600 text-center font-semibold hidden text-xl">Thank you! We'll call you soon!</p>
+                                <p id="contact-form-error-message" class="text-red-600 text-center font-semibold hidden text-xl">There was an error submitting your form. Please try again or call us directly.</p>
+                            </form>
+                        </div>
+                    </div>
+                 </div>`;
+            } else if (container === document.getElementById('review-modal-container')) {
+                 modalHTML = `
+                 <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
+                    <div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
+                        <div class="p-8 text-center">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="w-full">
+                                    <h2 class="text-5xl font-bold text-gray-800">Thank You!</h2>
+                                    <p class="text-xl text-gray-600 mt-2">We appreciate your interest in St. Vincent's Preschool.</p>
+                                </div>
+                                <button class="close-modal-btn p-1">
+                                    <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
+                                </button>
+                            </div>
+                            <div class="bg-yellow-100 p-6 crayon-border mb-6">
+                                <i data-lucide="star" class="w-16 h-16 text-yellow-500 mx-auto mb-4"></i>
+                                <h3 class="text-3xl font-bold text-gray-800 mb-4">Help Other Parents Discover Us</h3>
+                                <p class="font-body text-gray-600 mb-6">Would you like to share your experience with other parents by leaving a Google review?</p>
+                                <a href="https://g.page/r/CbNp6tq5qJ7-EB0/review" target="_blank" class="crayon-button bg-green-500 text-white font-bold px-8 py-4 text-xl inline-flex items-center gap-2">
+                                    <i data-lucide="star" class="w-6 h-6"></i> Leave a Google Review
+                                </a>
+                            </div>
+                            <button class="close-review-modal crayon-button bg-gray-400 text-white font-bold px-8 py-4 text-xl">Maybe Later</button>
+                        </div>
+                    </div>
+                 </div>`;
+            } else if (container === document.getElementById('blog-modal-container')) {
+                 modalHTML = `
+                 <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
+                    <div class="modal-content bg-paper crayon-border w-full max-w-4xl max-h-[90vh] overflow-y-auto transform scale-95 blog-modal-content">
+                        <div class="p-8">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h2 class="text-5xl font-bold text-gray-800">${data.title}</h2>
+                                    <p class="text-xl text-${data.color}-600 font-semibold mt-1">${data.subtitle}</p>
+                                </div>
+                                <button class="close-modal-btn p-1">
+                                    <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
+                                </button>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-8 mb-8">
+                                <div class="md:w-2/5">
+                                    <img src="${data.image}" alt="${data.title}" class="w-full h-64 object-cover crayon-border">
+                                </div>
+                                <div class="md:w-3/5">
+                                    <div class="prose max-w-none font-body text-gray-700">
+                                        ${data.content}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-8">
+                                <button class="close-blog-modal crayon-button bg-red-400 text-white font-bold px-8 py-4 text-xl">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                 </div>`;
             }
 
             container.innerHTML = modalHTML;
             const overlay = container.querySelector('.modal-overlay');
             overlay.style.display = 'flex';
-            setTimeout(() => { overlay.classList.remove('opacity-0'); overlay.querySelector('.modal-content').classList.remove('scale-95'); }, 10);
+            setTimeout(() => { 
+                overlay.classList.remove('opacity-0'); 
+                overlay.querySelector('.modal-content').classList.remove('scale-95'); 
+            }, 10);
+            
             lucide.createIcons();
+            
+            // Handle form submission for contact modal
+            const contactForm = container.querySelector('#contact-form');
+            if (contactForm) {
+                const successMessage = container.querySelector('#contact-form-success-message');
+                const errorMessage = container.querySelector('#contact-form-error-message');
+                const submitText = container.querySelector('#submit-text');
+                const submitSpinner = container.querySelector('#submit-spinner');
+                
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    submitText.classList.add('hidden');
+                    submitSpinner.classList.remove('hidden');
+                    successMessage.classList.add('hidden');
+                    errorMessage.classList.add('hidden');
+                    
+                    // Collect form data
+                    const formData = {
+                        parentName: document.getElementById('parentName').value,
+                        phone: document.getElementById('phone').value,
+                        childAge: document.getElementById('childAge').value,
+                        program: document.getElementById('program').value,
+                        message: document.getElementById('message').value,
+                        timestamp: new Date().toISOString(),
+                        source: 'Website Form'
+                    };
+                    
+                    // Send data to Google Sheets
+                    fetch(GOOGLE_SHEETS_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // On success
+                        successMessage.classList.remove('hidden');
+                        contactForm.reset();
+                        
+                        // Reset button state
+                        submitText.classList.remove('hidden');
+                        submitSpinner.classList.add('hidden');
+                        
+                        setTimeout(() => { 
+                            successMessage.classList.add('hidden'); 
+                            closeModal(overlay);
+                            // Show review modal after successful form submission
+                            createReviewModal();
+                        }, 2000);
+                    })
+                    .catch(error => {
+                        // On error
+                        console.error('Error:', error);
+                        errorMessage.classList.remove('hidden');
+                        
+                        // Reset button state
+                        submitText.classList.remove('hidden');
+                        submitSpinner.classList.add('hidden');
+                    });
+                });
+            }
+            
+            // Close modal when clicking overlay or close button
             overlay.addEventListener('click', (e) => {
-                if (e.target === overlay || e.target.closest('.close-modal-btn')) {
-                    overlay.classList.add('opacity-0');
-                    overlay.querySelector('.modal-content').classList.add('scale-95');
-                    setTimeout(() => { overlay.remove(); }, 300);
+                if (e.target === overlay || e.target.closest('.close-modal-btn') || e.target.closest('.close-review-modal') || e.target.closest('.close-blog-modal')) {
+                    closeModal(overlay);
                 }
             });
+            
+            // Open contact modal from program modal
+            const openContactModalBtns = container.querySelectorAll('.open-contact-modal-from-program');
+            openContactModalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    closeModal(overlay);
+                    setTimeout(() => {
+                        createContactModal();
+                    }, 300);
+                });
+            });
         }
-        document.querySelectorAll('.program-card').forEach(c => { c.addEventListener('click', () => createModal(programData[c.dataset.program], document.getElementById('modal-container'))); });
-        document.getElementById('start-tour-btn').addEventListener('click', () => {
-            const tourData = { embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15222.355609315053!2d78.31889445437893!3d17.4788531122557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb938095555555%3A0xe5427a1955b23d90!2sThe%20Learning%20Curve%2C%20Preschool%20%26%20Daycare!5e0!3m2!1sen!2sin!4v1724300095817!5m2!1sen!2sin&layer=c" };
-            createModal(tourData, document.getElementById('tour-modal-container'));
+        
+        function closeModal(overlay) {
+            overlay.classList.add('opacity-0');
+            overlay.querySelector('.modal-content').classList.add('scale-95');
+            setTimeout(() => { 
+                overlay.remove(); 
+            }, 300);
+        }
+        
+        function createContactModal() {
+            createModal({}, document.getElementById('contact-modal-container'));
+        }
+        
+        function createReviewModal() {
+            createModal({}, document.getElementById('review-modal-container'));
+        }
+        
+        function createBlogModal(blogId) {
+            const blogDataWithColor = {
+                ...blogData[blogId],
+                color: blogId === 'science' ? 'blue' : blogId === 'social' ? 'green' : 'purple'
+            };
+            createModal(blogDataWithColor, document.getElementById('blog-modal-container'));
+        }
+        
+        // Program modals
+        document.querySelectorAll('.program-card').forEach(c => { 
+            c.addEventListener('click', () => createModal(programData[c.dataset.program], document.getElementById('modal-container'))); 
         });
-
-        // Canvas Logic
-        const canvas = document.getElementById('drawing-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let isDrawing = false;
-            function resizeCanvas() {
-                const dpr = window.devicePixelRatio || 1;
-                canvas.width = canvas.parentElement.clientWidth * dpr;
-                canvas.height = (canvas.parentElement.clientWidth * 0.6) * dpr;
-                canvas.style.width = ${canvas.parentElement.clientWidth}px;
-                canvas.style.height = ${canvas.parentElement.clientWidth * 0.6}px;
-                ctx.scale(dpr, dpr);
-                ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.lineWidth = 5;
-            }
-            function getPos(e) {
-                const rect = canvas.getBoundingClientRect();
-                const evt = e.touches ? e.touches[0] : e;
-                return { x: evt.clientX - rect.left, y: evt.clientY - rect.top };
-            }
-            function start(e) { isDrawing = true; const {x,y} = getPos(e); ctx.beginPath(); ctx.moveTo(x,y); }
-            function draw(e) { if (!isDrawing) return; e.preventDefault(); const {x,y} = getPos(e); ctx.lineTo(x,y); ctx.stroke(); }
-            function stop() { isDrawing = false; ctx.closePath(); }
-            ['mousedown', 'touchstart'].forEach(e => canvas.addEventListener(e, start));
-            ['mousemove', 'touchmove'].forEach(e => canvas.addEventListener(e, draw));
-            ['mouseup', 'mouseleave', 'touchend'].forEach(e => canvas.addEventListener(e, stop));
-            document.getElementById('canvas-controls').addEventListener('click', (e) => {
-                if (e.target.dataset.color) {
-                    ctx.strokeStyle = e.target.dataset.color;
-                    document.querySelector('.color-btn.active').classList.remove('active');
-                    e.target.classList.add('active');
-                }
-                if (e.target.closest('#clear-canvas-btn')) { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+        
+        // Blog modals
+        document.querySelectorAll('.open-blog-modal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const blogId = btn.getAttribute('data-blog');
+                createBlogModal(blogId);
             });
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-        }
+        });
+        
+        // Contact modal triggers
+        document.getElementById('open-contact-modal').addEventListener('click', createContactModal);
+        document.getElementById('open-contact-modal-mobile').addEventListener('click', createContactModal);
+        document.getElementById('open-contact-modal-hero').addEventListener('click', createContactModal);
+        document.getElementById('open-contact-modal-bottom').addEventListener('click', createContactModal);
+        document.querySelector('.open-contact-modal-premium').addEventListener('click', createContactModal);
+        
+        // Auto-open contact modal after 5 seconds
+        setTimeout(() => {
+            createContactModal();
+        }, 5000);
     </script>
 </body>
 </html>
