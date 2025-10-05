@@ -1,10 +1,19 @@
-// Form Handling Functionality
-function initForms() {
-    // Form validation and submission logic can be added here
-    // This is a placeholder for any additional form functionality
+// Form submission handler
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form[data-form-type="contact"]');
     
-    console.log('Forms initialized');
-}
-
-// Initialize forms when DOM is loaded
-document.addEventListener('DOMContentLoaded', initForms);
+    forms.forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            const formData = new FormData(form);
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Send to Formspree or similar service (FREE alternative)
+                const response = await fetch('
