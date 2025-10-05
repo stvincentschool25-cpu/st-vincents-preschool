@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if modal-related elements exist on the page
     const programCards = document.querySelectorAll('.program-card');
     const startTourBtn = document.getElementById('start-tour-btn');
     const modalContainer = document.getElementById('modal-container');
     const tourModalContainer = document.getElementById('tour-modal-container');
 
+    // Only proceed if the main containers are on the page
     if (!modalContainer || !tourModalContainer) return;
 
     const programData = {
@@ -16,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function createModal(data, container) {
         let modalHTML = '';
         if (container === modalContainer) {
-            modalHTML = `<div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;"><div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95"><div class="p-8"><div class="flex justify-between items-start mb-4"><div><h2 class="text-5xl font-bold text-gray-800">${data.title}</h2><p class="text-2xl text-${data.color}-600 font-semibold mt-1">${data.hook}</p></div><button class="close-modal-btn p-1"><i data-lucide="x" class="w-8 h-8 text-gray-500"></i></button></div><p class="font-body text-gray-600 mb-6 text-lg">${data.value}</p><h3 class="font-bold text-3xl mb-3 text-gray-700">Curriculum Fun</h3><ul class="space-y-2 mb-8">${data.curriculum.map(item => `<li class="flex items-center text-xl"><i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-2"></i>${item}</li>`).join('')}</ul><div class="bg-${data.color}-100 crayon-border p-6 flex justify-center items-center"><a href="#book-tour" class="close-modal-btn crayon-button bg-${data.color}-500 text-white font-bold px-6 py-3 text-xl">Inquire About This Program</a></div></div></div></div>`;
+            // The link inside the modal now correctly navigates without extra classes
+            modalHTML = `<div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;"><div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95"><div class="p-8"><div class="flex justify-between items-start mb-4"><div><h2 class="text-5xl font-bold text-gray-800">${data.title}</h2><p class="text-2xl text-${data.color}-600 font-semibold mt-1">${data.hook}</p></div><button class="close-modal-btn p-1"><i data-lucide="x" class="w-8 h-8 text-gray-500"></i></button></div><p class="font-body text-gray-600 mb-6 text-lg">${data.value}</p><h3 class="font-bold text-3xl mb-3 text-gray-700">Curriculum Fun</h3><ul class="space-y-2 mb-8">${data.curriculum.map(item => `<li class="flex items-center text-xl"><i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-2"></i>${item}</li>`).join('')}</ul><div class="bg-${data.color}-100 crayon-border p-6 flex justify-center items-center"><a href="#book-tour" class="crayon-button bg-${data.color}-500 text-white font-bold px-6 py-3 text-xl">Inquire About This Program</a></div></div></div></div>`;
         } else if (container === tourModalContainer) {
             modalHTML = `<div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-2 z-50 opacity-0" style="display: none;"><div class="modal-content bg-gray-900 crayon-border w-full max-w-5xl h-[90vh] flex flex-col transform scale-95"><div class="flex justify-between items-center p-4 bg-gray-800"><h2 class="text-3xl font-bold text-white">360° Virtual Tour</h2><button class="close-modal-btn p-1"><i data-lucide="x" class="w-8 h-8 text-gray-300 hover:text-white"></i></button></div><div class="flex-grow bg-black"><iframe class="w-full h-full" src="${data.embedUrl}" frameborder="0" style="border:0;" allowfullscreen></iframe></div></div></div>`;
         }
@@ -26,7 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.style.display = 'flex';
         setTimeout(() => { overlay.classList.remove('opacity-0'); overlay.querySelector('.modal-content').classList.remove('scale-95'); }, 10);
         lucide.createIcons();
+        
         overlay.addEventListener('click', (e) => {
+            // Closes modal if the overlay or a specific close button is clicked
             if (e.target === overlay || e.target.closest('.close-modal-btn')) {
                 overlay.classList.add('opacity-0');
                 overlay.querySelector('.modal-content').classList.add('scale-95');
@@ -35,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Add listeners only if the elements exist
     if (programCards.length > 0) {
         programCards.forEach(c => {
             c.addEventListener('click', () => createModal(programData[c.dataset.program], modalContainer));
@@ -48,3 +54,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
