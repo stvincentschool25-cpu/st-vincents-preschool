@@ -2,7 +2,9 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Lucide icons
-    lucide.createIcons();
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
     
     // Initialize mobile menu
     initMobileMenu();
@@ -15,15 +17,23 @@ document.addEventListener('DOMContentLoaded', function() {
     initProgramCards();
     initBlogModals();
     initCanvas();
-    initForms();
+    initForms(); // ADD THIS LINE
     
     // Auto-open contact modal after 5 seconds
     setTimeout(() => {
-        createContactModal();
+        if (typeof createContactModal === 'function') {
+            createContactModal();
+        }
     }, 5000);
 });
 
-// Mobile Menu functionality
+// Add this new function
+function initForms() {
+    // This will be handled by form.js
+    console.log('Forms initialized');
+}
+
+// Rest of your existing main.js code remains the same...
 function initMobileMenu() {
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -52,7 +62,11 @@ function initFAQ() {
 // Program Cards functionality
 function initProgramCards() {
     document.querySelectorAll('.program-card').forEach(card => { 
-        card.addEventListener('click', () => createModal(programData[card.dataset.program], document.getElementById('modal-container'))); 
+        card.addEventListener('click', () => {
+            if (typeof createModal === 'function' && typeof programData !== 'undefined') {
+                createModal(programData[card.dataset.program], document.getElementById('modal-container'));
+            }
+        }); 
     });
 }
 
@@ -61,7 +75,9 @@ function initBlogModals() {
     document.querySelectorAll('.open-blog-modal').forEach(btn => {
         btn.addEventListener('click', () => {
             const blogId = btn.getAttribute('data-blog');
-            createBlogModal(blogId);
+            if (typeof createBlogModal === 'function') {
+                createBlogModal(blogId);
+            }
         });
     });
 }
