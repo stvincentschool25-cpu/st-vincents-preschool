@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if the slider elements exist on the current page
     const slider = document.getElementById('testimonial-slider');
     const nextBtn = document.getElementById('nextBtn');
     const prevBtn = document.getElementById('prevBtn');
 
+    // Only run the slider logic if all necessary elements are found
     if (slider && nextBtn && prevBtn) {
         const testimonials = [
             { name: "Shravani K.", text: "The best preschool in our area. The teachers are very caring and the curriculum is excellent. My son enjoys going to school every day." },
@@ -40,7 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn.addEventListener('click', showNext);
         prevBtn.addEventListener('click', showPrev);
 
+        // Auto-play the slider
         setInterval(showNext, 5000);
+        
+        // Initial render
         renderTestimonials();
     }
 });
+
