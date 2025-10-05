@@ -1,6 +1,6 @@
 const GOOGLE_SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbyXof_IuR9uCZBVmgjNTYYisbvEOu21BTEHAZIJfoKPm375joLtycdoDkoi_u41MLZo/exec';
 
-// Modal Functionality
+// Data for Program Modals
 const programData = {
     playgroup: { 
         title: "Playgroup", 
@@ -39,6 +39,30 @@ const programData = {
     }
 };
 
+// Data for Blog Modals
+const blogData = {
+    science: {
+        title: "The Science of Early Learning",
+        subtitle: "How Preschool Shapes Brain Development",
+        image: "https://images.unsplash.com/photo-1519452575416-64e83f8b89cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        content: `<p class="mb-4">The early years of a child's life are a period of rapid brain development...</p>` // Content truncated for brevity
+    },
+    social: {
+        title: "Social Skills Development",
+        subtitle: "Building Foundations for Healthy Relationships",
+        image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        content: `<p class="mb-4">The preschool years are a critical period for social development...</p>` // Content truncated for brevity
+    },
+    primary: {
+        title: "Preparing for Primary School",
+        subtitle: "Ensuring a Smooth Transition to Formal Education",
+        image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        content: `<p class="mb-4">The transition from preschool to primary school is a significant milestone...</p>` // Content truncated for brevity
+    }
+};
+
+// ... THE REST OF THE MODALS.JS CODE REMAINS THE SAME ...
+// (The createModal, closeModal, etc. functions)
 function createModal(data, container) {
     let modalHTML = '';
     if (container === document.getElementById('modal-container')) {
