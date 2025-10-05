@@ -15,8 +15,8 @@ function initCanvas() {
         const rect = canvas.parentElement.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-        canvas.style.width = ${rect.width}px;
-        canvas.style.height = ${rect.height}px;
+        canvas.style.width = `${rect.width}px`;
+        canvas.style.height = `${rect.height}px`;
         ctx.scale(dpr, dpr);
         ctx.lineCap = 'round'; 
         ctx.lineJoin = 'round'; 
@@ -202,8 +202,8 @@ function initCanvas() {
             
             // Update brush preview size
             const size = Math.max(5, brushSize / 2);
-            brushPreview.style.width = ${size}px;
-            brushPreview.style.height = ${size}px;
+            brushPreview.style.width = `${size}px`;
+            brushPreview.style.height = `${size}px`;
         });
     }
     
@@ -241,7 +241,7 @@ function initCanvas() {
             
             // Update active color button
             document.querySelector('.color-btn.active').classList.remove('active');
-            const colorBtn = document.querySelector(.color-btn[data-color="${randomColor}"]);
+            const colorBtn = document.querySelector(`.color-btn[data-color="${randomColor}"]`);
             if (colorBtn) {
                 colorBtn.classList.add('active');
             }
@@ -260,8 +260,8 @@ function initCanvas() {
     
     // Set initial brush preview
     if (brushPreview) {
-        brushPreview.style.width = ${brushSize/2}px;
-        brushPreview.style.height = ${brushSize/2}px;
+        brushPreview.style.width = `${brushSize/2}px`;
+        brushPreview.style.height = `${brushSize/2}px`;
     }
 }
 
