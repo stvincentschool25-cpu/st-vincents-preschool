@@ -16,24 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const faqQuestions = document.querySelectorAll('.faq-question');
     if (faqQuestions.length > 0) {
         faqQuestions.forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default anchor behavior
                 const parent = item.parentElement;
                 const wasOpen = parent.classList.contains('open');
                 
-                // Close all other open items
+                // Close all other open items before opening the new one
                 document.querySelectorAll('.faq-item.open').forEach(openItem => {
-                    if (openItem !== parent) {
-                        openItem.classList.remove('open');
-                    }
+                    openItem.classList.remove('open');
                 });
 
-                // Toggle the clicked item
+                // If it wasn't open, open it.
                 if (!wasOpen) {
                     parent.classList.add('open');
-                } else {
-                    parent.classList.remove('open');
                 }
             });
         });
     }
 });
+
