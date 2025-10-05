@@ -40,7 +40,7 @@ function initTestimonials() {
     }
     
     function updateSlider() { 
-        slider.style.transform = translateX(-${currentIndex * 100}%); 
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`; 
     }
     
     function showNext() { 
@@ -71,7 +71,7 @@ function initImageSlider() {
     let slideIndex = 0;
     
     function updateImageSlider() {
-        imageSlider.style.transform = translateX(-${slideIndex * 100}%);
+        imageSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
         
         // Update active dot
         sliderDots.forEach((dot, index) => {
@@ -113,9 +113,3 @@ function initImageSlider() {
         setInterval(nextSlide, 4000);
     }
 }
-
-// Initialize sliders when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initTestimonials();
-    initImageSlider();
-});
