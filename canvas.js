@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if the canvas element exists on the current page
     const canvas = document.getElementById('drawing-canvas');
 
+    // Only run the canvas logic if the element is found
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let isDrawing = false;
@@ -15,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.lineWidth = 5;
-            ctx.strokeStyle = 'black'; // Default color
+            ctx.strokeStyle = 'black'; // Set a default color
         }
 
         function getPos(e) {
@@ -33,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function draw(e) {
             if (!isDrawing) return;
-            e.preventDefault();
+            e.preventDefault(); // Prevent scrolling while drawing
             const { x, y } = getPos(e);
             ctx.lineTo(x, y);
             ctx.stroke();
@@ -44,26 +46,39 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.closePath();
         }
 
-        ['mousedown', 'touchstart'].forEach(e => canvas.addEventListener(e, start));
-        ['mousemove', 'touchmove'].forEach(e => canvas.addEventListener(e, draw));
-        ['mouseup', 'mouseleave', 'touchend'].forEach(e => canvas.addEventListener(e, stop));
+        // Add event listeners for both mouse and touch
+        canvas.addEventListener('mousedown', start);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stop);
+        canvas.addEventListener('mouseleave', stop);
+        
+        canvas.addEventListener('touchstart', start);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stop);
 
         const canvasControls = document.getElementById('canvas-controls');
         if (canvasControls) {
             canvasControls.addEventListener('click', (e) => {
-                if (e.target.dataset.color) {
-                    ctx.strokeStyle = e.target.dataset.color;
+                const colorButton = e.target.closest('.color-btn');
+                const clearButton = e.target.closest('#clear-canvas-btn');
+
+                if (colorButton && colorButton.dataset.color) {
+                    ctx.strokeStyle = colorButton.dataset.color;
                     const currentActive = document.querySelector('.color-btn.active');
                     if(currentActive) currentActive.classList.remove('active');
-                    e.target.classList.add('active');
+                    colorButton.classList.add('active');
                 }
-                if (e.target.closest('#clear-canvas-btn')) {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (clearButton) {
+                    ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio||1), canvas.height / (window.devicePixelRatio||1) );
                 }
             });
         }
         
+        // Resize canvas when the window is resized
         window.addEventListener('resize', resizeCanvas);
+        // Initial resize
         resizeCanvas();
     }
 });
+
