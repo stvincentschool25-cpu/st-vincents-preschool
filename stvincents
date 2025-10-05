@@ -4,180 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St. Vincent's Preschool | Preschool & Daycare in Chanda Nagar, Hyderabad</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body {
-            font-family: 'Patrick Hand', cursive;
-            letter-spacing: 0.5px;
-        }
-        h1, h2, h3, h4, h5, h6, .font-display {
-             font-family: 'Patrick Hand', cursive;
-        }
-        .font-body {
-            font-family: 'Lora', serif;
-        }
-        .crayon-border {
-            border: 3px solid #2d3748;
-            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-            box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
-        }
-        .crayon-button {
-            border: 3px solid #2d3748;
-            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 2px 4px 0px #2d3748;
-        }
-        .crayon-button:hover {
-            transform: translateY(2px) translateX(1px);
-            box-shadow: 1px 2px 0px #2d3748;
-        }
-        .crayon-button:active {
-            transform: translateY(4px) translateX(2px);
-            box-shadow: 0px 0px 0px #2d3748;
-        }
-        .bg-paper {
-             background-color: #fff;
-             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fde68a' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        .faq-item .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-        .faq-item.open .faq-answer {
-            max-height: 500px;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-        .faq-item.open .faq-icon {
-            transform: rotate(45deg);
-        }
-        .faq-icon {
-            transition: transform 0.3s ease;
-        }
-        .testimonial-slider { display: flex; transition: transform 0.5s ease-in-out; }
-        .testimonial-slide { min-width: 100%; box-sizing: border-box; }
-        .modal-overlay { transition: opacity 0.3s ease; }
-        .modal-content { transition: transform 0.3s ease; }
-        #drawing-canvas { touch-action: none; cursor: crosshair; }
-        .color-btn.active { transform: scale(1.2); box-shadow: 0 0 0 3px white, 0 0 0 5px currentColor; }
-        .section-padding { padding: 5rem 0; }
-        .container-narrow { max-width: 1200px; margin: 0 auto; }
-        
-        /* Image Slider Styles */
-        .image-slider-container {
-            position: relative;
-            overflow: hidden;
-        }
-        .image-slider {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .image-slide {
-            min-width: 100%;
-            transition: opacity 0.3s ease;
-        }
-        .image-slide img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-        }
-        .slider-nav {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .slider-dot.active {
-            background-color: white;
-            transform: scale(1.2);
-        }
-        .slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-        .slider-arrow:hover {
-            background-color: white;
-        }
-        .slider-arrow.prev {
-            left: 20px;
-        }
-        .slider-arrow.next {
-            right: 20px;
-        }
-        
-        /* Premium Content Cards */
-        .premium-card {
-            transition: all 0.3s ease;
-        }
-        .premium-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Testimonial improvements */
-        .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-        @media (max-width: 768px) {
-            .testimonial-text {
-                font-size: 1rem;
-            }
-        }
-        
-        /* Loading spinner */
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid #3498db;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Blog modal styles */
-        .blog-modal-content {
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-    </style>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body class="bg-yellow-50 text-gray-800 text-xl">
-
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50 crayon-border border-t-0 border-l-0 border-r-0">
         <div class="container-narrow px-6 py-3 flex justify-between items-center">
@@ -199,6 +42,7 @@
             <nav class="hidden md:flex items-center space-x-6 text-2xl">
                  <a href="#programs" class="text-gray-600 hover:text-red-500">Programs</a>
                  <a href="#gallery" class="text-gray-600 hover:text-red-500">Gallery</a>
+                 <a href="#creativity-canvas" class="text-gray-600 hover:text-red-500">Creativity</a>
                  <a href="#faq" class="text-gray-600 hover:text-red-500">FAQ</a>
                  <a href="#parent-resources" class="text-gray-600 hover:text-red-500">Parent Resources</a>
                  <button id="open-contact-modal" class="crayon-button bg-red-400 text-white font-semibold px-6 py-2 text-2xl">Book a Tour</button>
@@ -208,6 +52,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 text-2xl">
             <a href="#programs" class="block text-center py-2 text-gray-600 hover:text-red-500">Programs</a>
             <a href="#gallery" class="block text-center py-2 text-gray-600 hover:text-red-500">Gallery</a>
+            <a href="#creativity-canvas" class="block text-center py-2 text-gray-600 hover:text-red-500">Creativity</a>
             <a href="#faq" class="block text-center py-2 text-gray-600 hover:text-red-500">FAQ</a>
             <a href="#parent-resources" class="block text-center py-2 text-gray-600 hover:text-red-500">Parent Resources</a>
             <button id="open-contact-modal-mobile" class="block text-center w-full py-2 text-gray-600 hover:text-red-500">Book a Tour</button>
@@ -364,6 +209,118 @@
             </div>
         </section>
         
+        <!-- Enhanced Creativity Canvas Section -->
+        <section id="creativity-canvas" class="section-padding bg-red-100">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">A Splash of Creativity</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Experience the joy of creation, just like our little learners. Grab a color and draw something wonderful!</p>
+                </div>
+                
+                <div class="bg-white p-6 crayon-border max-w-4xl mx-auto">
+                    <!-- Drawing Area -->
+                    <div class="canvas-container crayon-border mb-4 overflow-hidden">
+                        <canvas id="drawing-canvas" class="w-full h-96"></canvas>
+                    </div>
+                    
+                    <!-- Enhanced Controls -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Color Palette -->
+                        <div class="bg-yellow-50 p-4 crayon-border">
+                            <h3 class="font-bold text-xl mb-3 text-center">Colors</h3>
+                            <div class="flex flex-wrap justify-center gap-2">
+                                <button class="color-btn w-10 h-10 rounded-full bg-black active crayon-border" data-color="black" title="Black"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-red-500 crayon-border" data-color="#ef4444" title="Red"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-blue-500 crayon-border" data-color="#3b82f6" title="Blue"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-green-500 crayon-border" data-color="#22c55e" title="Green"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-yellow-400 crayon-border" data-color="#facc15" title="Yellow"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-purple-500 crayon-border" data-color="#a855f7" title="Purple"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-pink-500 crayon-border" data-color="#ec4899" title="Pink"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-orange-500 crayon-border" data-color="#f97316" title="Orange"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-teal-500 crayon-border" data-color="#14b8a6" title="Teal"></button>
+                                <button class="color-btn w-10 h-10 rounded-full bg-gray-400 crayon-border" data-color="#9ca3af" title="Gray"></button>
+                            </div>
+                        </div>
+                        
+                        <!-- Tools & Settings -->
+                        <div class="bg-blue-50 p-4 crayon-border">
+                            <h3 class="font-bold text-xl mb-3 text-center">Tools</h3>
+                            <div class="flex flex-wrap justify-center gap-2 mb-3">
+                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg active" data-tool="brush" title="Brush">
+                                    <i data-lucide="paintbrush" class="w-5 h-5"></i>
+                                </button>
+                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg" data-tool="eraser" title="Eraser">
+                                    <i data-lucide="eraser" class="w-5 h-5"></i>
+                                </button>
+                                <button class="tool-btn crayon-button bg-white px-3 py-2 text-lg" data-tool="fill" title="Fill">
+                                    <i data-lucide="bucket" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="brush-size-control mt-2">
+                                <label class="font-medium text-gray-700">Brush Size:</label>
+                                <input type="range" id="brush-size" min="1" max="30" value="5" class="w-full">
+                                <div class="brush-size-preview">
+                                    <div id="brush-preview" class="rounded-full bg-black"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="bg-green-50 p-4 crayon-border">
+                            <h3 class="font-bold text-xl mb-3 text-center">Actions</h3>
+                            <div class="flex flex-col gap-2">
+                                <button id="clear-canvas-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
+                                    <i data-lucide="trash-2" class="w-5 h-5"></i> Clear Canvas
+                                </button>
+                                <button id="save-canvas-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
+                                    <i data-lucide="download" class="w-5 h-5"></i> Save Drawing
+                                </button>
+                                <button id="random-color-btn" class="crayon-button flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-4 py-2 text-lg">
+                                    <i data-lucide="shuffle" class="w-5 h-5"></i> Random Color
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Drawing Tips -->
+                    <div class="mt-6 bg-yellow-100 p-4 crayon-border">
+                        <h3 class="font-bold text-xl mb-2 text-center">Drawing Tips</h3>
+                        <ul class="font-body text-gray-700 text-base list-disc pl-5 space-y-1">
+                            <li>Use different brush sizes for varied effects</li>
+                            <li>Try the fill tool to quickly color large areas</li>
+                            <li>Use the eraser to correct mistakes</li>
+                            <li>Save your masterpiece when you're done!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Improved Testimonials Section -->
+        <section class="section-padding bg-paper">
+            <div class="container-narrow px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2>
+                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Hear from families who have experienced the St. Vincent's difference</p>
+                </div>
+                <div class="relative overflow-hidden max-w-4xl mx-auto">
+                    <div class="testimonial-slider" id="testimonial-slider"></div>
+                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
+                        <i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i>
+                    </button>
+                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
+                        <i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i>
+                    </button>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="https://g.page/r/CbNp6tq5qJ7-EB0/review" target="_blank" class="crayon-button bg-green-500 text-white font-bold px-8 py-4 text-xl inline-flex items-center gap-2">
+                        <i data-lucide="star" class="w-6 h-6"></i> Leave a Google Review
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Parent Resources Section -->
         <section id="parent-resources" class="section-padding bg-yellow-100">
             <div class="container-narrow px-6">
@@ -410,56 +367,6 @@
                     <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Give Your Child the Best Start?</h3>
                     <p class="font-body text-gray-600 mb-6 max-w-2xl mx-auto text-lg">Join the St. Vincent's family and watch your child prosper in our nurturing environment.</p>
                     <button class="open-contact-modal-premium crayon-button bg-red-500 text-white font-bold px-8 py-4 text-xl">Schedule a Tour Today</button>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Creativity Canvas Section -->
-        <section id="creativity-canvas" class="section-padding bg-red-100">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">A Splash of Creativity</h2>
-                    <p class="font-body text-gray-600 mt-2 max-w-2xl mx-auto text-lg">Experience the joy of creation, just like our little learners. Grab a color and draw something wonderful!</p>
-                </div>
-                <div class="bg-white p-4 crayon-border max-w-4xl mx-auto">
-                    <div class="w-full bg-gray-100 crayon-border overflow-hidden">
-                        <canvas id="drawing-canvas"></canvas>
-                    </div>
-                    <div id="canvas-controls" class="flex flex-wrap items-center justify-center gap-4 mt-4 p-2">
-                        <button class="color-btn w-10 h-10 rounded-full bg-black active crayon-border" data-color="black"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-red-500 crayon-border" data-color="#ef4444"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-blue-500 crayon-border" data-color="#3b82f6"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-green-500 crayon-border" data-color="#22c55e"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-yellow-400 crayon-border" data-color="#facc15"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-purple-500 crayon-border" data-color="#a855f7"></button>
-                        <div class="w-px h-10 bg-gray-300 mx-2"></div>
-                        <button id="clear-canvas-btn" class="crayon-button flex items-center gap-2 bg-gray-200 text-gray-700 font-semibold px-4 py-2 text-xl">
-                            <i data-lucide="trash-2" class="w-5 h-5"></i> Clear
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section class="section-padding bg-paper">
-            <div class="container-narrow px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold text-gray-800">What Our Parents Say</h2>
-                </div>
-                <div class="relative overflow-hidden max-w-3xl mx-auto">
-                    <div class="testimonial-slider" id="testimonial-slider"></div>
-                    <button id="prevBtn" class="absolute top-1/2 -left-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
-                        <i data-lucide="chevron-left" class="w-8 h-8 text-gray-700"></i>
-                    </button>
-                    <button id="nextBtn" class="absolute top-1/2 -right-4 -translate-y-1/2 crayon-button bg-white/80 p-2 z-10">
-                        <i data-lucide="chevron-right" class="w-8 h-8 text-gray-700"></i>
-                    </button>
-                </div>
-                <div class="text-center mt-12">
-                    <a href="https://g.page/r/CbNp6tq5qJ7-EB0/review" target="_blank" class="crayon-button bg-green-500 text-white font-bold px-8 py-4 text-xl inline-flex items-center gap-2">
-                        <i data-lucide="star" class="w-6 h-6"></i> Leave a Google Review
-                    </a>
                 </div>
             </div>
         </section>
@@ -584,708 +491,11 @@
         })();
     </script>
 
-    <script>
-        // Google Sheets API endpoint - Replace with your actual Google Apps Script URL
-        const GOOGLE_SHEETS_API_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
-        
-        lucide.createIcons();
-        
-        // Mobile Menu
-        document.getElementById('menu-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Testimonial Slider
-        const testimonials = [
-            { 
-                name: "Shravani K.", 
-                text: "The best preschool in our area. The teachers are very caring and the curriculum is excellent. My son enjoys going to school every day and has developed so much confidence since joining." 
-            }, 
-            { 
-                name: "Praveen G.", 
-                text: "A perfect school for early learning. They have a good play area and the management is very responsive. My daughter's language skills have improved dramatically in just a few months." 
-            }, 
-            { 
-                name: "Divya S.", 
-                text: "Amazing school. The staff is professional and the environment is very clean and hygienic which was very important for me. The communication with parents is excellent." 
-            },
-            { 
-                name: "Rajesh M.", 
-                text: "My daughter has been attending St. Vincent's for the past year and we've seen remarkable improvement in her social skills and confidence. The teachers are wonderful!" 
-            },
-            { 
-                name: "Priya N.", 
-                text: "The facilities are excellent and the staff is very caring. My son looks forward to going to school every day. Highly recommended!" 
-            }
-        ];
-        const slider = document.getElementById('testimonial-slider');
-        let currentIndex = 0;
-        
-        function renderTestimonials() {
-            if (!slider) return;
-            slider.innerHTML = testimonials.map(t => `
-                <div class="testimonial-slide p-4 flex-shrink-0">
-                    <div class="bg-yellow-100 p-8 rounded-xl crayon-border text-center">
-                        <p class="font-body text-gray-600 testimonial-text italic">"${t.text}"</p>
-                        <p class="font-bold text-gray-800 mt-4 text-2xl">- ${t.name}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function updateSlider() { 
-            if (slider) {
-                slider.style.transform = `translateX(-${currentIndex * 100}%)`; 
-            }
-        }
-        
-        function showNext() { 
-            currentIndex = (currentIndex + 1) % testimonials.length; 
-            updateSlider(); 
-        }
-        
-        if (slider) {
-            document.getElementById('nextBtn').addEventListener('click', showNext);
-            document.getElementById('prevBtn').addEventListener('click', () => { 
-                currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length; 
-                updateSlider(); 
-            });
-            setInterval(showNext, 5000);
-            renderTestimonials();
-        }
-
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(item => {
-            item.addEventListener('click', () => {
-                const parent = item.parentElement;
-                const wasOpen = parent.classList.contains('open');
-                document.querySelectorAll('.faq-item.open').forEach(openItem => openItem.classList.remove('open'));
-                if (!wasOpen) {
-                    parent.classList.add('open');
-                }
-            });
-        });
-
-        // Blog Content
-        const blogData = {
-            science: {
-                title: "The Science of Early Learning",
-                subtitle: "How Preschool Shapes Brain Development",
-                image: "https://images.unsplash.com/photo-1519452575416-64e83f8b89cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-                content: `
-                    <p class="mb-4">The early years of a child's life are a period of rapid brain development. During this time, the brain forms neural connections at an astonishing rate - up to one million new connections per second. These connections build the foundation for all future learning, behavior, and health.</p>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Critical Periods of Development</h4>
-                    <p class="mb-4">Research shows that certain abilities are best developed during specific "sensitive periods" in early childhood. For example:</p>
-                    
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li><strong>Language development:</strong> The prime period for language acquisition is between birth and age 5</li>
-                        <li><strong>Social-emotional skills:</strong> Foundation for relationships forms in the first 3 years</li>
-                        <li><strong>Cognitive development:</strong> Critical thinking skills develop rapidly between ages 3-5</li>
-                    </ul>
-                    
-                    <div class="bg-blue-50 p-6 crayon-border my-6">
-                        <p class="text-blue-800 font-semibold text-lg">"The architecture of the brain is built over time, and early experiences shape the foundation." - Center on the Developing Child, Harvard University</p>
-                    </div>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">The Role of Quality Early Education</h4>
-                    <p class="mb-4">High-quality preschool programs provide the stimulating environment necessary for optimal brain development. Studies have shown that children who attend quality preschool programs:</p>
-                    
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>Develop stronger neural connections in language and cognitive areas</li>
-                        <li>Show better executive function skills (planning, focus, self-control)</li>
-                        <li>Have higher graduation rates and better lifelong outcomes</li>
-                    </ul>
-                    
-                    <div class="flex flex-col md:flex-row gap-6 my-8">
-                        <div class="md:w-1/2">
-                            <img src="https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Children engaged in learning activities" class="w-full h-48 object-cover crayon-border">
-                        </div>
-                        <div class="md:w-1/2">
-                            <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Teacher guiding children" class="w-full h-48 object-cover crayon-border">
-                        </div>
-                    </div>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">References & Further Reading</h4>
-                    <ul class="text-sm space-y-1 mb-4">
-                        <li>Center on the Developing Child, Harvard University. (2016). From Best Practices to Breakthrough Impacts.</li>
-                        <li>National Scientific Council on the Developing Child. (2007). The Timing and Quality of Early Experiences Combine to Shape Brain Architecture.</li>
-                        <li>Yoshikawa, H., et al. (2013). Investing in Our Future: The Evidence Base on Preschool Education.</li>
-                    </ul>
-                    
-                    <p class="mt-6">By understanding the science behind early learning, we can better appreciate the vital role that quality preschool education plays in setting children up for lifelong success.</p>
-                `
-            },
-            social: {
-                title: "Social Skills Development",
-                subtitle: "Building Foundations for Healthy Relationships",
-                image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-                content: `
-                    <p class="mb-4">The preschool years are a critical period for social development. During this time, children learn fundamental skills that will influence their relationships throughout life. At St. Vincent's, we create environments where children naturally develop these essential social competencies.</p>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Key Social Skills Developed in Preschool</h4>
-                    <p class="mb-4">Through carefully designed activities and guided interactions, children develop:</p>
-                    
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li><strong>Cooperation:</strong> Learning to work together toward common goals</li>
-                        <li><strong>Empathy:</strong> Understanding and responding to others' feelings</li>
-                        <li><strong>Communication:</strong> Expressing needs and listening to others</li>
-                        <li><strong>Conflict resolution:</strong> Solving disagreements peacefully</li>
-                        <li><strong>Sharing and turn-taking:</strong> Fundamental skills for social interaction</li>
-                    </ul>
-                    
-                    <div class="bg-green-50 p-6 crayon-border my-6">
-                        <p class="text-green-800 font-semibold text-lg">"The single best childhood predictor of adult adaptation is not school grades, but adequacy with which the child gets along with other children." - Willard Hartup, Child Development Researcher</p>
-                    </div>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">How We Foster Social Development</h4>
-                    <p class="mb-4">Our approach to social development includes:</p>
-                    
-                    <ol class="list-decimal pl-6 mb-4 space-y-2">
-                        <li><strong>Structured group activities:</strong> Collaborative projects that require teamwork</li>
-                        <li><strong>Role-playing scenarios:</strong> Practicing social situations in a safe environment</li>
-                        <li><strong>Teacher modeling:</strong> Demonstrating positive social interactions</li>
-                        <li><strong>Emotional literacy:</strong> Teaching children to identify and express emotions</li>
-                        <li><strong>Problem-solving guidance:</strong> Helping children navigate social challenges</li>
-                    </ol>
-                    
-                    <div class="flex flex-col md:flex-row gap-6 my-8">
-                        <div class="md:w-1/2">
-                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Children playing together" class="w-full h-48 object-cover crayon-border">
-                        </div>
-                        <div class="md:w-1/2">
-                            <img src="https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Children engaged in group activity" class="w-full h-48 object-cover crayon-border">
-                        </div>
-                    </div>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Long-Term Benefits</h4>
-                    <p class="mb-4">Research shows that strong social skills in early childhood predict:</p>
-                    
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>Better academic performance in later school years</li>
-                        <li>Higher rates of college attendance and completion</li>
-                        <li>More stable employment in adulthood</li>
-                        <li>Better mental health outcomes</li>
-                        <li>Stronger, more satisfying relationships throughout life</li>
-                    </ul>
-                    
-                    <p class="mt-6">By prioritizing social development alongside academic readiness, we help children build the foundation for success in all areas of life.</p>
-                `
-            },
-            primary: {
-                title: "Preparing for Primary School",
-                subtitle: "Ensuring a Smooth Transition to Formal Education",
-                image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-                content: `
-                    <p class="mb-4">The transition from preschool to primary school is a significant milestone in a child's educational journey. At St. Vincent's, we carefully prepare children for this important step, ensuring they enter formal schooling with confidence, curiosity, and the foundational skills needed for success.</p>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Academic Readiness</h4>
-                    <p class="mb-4">Our curriculum builds essential academic foundations through developmentally appropriate activities:</p>
-                    
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li><strong>Literacy skills:</strong> Phonemic awareness, letter recognition, and early reading readiness</li>
-                        <li><strong>Numeracy development:</strong> Number sense, basic operations, and mathematical thinking</li>
-                        <li><strong>Fine motor skills:</strong> Pencil grip, cutting, and writing preparation</li>
-                        <li><strong>Executive function:</strong> Attention, memory, and self-regulation abilities</li>
-                    </ul>
-                    
-                    <div class="bg-purple-50 p-6 crayon-border my-6">
-                        <p class="text-purple-800 font-semibold text-lg">"Children who experience a smooth transition to primary school are more likely to develop positive attitudes toward learning and achieve academic success." - Ramey & Ramey, Early Childhood Researchers</p>
-                    </div>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Social-Emotional Preparation</h4>
-                    <p class="mb-4">Beyond academic skills, we focus on developing the social and emotional competencies needed for primary school:</p>
-                    
-                    <ol class="list-decimal pl-6 mb-4 space-y-2">
-                        <li><strong>Independence:</strong> Following routines, managing belongings, and self-care skills</li>
-                        <li><strong>Resilience:</strong> Coping with challenges and bouncing back from setbacks</li>
-                        <li><strong>Collaboration:</strong> Working effectively with peers and teachers</li>
-                        <li><strong>Self-advocacy:</strong> Expressing needs and asking for help appropriately</li>
-                    </ol>
-                    
-                    <div class="flex flex-col md:flex-row gap-6 my-8">
-                        <div class="md:w-1/2">
-                            <img src="https://images.unsplash.com/photo-1519452575416-64e83f8b89cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Child engaged in learning activity" class="w-full h-48 object-cover crayon-border">
-                        </div>
-                        <div class="md:w-1/2">
-                            <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Teacher working with small group" class="w-full h-48 object-cover crayon-border">
-                        </div>
-                    </div>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Our Transition Program</h4>
-                    <p class="mb-4">We implement a comprehensive transition program that includes:</p>
-                    
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>Gradual introduction to more structured learning environments</li>
-                        <li>Collaboration with local primary schools to align expectations</li>
-                        <li>Parent workshops on supporting the transition to primary school</li>
-                        <li>Portfolio development to showcase children's readiness</li>
-                        <li>Visits from primary school teachers and students when possible</li>
-                    </ul>
-                    
-                    <h4 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Measurable Outcomes</h4>
-                    <p class="mb-4">Our graduates consistently demonstrate:</p>
-                    
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>Strong foundational literacy and numeracy skills</li>
-                        <li>Positive attitudes toward learning and school</li>
-                        <li>Well-developed social skills and emotional regulation</li>
-                        <li>Confidence in navigating new environments and routines</li>
-                        <li>Smooth adjustment to the demands of primary school</li>
-                    </ul>
-                    
-                    <p class="mt-6">By focusing on holistic development and school readiness, we ensure that children leave St. Vincent's not just prepared for primary school, but excited about the learning journey ahead.</p>
-                `
-            }
-        };
-
-        // Image Slider
-        const imageSlider = document.getElementById('image-slider');
-        const sliderDots = document.querySelectorAll('.slider-dot');
-        let slideIndex = 0;
-        
-        function updateImageSlider() {
-            if (imageSlider) {
-                imageSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
-                
-                // Update active dot
-                sliderDots.forEach((dot, index) => {
-                    if (index === slideIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-            }
-        }
-        
-        function nextSlide() {
-            slideIndex = (slideIndex + 1) % sliderDots.length;
-            updateImageSlider();
-        }
-        
-        function prevSlide() {
-            slideIndex = (slideIndex - 1 + sliderDots.length) % sliderDots.length;
-            updateImageSlider();
-        }
-        
-        // Initialize image slider
-        if (imageSlider) {
-            document.getElementById('slider-next').addEventListener('click', nextSlide);
-            document.getElementById('slider-prev').addEventListener('click', prevSlide);
-            
-            // Add click events to dots
-            sliderDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    slideIndex = index;
-                    updateImageSlider();
-                });
-            });
-            
-            // Auto-advance slides
-            setInterval(nextSlide, 4000);
-        }
-
-        // Modal Logic
-        const programData = {
-            playgroup: { 
-                title: "Playgroup", 
-                hook: "Where Curiosity Takes Flight!", 
-                value: "Our Playgroup is a wonderland of sensory experiences designed to nurture your toddler's budding curiosity.", 
-                curriculum: ["Sensory Play", "Gross Motor Skills", "Fine Motor Development", "Music & Movement", "Early Language", "Group Play"], 
-                color: "red" 
-            },
-            nursery: { 
-                title: "Nursery", 
-                hook: "Building Blocks for a Bright Future!", 
-                value: "In Nursery, we build upon natural curiosity by introducing foundational concepts in literacy and numeracy.", 
-                curriculum: ["Phonics", "Pre-writing Skills", "Number Recognition", "Physical Development Activities", "Colors & Shapes", "Storytelling"], 
-                color: "blue" 
-            },
-            lkg: { 
-                title: "LKG", 
-                hook: "Getting Ready for Big School!", 
-                value: "Our LKG program focuses on developing foundational academic skills and preparing children for formal schooling.", 
-                curriculum: ["Reading & Writing", "Basic Numeracy", "Physical Coordination", "EVS Concepts", "Logical Reasoning", "Creative Expression"], 
-                color: "yellow" 
-            },
-            ukg: { 
-                title: "UKG", 
-                hook: "Advanced Preparation for Primary School!", 
-                value: "Our UKG program ensures children are fully prepared for primary school with comprehensive skill development.", 
-                curriculum: ["Advanced Reading & Writing", "Mathematical Concepts", "Physical Development", "Science Exploration", "Problem Solving", "Public Speaking"], 
-                color: "green" 
-            },
-            daycare: { 
-                title: "Day Care", 
-                hook: "Your Child's Safe Second Home!", 
-                value: "We provide a secure, nurturing, and structured environment for children of working parents.", 
-                curriculum: ["Homework Assistance", "Hobby Classes", "Structured Play", "Nap Time", "Indoor Activities"], 
-                color: "purple" 
-            }
-        };
-
-        function createModal(data, container) {
-            let modalHTML = '';
-            if (container === document.getElementById('modal-container')) {
-                 modalHTML = `
-                 <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
-                    <div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
-                        <div class="p-8">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h2 class="text-5xl font-bold text-gray-800">${data.title}</h2>
-                                    <p class="text-2xl text-${data.color}-600 font-semibold mt-1">${data.hook}</p>
-                                </div>
-                                <button class="close-modal-btn p-1">
-                                    <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
-                                </button>
-                            </div>
-                            <p class="font-body text-gray-600 mb-6 text-lg">${data.value}</p>
-                            <h3 class="font-bold text-3xl mb-3 text-gray-700">Curriculum Highlights</h3>
-                            <ul class="space-y-2 mb-8">
-                                ${data.curriculum.map(item => `
-                                    <li class="flex items-center text-xl">
-                                        <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-2"></i>${item}
-                                    </li>
-                                `).join('')}
-                            </ul>
-                            <div class="bg-${data.color}-100 crayon-border p-6 flex justify-between items-center">
-                                <div>
-                                    <p class="text-gray-600 font-medium text-xl">To know more</p>
-                                    <p class="text-4xl font-bold text-gray-800">Contact Us</p>
-                                </div>
-                                <button class="open-contact-modal-from-program crayon-button bg-${data.color}-500 text-white font-bold px-6 py-3 text-xl">Book a Tour</button>
-                            </div>
-                        </div>
-                    </div>
-                 </div>`;
-            } else if (container === document.getElementById('contact-modal-container')) {
-                 modalHTML = `
-                 <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
-                    <div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
-                        <div class="p-8">
-                            <div class="flex justify-between items-start mb-6">
-                                <div>
-                                    <h2 class="text-5xl font-bold text-gray-800">Schedule a Visit</h2>
-                                    <p class="text-xl text-gray-600 mt-2">We'd love to show you around our campus!</p>
-                                </div>
-                                <button class="close-modal-btn p-1">
-                                    <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
-                                </button>
-                            </div>
-                            <form id="contact-form" class="space-y-4">
-                                <div class="text-2xl">
-                                    <label for="parentName" class="font-medium text-gray-700">Parent's Name</label>
-                                    <input type="text" id="parentName" name="parentName" class="w-full mt-1 p-3 crayon-border text-xl" required>
-                                </div>
-                                <div class="text-2xl">
-                                    <label for="phone" class="font-medium text-gray-700">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone" class="w-full mt-1 p-3 crayon-border text-xl" required>
-                                </div>
-                                <div class="text-2xl">
-                                    <label for="childAge" class="font-medium text-gray-700">Child's Age</label>
-                                    <input type="number" id="childAge" name="childAge" min="1" max="8" class="w-full mt-1 p-3 crayon-border text-xl" required>
-                                </div>
-                                <div class="text-2xl">
-                                    <label for="program" class="font-medium text-gray-700">Program Interested In</label>
-                                    <select id="program" name="program" class="w-full mt-1 p-3 crayon-border text-xl" required>
-                                        <option value="">Select a program</option>
-                                        <option value="playgroup">Playgroup</option>
-                                        <option value="nursery">Nursery</option>
-                                        <option value="lkg">LKG</option>
-                                        <option value="ukg">UKG</option>
-                                        <option value="daycare">Day Care</option>
-                                    </select>
-                                </div>
-                                <div class="text-2xl">
-                                    <label for="message" class="font-medium text-gray-700">Additional Message (Optional)</label>
-                                    <textarea id="message" name="message" class="w-full mt-1 p-3 crayon-border text-xl" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="w-full crayon-button bg-red-400 text-white font-bold text-2xl p-4 flex items-center justify-center gap-2">
-                                    <span id="submit-text">Submit Inquiry</span>
-                                    <div id="submit-spinner" class="spinner hidden" style="width: 20px; height: 20px;"></div>
-                                </button>
-                                <p id="contact-form-success-message" class="text-green-600 text-center font-semibold hidden text-xl">Thank you! We'll call you soon!</p>
-                                <p id="contact-form-error-message" class="text-red-600 text-center font-semibold hidden text-xl">There was an error submitting your form. Please try again or call us directly.</p>
-                            </form>
-                        </div>
-                    </div>
-                 </div>`;
-            } else if (container === document.getElementById('review-modal-container')) {
-                 modalHTML = `
-                 <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
-                    <div class="modal-content bg-paper crayon-border w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
-                        <div class="p-8 text-center">
-                            <div class="flex justify-between items-start mb-6">
-                                <div class="w-full">
-                                    <h2 class="text-5xl font-bold text-gray-800">Thank You!</h2>
-                                    <p class="text-xl text-gray-600 mt-2">We appreciate your interest in St. Vincent's Preschool.</p>
-                                </div>
-                                <button class="close-modal-btn p-1">
-                                    <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
-                                </button>
-                            </div>
-                            <div class="bg-yellow-100 p-6 crayon-border mb-6">
-                                <i data-lucide="star" class="w-16 h-16 text-yellow-500 mx-auto mb-4"></i>
-                                <h3 class="text-3xl font-bold text-gray-800 mb-4">Help Other Parents Discover Us</h3>
-                                <p class="font-body text-gray-600 mb-6">Would you like to share your experience with other parents by leaving a Google review?</p>
-                                <a href="https://g.page/r/CbNp6tq5qJ7-EB0/review" target="_blank" class="crayon-button bg-green-500 text-white font-bold px-8 py-4 text-xl inline-flex items-center gap-2">
-                                    <i data-lucide="star" class="w-6 h-6"></i> Leave a Google Review
-                                </a>
-                            </div>
-                            <button class="close-review-modal crayon-button bg-gray-400 text-white font-bold px-8 py-4 text-xl">Maybe Later</button>
-                        </div>
-                    </div>
-                 </div>`;
-            } else if (container === document.getElementById('blog-modal-container')) {
-                 modalHTML = `
-                 <div class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0" style="display: none;">
-                    <div class="modal-content bg-paper crayon-border w-full max-w-4xl max-h-[90vh] overflow-y-auto transform scale-95 blog-modal-content">
-                        <div class="p-8">
-                            <div class="flex justify-between items-start mb-6">
-                                <div>
-                                    <h2 class="text-5xl font-bold text-gray-800">${data.title}</h2>
-                                    <p class="text-xl text-${data.color}-600 font-semibold mt-1">${data.subtitle}</p>
-                                </div>
-                                <button class="close-modal-btn p-1">
-                                    <i data-lucide="x" class="w-8 h-8 text-gray-500"></i>
-                                </button>
-                            </div>
-                            <div class="flex flex-col md:flex-row gap-8 mb-8">
-                                <div class="md:w-2/5">
-                                    <img src="${data.image}" alt="${data.title}" class="w-full h-64 object-cover crayon-border">
-                                </div>
-                                <div class="md:w-3/5">
-                                    <div class="prose max-w-none font-body text-gray-700">
-                                        ${data.content}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center mt-8">
-                                <button class="close-blog-modal crayon-button bg-red-400 text-white font-bold px-8 py-4 text-xl">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                 </div>`;
-            }
-
-            container.innerHTML = modalHTML;
-            const overlay = container.querySelector('.modal-overlay');
-            overlay.style.display = 'flex';
-            setTimeout(() => { 
-                overlay.classList.remove('opacity-0'); 
-                overlay.querySelector('.modal-content').classList.remove('scale-95'); 
-            }, 10);
-            
-            lucide.createIcons();
-            
-            // Handle form submission for contact modal
-            const contactForm = container.querySelector('#contact-form');
-            if (contactForm) {
-                const successMessage = container.querySelector('#contact-form-success-message');
-                const errorMessage = container.querySelector('#contact-form-error-message');
-                const submitText = container.querySelector('#submit-text');
-                const submitSpinner = container.querySelector('#submit-spinner');
-                
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Show loading state
-                    submitText.classList.add('hidden');
-                    submitSpinner.classList.remove('hidden');
-                    successMessage.classList.add('hidden');
-                    errorMessage.classList.add('hidden');
-                    
-                    // Collect form data
-                    const formData = {
-                        parentName: document.getElementById('parentName').value,
-                        phone: document.getElementById('phone').value,
-                        childAge: document.getElementById('childAge').value,
-                        program: document.getElementById('program').value,
-                        message: document.getElementById('message').value,
-                        timestamp: new Date().toISOString(),
-                        source: 'Website Form'
-                    };
-                    
-                    // Send data to Google Sheets
-                    fetch(GOOGLE_SHEETS_API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(formData)
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // On success
-                        successMessage.classList.remove('hidden');
-                        contactForm.reset();
-                        
-                        // Reset button state
-                        submitText.classList.remove('hidden');
-                        submitSpinner.classList.add('hidden');
-                        
-                        setTimeout(() => { 
-                            successMessage.classList.add('hidden'); 
-                            closeModal(overlay);
-                            // Show review modal after successful form submission
-                            createReviewModal();
-                        }, 2000);
-                    })
-                    .catch(error => {
-                        // On error
-                        console.error('Error:', error);
-                        errorMessage.classList.remove('hidden');
-                        
-                        // Reset button state
-                        submitText.classList.remove('hidden');
-                        submitSpinner.classList.add('hidden');
-                    });
-                });
-            }
-            
-            // Close modal when clicking overlay or close button
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay || e.target.closest('.close-modal-btn') || e.target.closest('.close-review-modal') || e.target.closest('.close-blog-modal')) {
-                    closeModal(overlay);
-                }
-            });
-            
-            // Open contact modal from program modal
-            const openContactModalBtns = container.querySelectorAll('.open-contact-modal-from-program');
-            openContactModalBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    closeModal(overlay);
-                    setTimeout(() => {
-                        createContactModal();
-                    }, 300);
-                });
-            });
-        }
-        
-        function closeModal(overlay) {
-            overlay.classList.add('opacity-0');
-            overlay.querySelector('.modal-content').classList.add('scale-95');
-            setTimeout(() => { 
-                overlay.remove(); 
-            }, 300);
-        }
-        
-        function createContactModal() {
-            createModal({}, document.getElementById('contact-modal-container'));
-        }
-        
-        function createReviewModal() {
-            createModal({}, document.getElementById('review-modal-container'));
-        }
-        
-        function createBlogModal(blogId) {
-            const blogDataWithColor = {
-                ...blogData[blogId],
-                color: blogId === 'science' ? 'blue' : blogId === 'social' ? 'green' : 'purple'
-            };
-            createModal(blogDataWithColor, document.getElementById('blog-modal-container'));
-        }
-        
-        // Program modals
-        document.querySelectorAll('.program-card').forEach(c => { 
-            c.addEventListener('click', () => createModal(programData[c.dataset.program], document.getElementById('modal-container'))); 
-        });
-        
-        // Blog modals
-        document.querySelectorAll('.open-blog-modal').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const blogId = btn.getAttribute('data-blog');
-                createBlogModal(blogId);
-            });
-        });
-        
-        // Contact modal triggers
-        document.getElementById('open-contact-modal').addEventListener('click', createContactModal);
-        document.getElementById('open-contact-modal-mobile').addEventListener('click', createContactModal);
-        document.getElementById('open-contact-modal-hero').addEventListener('click', createContactModal);
-        document.getElementById('open-contact-modal-bottom').addEventListener('click', createContactModal);
-        document.querySelectorAll('.open-contact-modal-faq').forEach(btn => {
-            btn.addEventListener('click', createContactModal);
-        });
-        document.querySelector('.open-contact-modal-premium').addEventListener('click', createContactModal);
-        
-        // Auto-open contact modal after 5 seconds
-        setTimeout(() => {
-            createContactModal();
-        }, 5000);
-
-        // Canvas Logic
-        const canvas = document.getElementById('drawing-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let isDrawing = false;
-            
-            function resizeCanvas() {
-                const dpr = window.devicePixelRatio || 1;
-                canvas.width = canvas.parentElement.clientWidth * dpr;
-                canvas.height = (canvas.parentElement.clientWidth * 0.6) * dpr;
-                canvas.style.width = `${canvas.parentElement.clientWidth}px`;
-                canvas.style.height = `${canvas.parentElement.clientWidth * 0.6}px`;
-                ctx.scale(dpr, dpr);
-                ctx.lineCap = 'round'; 
-                ctx.lineJoin = 'round'; 
-                ctx.lineWidth = 5;
-            }
-            
-            function getPos(e) {
-                const rect = canvas.getBoundingClientRect();
-                const evt = e.touches ? e.touches[0] : e;
-                return { 
-                    x: evt.clientX - rect.left, 
-                    y: evt.clientY - rect.top 
-                };
-            }
-            
-            function start(e) { 
-                isDrawing = true; 
-                const {x,y} = getPos(e); 
-                ctx.beginPath(); 
-                ctx.moveTo(x,y); 
-            }
-            
-            function draw(e) { 
-                if (!isDrawing) return; 
-                e.preventDefault(); 
-                const {x,y} = getPos(e); 
-                ctx.lineTo(x,y); 
-                ctx.stroke(); 
-            }
-            
-            function stop() { 
-                isDrawing = false; 
-                ctx.closePath(); 
-            }
-            
-            ['mousedown', 'touchstart'].forEach(e => canvas.addEventListener(e, start));
-            ['mousemove', 'touchmove'].forEach(e => canvas.addEventListener(e, draw));
-            ['mouseup', 'mouseleave', 'touchend'].forEach(e => canvas.addEventListener(e, stop));
-            
-            document.getElementById('canvas-controls').addEventListener('click', (e) => {
-                if (e.target.dataset.color) {
-                    ctx.strokeStyle = e.target.dataset.color;
-                    document.querySelector('.color-btn.active').classList.remove('active');
-                    e.target.classList.add('active');
-                }
-                if (e.target.closest('#clear-canvas-btn')) { 
-                    ctx.clearRect(0, 0, canvas.width, canvas.height); 
-                }
-            });
-            
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-        }
-    </script>
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/sliders.js"></script>
+    <script src="js/forms.js"></script>
 </body>
 </html>
