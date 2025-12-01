@@ -273,37 +273,43 @@
           </video>
         </div>
 
-      <!-- START: Adaptive, full-image gallery slider -->
-<div class="gallery-frame overflow-hidden rounded-lg">
-          <div id="image-slider" class="image-slider flex transition-transform duration-500">
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-1.jpeg" alt="gallery 1" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-2.jpeg" alt="gallery 2" class="w-full h-64 object-cover"></div>
-            <div class="image-slide min-w-full"><img src="images/gallery/preschool-3.jpeg" alt="gallery 3" class="w-full h-64 object-cover"></div>
-          </div>
-
-          <div class="flex justify-between items-center p-2">
-            <button id="slider-prev" class="slider-btn">‹</button>
-            <div class="slider-dots flex gap-2">
-              <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
-              <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
-              <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
-            </div>
-            <button id="slider-next" class="slider-btn">›</button>
-          </div>
+      <!-- START: Adaptive gallery slider (DROP-IN REPLACEMENT) -->
+<div class="gallery-frame" aria-roledescription="carousel" aria-label="Image gallery">
+  <div class="gallery-viewport adaptive-viewport" role="region" aria-live="polite">
+    <div id="image-slider" class="image-slider" tabindex="0" aria-roledescription="carousel">
+      <!-- Slide 1 -->
+      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 3">
+        <div class="slide-inner">
+          <img src="images/gallery/preschool-1.jpeg" alt="Children playing at preschool" loading="lazy">
         </div>
       </div>
-    </section>
-      <!-- add more .adaptive-slide blocks as needed -->
+
+      <!-- Slide 2 -->
+      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 3">
+        <div class="slide-inner">
+          <img src="images/gallery/preschool-2.jpeg" alt="Preschool activity" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 3">
+        <div class="slide-inner">
+          <img src="images/gallery/preschool-3.jpeg" alt="Outdoor play at preschool" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Add more .image-slide blocks here if required -->
     </div>
   </div>
 
+  <!-- Controls: keep these IDs (used by JS) -->
   <div class="gallery-controls" aria-hidden="false">
     <button id="slider-prev" class="slider-btn" aria-label="Previous slide">‹</button>
     <div id="slider-dots" class="slider-dots" role="tablist" aria-label="Gallery slides"></div>
     <button id="slider-next" class="slider-btn" aria-label="Next slide">›</button>
   </div>
 </div>
-<!-- END: Adaptive gallery -->
+<!-- END: Adaptive gallery slider -->
 
     <section class="py-8">
       <div class="max-w-6xl mx-auto bg-white rounded-xl p-6 shadow">
