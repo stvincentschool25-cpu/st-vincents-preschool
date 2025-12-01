@@ -101,20 +101,36 @@ function initUniversalBurger(){
   document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
 }
 
-/* ---------- Gallery slider ---------- */
-function initImageSlider(){
-  const slider = document.getElementById('image-slider'); if(!slider) return;
-  const slides = slider.querySelectorAll('.image-slide'); if(!slides.length) return;
-  let idx = 0, total = slides.length;
-  const prev = document.getElementById('slider-prev'), next = document.getElementById('slider-next');
-  const dots = Array.from(document.querySelectorAll('.slider-dot'));
-  function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
-  prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
-  next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
-  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); }));
-  setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
-  update();
-}
+<!-- START: Responsive framed gallery slider -->
+<div class="gallery-frame overflow-hidden rounded-lg" aria-roledescription="carousel" aria-label="Gallery">
+  <div class="gallery-viewport" role="region" aria-live="polite">
+    <div id="image-slider" class="image-slider" tabindex="0">
+      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 3">
+        <div class="slide-inner">
+          <img src="images/gallery/preschool-1.jpeg" alt="Children playing at preschool" loading="lazy">
+        </div>
+      </div>
+      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 3">
+        <div class="slide-inner">
+          <img src="images/gallery/preschool-2.jpeg" alt="Preschool activity" loading="lazy">
+        </div>
+      </div>
+      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 3">
+        <div class="slide-inner">
+          <img src="images/gallery/preschool-3.jpeg" alt="Outdoor play at preschool" loading="lazy">
+        </div>
+      </div>
+      <!-- add more .image-slide blocks as needed -->
+    </div>
+  </div>
+
+  <div class="gallery-controls" aria-hidden="false">
+    <button id="slider-prev" class="slider-btn" aria-label="Previous slide">‹</button>
+    <div id="slider-dots" class="slider-dots" role="tablist" aria-label="Gallery slides"></div>
+    <button id="slider-next" class="slider-btn" aria-label="Next slide">›</button>
+  </div>
+</div>
+<!-- END: Responsive framed gallery slider -->
 
 /* ---------- Testimonials slider (T1) ---------- */
 const TESTIMONIALS = [
