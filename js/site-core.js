@@ -101,174 +101,19 @@ function initUniversalBurger(){
   document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
 }
 
-/* ---------- Adaptive Gallery Slider (full image, responsive height) ---------- */
+/* ---------- Gallery slider ---------- */
 function initImageSlider(){
-  const slider = document.getElementById('image-slider');
-  if(!slider) return;
-  const slides = Array.from(slider.querySelectorAll('.adaptive-slide'));
-  if(!slides.length) return;
-
-  const prev = document.getElementById('slider-prev');
-  const next = document.getElementById('slider-next');
-  let dotsWrap = document.getElementById('slider-dots');
-  const viewport = document.querySelector('.adaptive-viewport');
-
-  // create dots if missing
-  if(!dotsWrap){
-    dotsWrap = document.createElement('div');
-    dotsWrap.id = 'slider-dots';
-    dotsWrap.className = 'slider-dots';
-    if(prev && prev.parentElement) prev.parentElement.insertBefore(dotsWrap, next || null);
-    else slider.parentElement.appendChild(dotsWrap);
-  } else {
-    dotsWrap.innerHTML = '';
-  }
-
-  // collect images and ensure we have natural sizes
-  const imgs = slides.map(s => s.querySelector('img'));
-  const imgInfo = imgs.map(img => ({ img, w: 0, h: 0, loaded: false }));
-
-  // helper: measure natural size when image ready
-  function measureImg(i){
-    const entry = imgInfo[i];
-    if(!entry || !entry.img) return;
-    const image = entry.img;
-    if(image.naturalWidth && image.naturalHeight){
-      entry.w = image.naturalWidth;
-      entry.h = image.naturalHeight;
-      entry.loaded = true;
-    } else {
-      // attach one-time load
-      image.addEventListener('load', function onL(){
-        entry.w = image.naturalWidth;
-        entry.h = image.naturalHeight;
-        entry.loaded = true;
-        image.removeEventListener('load', onL);
-        // if this is current slide, adjust now
-        if(currentIndex === i) adjustViewportHeight(i);
-      });
-    }
-  }
-
-  // initial measure for all images
-  imgInfo.forEach((_, i)=> measureImg(i));
-
-  // setup dots
-  imgInfo.forEach((_, i) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'slider-dot';
-    b.setAttribute('aria-label', 'Go to slide '+(i+1));
-    b.dataset.index = String(i);
-    b.addEventListener('click', () => { goTo(i); resetAutoplay(); });
-    dotsWrap.appendChild(b);
-  });
-  const dots = Array.from(dotsWrap.children);
-
-  // state
-  let currentIndex = 0;
-  let autoplayTimer = null;
-  const AUTOPLAY_MS = 5000;
-
-  // compute and set viewport height so the entire image is visible (max 80vh)
-  function adjustViewportHeight(index){
-    const info = imgInfo[index];
-    const vw = viewport.clientWidth; // available width
-    const maxHeight = Math.round(window.innerHeight * 0.8);
-    // if image not measured yet, fallback to 16:9 and wait for load
-    if(!info || !info.loaded || !info.w || !info.h){
-      viewport.style.height = Math.min(maxHeight, Math.round(vw * 9 / 16)) + 'px';
-      return;
-    }
-    // compute natural ratio
-    const ratio = info.h / info.w;
-    let target = Math.round(vw * ratio);
-    if(target > maxHeight) target = maxHeight;
-    viewport.style.height = target + 'px';
-  }
-
-  function update(){
-    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-    dots.forEach((d,i) => d.classList.toggle('active', i === currentIndex));
-    // accessibility attributes
-    slides.forEach((s,i) => {
-      s.setAttribute('aria-hidden', i === currentIndex ? 'false' : 'true');
-      s.tabIndex = i === currentIndex ? 0 : -1;
-    });
-    // adjust viewport for current image
-    adjustViewportHeight(currentIndex);
-  }
-
-  function goTo(i){
-    const total = slides.length;
-    if(total === 0) return;
-    currentIndex = Math.max(0, Math.min(i, total - 1));
-    update();
-  }
-
-  prev && prev.addEventListener('click', ()=> { goTo(currentIndex - 1); resetAutoplay(); });
-  next && next.addEventListener('click', ()=> { goTo(currentIndex + 1); resetAutoplay(); });
-
-  // keyboard
-  slider.addEventListener('keydown', (e) => {
-    if(e.key === 'ArrowLeft') prev && prev.click();
-    if(e.key === 'ArrowRight') next && next.click();
-  });
-
-  // swipe support
-  let startX = 0, delta = 0, isTouch = false;
-  slider.addEventListener('touchstart', (e)=> { isTouch = true; startX = e.touches[0].clientX; if(autoplayTimer) clearInterval(autoplayTimer); }, {passive:true});
-  slider.addEventListener('touchmove', (e)=> { if(!isTouch) return; delta = e.touches[0].clientX - startX; }, {passive:true});
-  slider.addEventListener('touchend', ()=> {
-    if(!isTouch) return;
-    if(Math.abs(delta) > 40){
-      if(delta < 0) goTo(currentIndex + 1);
-      else goTo(currentIndex - 1);
-    }
-    delta = 0; isTouch = false; resetAutoplay();
-  });
-
-  // autoplay
-  function resetAutoplay(){
-    if(autoplayTimer) clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(()=> {
-      currentIndex = (currentIndex + 1) % slides.length;
-      update();
-    }, AUTOPLAY_MS);
-  }
-
-  // pause on hover (desktop)
-  const container = slider.closest('.adaptive-gallery') || slider.parentElement;
-  if(container){
-    container.addEventListener('mouseenter', ()=> { if(autoplayTimer) clearInterval(autoplayTimer); });
-    container.addEventListener('mouseleave', ()=> { resetAutoplay(); });
-  }
-
-  // ensure viewport correct on resize
-  window.addEventListener('resize', ()=> {
-    // re-measure available width and recalc height
-    setTimeout(()=> adjustViewportHeight(currentIndex), 80);
-  });
-
-  // if some images were not yet loaded, attach loader to recalc when they load
-  imgInfo.forEach((info, i) => {
-    if(!info.loaded){
-      const img = info.img;
-      img.addEventListener('load', function onLoad(){
-        measureImg(i);
-        adjustViewportHeight(currentIndex);
-        img.removeEventListener('load', onLoad);
-      });
-    }
-  });
-
-  // initialize
-  goTo(0);
-  resetAutoplay();
-
-  // expose helper for debugging
-  slider._adaptiveGoTo = goTo;
-  slider._adaptiveStop = ()=> { if(autoplayTimer) clearInterval(autoplayTimer); };
+  const slider = document.getElementById('image-slider'); if(!slider) return;
+  const slides = slider.querySelectorAll('.image-slide'); if(!slides.length) return;
+  let idx = 0, total = slides.length;
+  const prev = document.getElementById('slider-prev'), next = document.getElementById('slider-next');
+  const dots = Array.from(document.querySelectorAll('.slider-dot'));
+  function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
+  prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
+  next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
+  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); }));
+  setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
+  update();
 }
 
 /* ---------- Testimonials slider (T1) ---------- */
