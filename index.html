@@ -274,26 +274,25 @@
         </div>
 
       <!-- START: Adaptive, full-image gallery slider -->
-<div class="adaptive-gallery gallery-frame" aria-roledescription="carousel" aria-label="Gallery">
-  <div class="adaptive-viewport" role="region" aria-live="polite">
-    <div id="image-slider" class="adaptive-slider" tabindex="0">
-      <div class="adaptive-slide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 3">
-        <div class="adaptive-inner">
-          <img src="images/gallery/preschool-1.jpeg" alt="Children playing at preschool" loading="lazy">
-        </div>
-      </div>
+<div class="gallery-frame overflow-hidden rounded-lg">
+          <div id="image-slider" class="image-slider flex transition-transform duration-500">
+            <div class="image-slide min-w-full"><img src="images/gallery/preschool-1.jpeg" alt="gallery 1" class="w-full h-64 object-cover"></div>
+            <div class="image-slide min-w-full"><img src="images/gallery/preschool-2.jpeg" alt="gallery 2" class="w-full h-64 object-cover"></div>
+            <div class="image-slide min-w-full"><img src="images/gallery/preschool-3.jpeg" alt="gallery 3" class="w-full h-64 object-cover"></div>
+          </div>
 
-      <div class="adaptive-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 3">
-        <div class="adaptive-inner">
-          <img src="images/gallery/preschool-2.jpeg" alt="Preschool activity" loading="lazy">
+          <div class="flex justify-between items-center p-2">
+            <button id="slider-prev" class="slider-btn">‹</button>
+            <div class="slider-dots flex gap-2">
+              <button class="slider-dot" data-index="0" aria-label="Slide 1"></button>
+              <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
+              <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+            </div>
+            <button id="slider-next" class="slider-btn">›</button>
+          </div>
         </div>
       </div>
-
-      <div class="adaptive-slide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 3">
-        <div class="adaptive-inner">
-          <img src="images/gallery/preschool-3.jpeg" alt="Outdoor play at preschool" loading="lazy">
-        </div>
-      </div>
+    </section>
       <!-- add more .adaptive-slide blocks as needed -->
     </div>
   </div>
