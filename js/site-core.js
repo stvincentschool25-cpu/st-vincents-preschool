@@ -101,19 +101,171 @@ function initUniversalBurger(){
   document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
 }
 
-/* ---------- Gallery slider ---------- */
+/* ---------- Adaptive Gallery Slider (full image, responsive height) ---------- */
 function initImageSlider(){
-  const slider = document.getElementById('image-slider'); if(!slider) return;
-  const slides = slider.querySelectorAll('.image-slide'); if(!slides.length) return;
-  let idx = 0, total = slides.length;
-  const prev = document.getElementById('slider-prev'), next = document.getElementById('slider-next');
-  const dots = Array.from(document.querySelectorAll('.slider-dot'));
-  function update(){ slider.style.transform = `translateX(-${idx*100}%)`; dots.forEach((d,i)=> d.classList.toggle('active', i===idx)); }
-  prev?.addEventListener('click', ()=> { idx=(idx-1+total)%total; update(); });
-  next?.addEventListener('click', ()=> { idx=(idx+1)%total; update(); });
-  dots.forEach(d => d.addEventListener('click', e => { idx = Number(e.currentTarget.dataset.index); update(); }));
-  setInterval(()=> { idx=(idx+1)%total; update(); }, 6000);
-  update();
+  const slider = document.getElementById('image-slider');
+  if(!slider) return;
+  const slides = Array.from(slider.querySelectorAll('.image-slide'));
+  if(!slides.length) return;
+
+  const prev = document.getElementById('slider-prev');
+  const next = document.getElementById('slider-next');
+  let dotsWrap = document.getElementById('slider-dots');
+  const viewport = document.querySelector('.adaptive-viewport') || document.querySelector('.gallery-viewport');
+
+  // Create dots container if missing
+  if(!dotsWrap){
+    dotsWrap = document.createElement('div');
+    dotsWrap.id = 'slider-dots';
+    dotsWrap.className = 'slider-dots';
+    // Attempt to insert between prev and next
+    if(prev && prev.parentElement) prev.parentElement.insertBefore(dotsWrap, next || null);
+    else slider.parentElement.appendChild(dotsWrap);
+  } else {
+    // clear existing dots (avoid duplicates)
+    dotsWrap.innerHTML = '';
+  }
+
+  // Collect images and prepare measurements
+  const imgInfos = slides.map(s => {
+    const img = s.querySelector('img');
+    return { img, w: 0, h: 0, loaded: false };
+  });
+
+  function measure(i){
+    const info = imgInfos[i];
+    if(!info || !info.img) return;
+    if(info.img.naturalWidth && info.img.naturalHeight){
+      info.w = info.img.naturalWidth;
+      info.h = info.img.naturalHeight;
+      info.loaded = true;
+      return;
+    }
+    // fallback: wait for load event
+    info.img.addEventListener('load', function onLoad(){
+      info.w = info.img.naturalWidth;
+      info.h = info.img.naturalHeight;
+      info.loaded = true;
+      info.img.removeEventListener('load', onLoad);
+      // adjust viewport if currently visible
+      if(currentIndex === i) adjustViewportHeight(i);
+    });
+  }
+
+  imgInfos.forEach((_, i) => measure(i));
+
+  // Build dots
+  imgInfos.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'slider-dot';
+    btn.setAttribute('aria-label', 'Go to slide '+(i+1));
+    btn.dataset.index = String(i);
+    btn.addEventListener('click', () => { goTo(i); resetAutoplay(); });
+    dotsWrap.appendChild(btn);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  // State
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  const AUTOPLAY_MS = 5000;
+  let isTouch = false, startX = 0, delta = 0;
+
+  // Adjust viewport height based on image natural ratio (max 80vh)
+  function adjustViewportHeight(index){
+    if(!viewport) return;
+    const info = imgInfos[index];
+    const vw = viewport.clientWidth || document.documentElement.clientWidth;
+    const maxHeight = Math.round(window.innerHeight * 0.8);
+    if(!info?.loaded || !info.w || !info.h){
+      // fallback to 16:9 until image loads
+      viewport.style.height = Math.min(maxHeight, Math.round(vw * 9 / 16)) + 'px';
+      return;
+    }
+    const ratio = info.h / info.w;
+    let target = Math.round(vw * ratio);
+    if(target > maxHeight) target = maxHeight;
+    viewport.style.height = target + 'px';
+  }
+
+  // Update visual state
+  function update(){
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i === currentIndex));
+    slides.forEach((s,i) => {
+      s.setAttribute('aria-hidden', i === currentIndex ? 'false' : 'true');
+      s.tabIndex = i === currentIndex ? 0 : -1;
+    });
+    adjustViewportHeight(currentIndex);
+  }
+
+  function goTo(i){
+    const total = slides.length;
+    if(total === 0) return;
+    currentIndex = Math.max(0, Math.min(i, total - 1));
+    update();
+  }
+
+  // Prev/next wiring
+  prev && prev.addEventListener('click', ()=> { goTo(currentIndex - 1); resetAutoplay(); });
+  next && next.addEventListener('click', ()=> { goTo(currentIndex + 1); resetAutoplay(); });
+
+  // Keyboard navigation
+  slider.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowLeft') prev && prev.click();
+    if(e.key === 'ArrowRight') next && next.click();
+  });
+
+  // Swipe support
+  slider.addEventListener('touchstart', (e)=> { isTouch = true; startX = e.touches[0].clientX; if(autoplayTimer) clearInterval(autoplayTimer); }, {passive:true});
+  slider.addEventListener('touchmove', (e)=> { if(!isTouch) return; delta = e.touches[0].clientX - startX; }, {passive:true});
+  slider.addEventListener('touchend', ()=> {
+    if(!isTouch) return;
+    if(Math.abs(delta) > 40){
+      if(delta < 0) goTo(currentIndex + 1);
+      else goTo(currentIndex - 1);
+    }
+    delta = 0; isTouch = false; resetAutoplay();
+  });
+
+  // Autoplay
+  function resetAutoplay(){
+    if(autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(()=> {
+      currentIndex = (currentIndex + 1) % slides.length;
+      update();
+    }, AUTOPLAY_MS);
+  }
+
+  // Pause on hover
+  const container = slider.closest('.gallery-frame') || slider.parentElement;
+  if(container){
+    container.addEventListener('mouseenter', ()=> { if(autoplayTimer) clearInterval(autoplayTimer); });
+    container.addEventListener('mouseleave', ()=> { resetAutoplay(); });
+  }
+
+  // Recalculate on resize
+  window.addEventListener('resize', ()=> { setTimeout(()=> adjustViewportHeight(currentIndex), 80); });
+
+  // If images not yet loaded, attach load handlers (safety)
+  imgInfos.forEach((info, i) => {
+    if(!info.loaded && info.img){
+      info.img.addEventListener('load', function onLoad(){
+        measure(i);
+        adjustViewportHeight(currentIndex);
+        info.img.removeEventListener('load', onLoad);
+      });
+    }
+  });
+
+  // Init
+  goTo(0);
+  resetAutoplay();
+
+  // Expose for debugging
+  slider._galleryGoTo = goTo;
+  slider._galleryStop = ()=> { if(autoplayTimer) clearInterval(autoplayTimer); };
 }
 
 /* ---------- Testimonials slider (T1) ---------- */
