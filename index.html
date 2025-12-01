@@ -273,26 +273,28 @@
           </video>
         </div>
 
-       <!-- START: Responsive framed gallery slider -->
-<div class="gallery-frame overflow-hidden rounded-lg" aria-roledescription="carousel" aria-label="Gallery">
-  <div class="gallery-viewport" role="region" aria-live="polite">
-    <div id="image-slider" class="image-slider" tabindex="0">
-      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 3">
-        <div class="slide-inner">
+      <!-- START: Adaptive, full-image gallery slider -->
+<div class="adaptive-gallery gallery-frame" aria-roledescription="carousel" aria-label="Gallery">
+  <div class="adaptive-viewport" role="region" aria-live="polite">
+    <div id="image-slider" class="adaptive-slider" tabindex="0">
+      <div class="adaptive-slide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 3">
+        <div class="adaptive-inner">
           <img src="images/gallery/preschool-1.jpeg" alt="Children playing at preschool" loading="lazy">
         </div>
       </div>
-      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 3">
-        <div class="slide-inner">
+
+      <div class="adaptive-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 3">
+        <div class="adaptive-inner">
           <img src="images/gallery/preschool-2.jpeg" alt="Preschool activity" loading="lazy">
         </div>
       </div>
-      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 3">
-        <div class="slide-inner">
+
+      <div class="adaptive-slide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 3">
+        <div class="adaptive-inner">
           <img src="images/gallery/preschool-3.jpeg" alt="Outdoor play at preschool" loading="lazy">
         </div>
       </div>
-      <!-- add more .image-slide blocks as needed -->
+      <!-- add more .adaptive-slide blocks as needed -->
     </div>
   </div>
 
@@ -302,7 +304,7 @@
     <button id="slider-next" class="slider-btn" aria-label="Next slide">›</button>
   </div>
 </div>
-<!-- END: Responsive framed gallery slider -->
+<!-- END: Adaptive gallery -->
 
     <section class="py-8">
       <div class="max-w-6xl mx-auto bg-white rounded-xl p-6 shadow">
