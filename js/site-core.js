@@ -101,36 +101,133 @@ function initUniversalBurger(){
   document.addEventListener('keydown', e=> { if(e.key==='Escape') $$('#mobile-menu').forEach(m=>m.classList.add('hidden')); });
 }
 
-<!-- START: Responsive framed gallery slider -->
-<div class="gallery-frame overflow-hidden rounded-lg" aria-roledescription="carousel" aria-label="Gallery">
-  <div class="gallery-viewport" role="region" aria-live="polite">
-    <div id="image-slider" class="image-slider" tabindex="0">
-      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 3">
-        <div class="slide-inner">
-          <img src="images/gallery/preschool-1.jpeg" alt="Children playing at preschool" loading="lazy">
-        </div>
-      </div>
-      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 3">
-        <div class="slide-inner">
-          <img src="images/gallery/preschool-2.jpeg" alt="Preschool activity" loading="lazy">
-        </div>
-      </div>
-      <div class="image-slide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 3">
-        <div class="slide-inner">
-          <img src="images/gallery/preschool-3.jpeg" alt="Outdoor play at preschool" loading="lazy">
-        </div>
-      </div>
-      <!-- add more .image-slide blocks as needed -->
-    </div>
-  </div>
+/* ---------- Gallery slider (robust, responsive, non-destructive) ---------- */
+function initImageSlider(){
+  const slider = document.getElementById('image-slider');
+  if(!slider) return;
+  const slides = Array.from(slider.querySelectorAll('.image-slide'));
+  if(!slides.length) return;
 
-  <div class="gallery-controls" aria-hidden="false">
-    <button id="slider-prev" class="slider-btn" aria-label="Previous slide">‹</button>
-    <div id="slider-dots" class="slider-dots" role="tablist" aria-label="Gallery slides"></div>
-    <button id="slider-next" class="slider-btn" aria-label="Next slide">›</button>
-  </div>
-</div>
-<!-- END: Responsive framed gallery slider -->
+  // Controls
+  const prev = document.getElementById('slider-prev');
+  const next = document.getElementById('slider-next');
+  let dotsWrap = document.getElementById('slider-dots');
+
+  // If dots container not present, create it next to controls
+  if(!dotsWrap){
+    dotsWrap = document.createElement('div');
+    dotsWrap.id = 'slider-dots';
+    dotsWrap.className = 'slider-dots';
+    // attempt to insert between prev and next if markup present
+    const controlsParent = prev?.parentElement || slider.parentElement;
+    if(controlsParent){
+      // append in the middle
+      controlsParent.insertBefore(dotsWrap, next || null);
+    } else {
+      slider.parentElement.appendChild(dotsWrap);
+    }
+  }
+
+  // make sure we don't duplicate dots
+  dotsWrap.innerHTML = '';
+
+  // state
+  let idx = 0;
+  let autoplayTimer = null;
+  const AUTOPLAY_MS = 5000;
+  let isTouch = false, startX = 0, delta = 0;
+
+  // create dots
+  slides.forEach((s,i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'slider-dot';
+    b.setAttribute('aria-label', 'Go to slide '+(i+1));
+    b.dataset.index = String(i);
+    b.addEventListener('click', () => { goTo(i); resetAutoplay(); });
+    dotsWrap.appendChild(b);
+  });
+
+  const dots = Array.from(dotsWrap.children);
+
+  function update(){
+    // transform using percent (safe for responsive)
+    slider.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
+    // accessibility attributes
+    slides.forEach((s,i) => {
+      s.setAttribute('aria-hidden', i===idx ? 'false' : 'true');
+      s.tabIndex = i===idx ? 0 : -1;
+    });
+  }
+
+  function goTo(i){
+    const total = slides.length;
+    if(total === 0) return;
+    idx = Math.max(0, Math.min(i, total - 1));
+    update();
+  }
+
+  // prev / next wiring (safe with optional chaining)
+  prev && prev.addEventListener('click', ()=> { goTo(idx - 1); resetAutoplay(); });
+  next && next.addEventListener('click', ()=> { goTo(idx + 1); resetAutoplay(); });
+
+  // keyboard navigation
+  slider.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowLeft'){ prev && prev.click(); }
+    if(e.key === 'ArrowRight'){ next && next.click(); }
+  });
+
+  // touch support for swipe
+  slider.addEventListener('touchstart', (e) => {
+    isTouch = true;
+    startX = e.touches[0].clientX;
+    if(autoplayTimer) clearInterval(autoplayTimer);
+  }, { passive: true });
+
+  slider.addEventListener('touchmove', (e) => {
+    if(!isTouch) return;
+    delta = e.touches[0].clientX - startX;
+  }, { passive: true });
+
+  slider.addEventListener('touchend', () => {
+    if(!isTouch) return;
+    if(Math.abs(delta) > 40){
+      if(delta < 0) goTo(idx + 1);
+      else goTo(idx - 1);
+    }
+    delta = 0;
+    isTouch = false;
+    resetAutoplay();
+  });
+
+  // autoplay
+  function resetAutoplay(){
+    if(autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(()=> {
+      idx = (idx + 1) % slides.length;
+      update();
+    }, AUTOPLAY_MS);
+  }
+
+  // pause on hover (desktop)
+  const container = slider.closest('.gallery-frame') || slider.parentElement;
+  if(container){
+    container.addEventListener('mouseenter', ()=> { if(autoplayTimer) clearInterval(autoplayTimer); });
+    container.addEventListener('mouseleave', ()=> { resetAutoplay(); });
+  }
+
+  // initial
+  goTo(0);
+  resetAutoplay();
+
+  // expose some helpers (optional)
+  slider._galleryGoTo = goTo;
+  slider._galleryStop = ()=> { if(autoplayTimer) clearInterval(autoplayTimer); };
+
+  // responsive: ensure the visible slide stays consistent after resize (translate uses % so OK)
+  window.addEventListener('resize', ()=> { setTimeout(update, 60); });
+}
 
 /* ---------- Testimonials slider (T1) ---------- */
 const TESTIMONIALS = [
