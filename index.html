@@ -492,42 +492,63 @@
 
 
      <!-- right: interactive map + CTAs -->
-      <section>
-        <div class="card">
-          <h3 class="text-lg font-semibold">Visit Us Now</h3>
-          <p class="mt-2 text-gray-700">Interactive map — click "Get Directions" to open Google Maps with directions to our preschool.</p>
+      <section class="max-w-6xl mx-auto px-4 py-16">
+  <div class="grid md:grid-cols-2 gap-8">
+    
+    <div class="card bg-white rounded-xl p-5 shadow-[0_12px_30px_rgba(2,6,23,0.06)]">
+      <h3 class="text-lg font-semibold">Visit Us Now</h3>
+      <p class="mt-2 text-gray-700">Interactive map — click "Get Directions" to open Google Maps with directions to our preschool.</p>
 
-          <div class="mt-4 map-area rounded-lg overflow-hidden shadow">
-            <!-- Google Maps Embed (Place API). Uses place id + API key passed below.
-                 Replace API_KEY and PLACE_ID with your values if they change. -->
-            <iframe
-              class="map-frame"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/dir/?api=1&destination=place_id:ChIJ57HUW3STyzsRXzMWdj4P9Cg">
-            </iframe>
-          </div>
+      <div class="mt-4 map-area rounded-lg overflow-hidden shadow">
+        <iframe
+          class="map-frame"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDxtmtPmYd3XN2LbsZaTGD2wjMwVbnyLo4&q=place_id:ChIJ57HUW3STyzsRXzMWdj4P9Cg">
+        </iframe>
+      </div>
 
-          <div class="mt-4 flex gap-3 flex-wrap">
-            <!-- Directions using place_id -->
-            <a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=place_id:ChIJ57HUW3STyzsRXzMWdj4P9Cg" target="_blank" rel="noopener">Get Directions</a>
-            <a class="btn-outline" href="https://maps.app.goo.gl/KsS1VMHppwR6ZxU37" target="_blank" rel="noopener">Open in Maps App</a>
-            <a class="btn-outline" href="https://www.google.com/search?q=St.+Vincent%27s+Preschool+Chandanagar" target="_blank" rel="noopener">Search on Google</a>
-          </div>
+      <div class="mt-4 flex gap-3 flex-wrap">
+        <a class="btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=place_id:ChIJ57HUW3STyzsRXzMWdj4P9Cg" target="_blank" rel="noopener">Get Directions</a>
+        <a class="btn-outline" href="https://maps.app.goo.gl/KsS1VMHppwR6ZxU37" target="_blank" rel="noopener">Open in Maps App</a>
+        <a class="btn-outline" href="https://www.google.com/search?q=St.+Vincent%27s+Preschool+Chandanagar" target="_blank" rel="noopener">Search on Google</a>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6">
+      
+      <div class="card bg-white rounded-xl p-5 shadow-[0_12px_30px_rgba(2,6,23,0.06)]">
+        <h4 class="font-semibold text-lg">Business Hours</h4>
+        <p class="mt-2 text-gray-700 leading-relaxed">
+          <strong>Mon - Fri:</strong> 8:00 AM - 6:00 PM<br/>
+          <strong>Saturday:</strong> 8:00 AM - 4:00 PM<br/>
+          <span class="text-gray-500 text-sm">Sunday: Closed</span>
+        </p>
+      </div>
+
+      <div class="card bg-white rounded-xl p-5 shadow-[0_12px_30px_rgba(2,6,23,0.06)]">
+        <h4 class="font-semibold text-lg">Get in Touch</h4>
+        <div class="mt-3 space-y-3 text-gray-700">
+           <div>
+             <strong>Address:</strong><br/>
+             Street 1, Plot 454, Aparna Hillpark Rd,<br/>KSR Layout, Chandanagar, Hyderabad
+           </div>
+           <div>
+             <strong>Phone:</strong> <a href="tel:+919032249494" class="text-[--brand] font-semibold">+91 9032249494</a>
+           </div>
+           <div>
+             <strong>Email:</strong> <a href="mailto:Stvincent.school25@gmail.com" class="text-[--brand] font-semibold">Stvincent.school25@gmail.com</a>
+           </div>
         </div>
-
-        <!-- small helpful info -->
-        <div class="mt-4">
-          <div class="card">
-            <h4 class="font-semibold">Business Hours</h4>
-            <p class="mt-1 text-gray-700">Mon - Fri: 8:00 AM - 6:00 PM<br/>Saturday: 8:00 AM - 4:00 PM</p>
-            <div class="mt-3">
-              <a class="btn-primary-outline" href="tel:+919032249494">Call +91 9032249494</a>
-            </div>
-          </div>
+        <div class="mt-5">
+           <a class="btn-primary-outline w-full justify-center" href="tel:+919032249494">Call Now</a>
         </div>
-      </section>
+      </div>
+
+    </div>
+  </div>
+</section>
     </div>
   </main>
 
