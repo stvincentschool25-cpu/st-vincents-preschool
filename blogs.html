@@ -125,7 +125,6 @@
     <div class="text-center py-4 text-sm bg-[#6a1a3a]">© 2025 St. Vincent's Preschool & Daycare. All rights reserved.</div>
   </footer>
 
-  <!-- Fixed, scrollable blog modal (overlay scroll enabled, inner scroll smooth on mobile) -->
   <div id="blog-modal" class="fixed inset-0 bg-black/60 z-50 hidden overflow-y-auto">
     <div class="min-h-screen flex items-start md:items-center justify-center p-4">
       <div id="blog-modal-inner" class="bg-white rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden" role="dialog" aria-modal="true"
@@ -143,8 +142,7 @@
         </div>
 
         <div id="blog-body" class="p-6 modal-inner-scroll" tabindex="0" aria-live="polite">
-          <!-- injected content -->
-        </div>
+          </div>
 
         <div class="p-6 pt-3 border-t flex justify-end gap-3 bg-gray-50">
           <button class="cta-yellow open-contact-modal" data-program="General Enquiry from Blog">Enquire</button>
@@ -154,7 +152,6 @@
     </div>
   </div>
 
-  <!-- Optional fallback WhatsApp if site-core doesn't inject one -->
   <div id="whatsapp-fab-fallback" style="display:none;"></div>
 
   <script>
@@ -270,10 +267,16 @@
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeBlogModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeBlogModal(); });
 
-    // wire open-contact-modal to site-wide modal (site-core.js should provide openUnifiedModal)
+    // wire open-contact-modal to site-wide modal
     document.addEventListener('click', (e) => {
       const el = e.target.closest && e.target.closest('.open-contact-modal');
       if (!el) return;
+      
+      // *** UPDATED LOGIC HERE: Check if blog modal is open, and close it first ***
+      if (!overlay.classList.contains('hidden')) {
+          closeBlogModal();
+      }
+
       const program = el.dataset.program || '';
       if (typeof openUnifiedModal === 'function') {
         openUnifiedModal({ prefillProgram: program });
