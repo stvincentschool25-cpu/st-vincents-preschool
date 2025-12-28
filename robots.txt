@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://henry-paul.github.io/sitemap.xml
+Sitemap: https://www.stvincents.in/sitemap.xml
